@@ -23,7 +23,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="mb-4">
+            <div className="mb-5">
               <Image
                 src="/jenveda%20logo%201.png"
                 alt="Jenveda Logo"
@@ -31,6 +31,37 @@ export default function Footer() {
                 height={44}
                 className="object-contain object-left"
               />
+              {/* Tagline */}
+              <p
+                className="footer-tagline"
+                style={{
+                  marginTop: "14px",
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  fontFamily: "'Outfit', sans-serif",
+                  background: "linear-gradient(90deg, #6D28D9 0%, #D1008F 40%, #1D4ED8 70%, #6D28D9 100%)",
+                  backgroundSize: "200% auto",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  animation: "footer-tagline-shimmer 4s linear infinite",
+                }}
+              >
+                Clarity{" "}
+                <span style={{ WebkitTextFillColor: "transparent", opacity: 0.55 }}>•</span>
+                {" "}Confidence{" "}
+                <span style={{ WebkitTextFillColor: "transparent", opacity: 0.55 }}>•</span>
+                {" "}Speed
+              </p>
+
+              <style>{`
+                @keyframes footer-tagline-shimmer {
+                  0%   { background-position: 200% center; }
+                  100% { background-position: -200% center; }
+                }
+              `}</style>
             </div>
             <p className="text-[17.5px] leading-relaxed max-w-sm mb-8" style={{ color:"#444" }}>
               JenVeda helps Indian MSMEs manage HR, payroll, accounts, and

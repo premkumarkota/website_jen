@@ -143,12 +143,67 @@ export default function Navbar() {
         <nav
           className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-3.5"
         >
-          {/* Logo */}
-          <Link href="/" className="group flex items-center flex-shrink-0">
-            <div className="relative h-10 w-[138px] transition-opacity duration-200 group-hover:opacity-80">
-              <Image src="/jenveda%20logo%201.png" alt="JenVeda" fill sizes="138px" className="object-contain object-left" priority />
+          {/* Logo + Tagline */}
+          <div className="flex flex-col flex-shrink-0">
+            <Link href="/" className="group flex items-center">
+              <div className="relative h-12 w-[165px] transition-opacity duration-200 group-hover:opacity-80">
+                <Image src="/jenveda%20logo%201.png" alt="JenVeda" fill sizes="165px" className="object-contain object-left" priority />
+              </div>
+            </Link>
+            <div
+              style={{
+                marginTop: "3px",
+                display: "flex",
+                alignItems: "center",
+                gap: "0px",
+                lineHeight: 1,
+              }}
+            >
+              {[
+                { word: "Clarity",    color: "#1E293B", delay: 0.3  },
+                { word: "Confidence", color: "#1E293B", delay: 0.7  },
+                { word: "Speed",      color: "#1E293B", delay: 1.1  },
+              ].map((item, i) => (
+                <span key={item.word} style={{ display: "inline-flex", alignItems: "center" }}>
+                  {i > 0 && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 0.35, scale: 1 }}
+                      transition={{ duration: 0.3, delay: item.delay - 0.15, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        fontSize: "8px",
+                        color: "#94A3B8",
+                        padding: "0 5px",
+                        display: "inline-block",
+                      }}
+                    >
+                      •
+                    </motion.span>
+                  )}
+                  <motion.span
+                    initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{
+                      duration: 0.6,
+                      delay: item.delay,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    style={{
+                      fontSize: "9px",
+                      fontWeight: 700,
+                      letterSpacing: "0.24em",
+                      textTransform: "uppercase" as const,
+                      fontFamily: "'Outfit', sans-serif",
+                      color: item.color,
+                      display: "inline-block",
+                    }}
+                  >
+                    {item.word}
+                  </motion.span>
+                </span>
+              ))}
             </div>
-          </Link>
+          </div>
 
           {/* Desktop Nav */}
           <ul className="hidden items-center gap-0.5 md:flex">
