@@ -77,9 +77,11 @@ const solutions = [
 ];
 
 const navLinks = [
-  { label: "Home",    href: "/" },
-  { label: "About",   href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home",         href: "/" },
+  { label: "Why JenVeda",  href: "/why-jenveda" },
+  { label: "Industries",   href: "/industries" },
+  { label: "About",        href: "/about" },
+  { label: "Contact",      href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -129,19 +131,17 @@ export default function Navbar() {
         initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease }}
-        className="fixed inset-x-0 top-0 z-50 px-4 pt-3"
+        className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+        style={{
+          background: scrolled || open || mobile ? "rgba(255,255,255,0.97)" : "transparent",
+          backdropFilter: scrolled || open || mobile ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled || open || mobile ? "blur(20px)" : "none",
+          borderBottom: scrolled || open || mobile ? "1px solid rgba(0,0,0,0.07)" : "1px solid transparent",
+          boxShadow: scrolled || open || mobile ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
+        }}
       >
         <nav
-          className="relative mx-auto flex w-full max-w-7xl items-center justify-between rounded-2xl px-5 py-2.5 transition-all duration-300"
-          style={{
-            background: scrolled || open ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.82)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(0,0,0,0.07)",
-            boxShadow: scrolled || open
-              ? "0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.04)"
-              : "0 2px 12px rgba(0,0,0,0.05)",
-          }}
+          className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-3.5"
         >
           {/* Logo */}
           <Link href="/" className="group flex items-center flex-shrink-0">
@@ -153,32 +153,60 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <ul className="hidden items-center gap-0.5 md:flex">
             {/* Regular links */}
-            {navLinks.map((l) => (
-              <li key={l.label}>
-                <Link
-                  href={l.href}
-                  className={`block rounded-xl px-3.5 py-2 text-[13.5px] font-semibold transition-colors duration-200 ${
-                    pathname === l.href ? "text-violet-600" : "text-slate-600 hover:text-slate-900"
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="relative block px-3.5 py-2 text-[13.5px] font-semibold group"
+                    style={{ color: active ? "#6D28D9" : "#475569" }}
+                  >
+                    {/* Hover background pill */}
+                    <motion.span
+                      className="absolute inset-0 rounded-xl"
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      whileHover={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                      style={{ background: active ? "rgba(109,40,217,0.08)" : "rgba(0,0,0,0.05)" }}
+                    />
+                    {/* Active underline */}
+                    {active && (
+                      <motion.span
+                        layoutId="nav-active-underline"
+                        className="absolute bottom-0 left-3 right-3 h-[2.5px] rounded-full"
+                        style={{ background: "var(--gradient-1)" }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      />
+                    )}
+                    <span className="relative transition-colors duration-150 group-hover:text-slate-900" style={{ color: active ? "#6D28D9" : undefined }}>
+                      {l.label}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
 
             {/* Solutions trigger */}
             <li className="relative">
               <button
                 ref={btnRef}
                 onClick={() => setOpen((v) => !v)}
-                className={`flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-[13.5px] font-semibold transition-colors duration-200 ${
-                  open || isActive ? "text-violet-600" : "text-slate-600 hover:text-slate-900"
-                }`}
+                className="relative flex items-center gap-1.5 px-3.5 py-2 text-[13.5px] font-semibold group"
+                style={{ color: open || isActive ? "#6D28D9" : "#475569" }}
               >
-                Solutions
+                <motion.span
+                  className="absolute inset-0 rounded-xl"
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileHover={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ background: open || isActive ? "rgba(109,40,217,0.08)" : "rgba(0,0,0,0.05)" }}
+                />
+                <span className="relative transition-colors duration-150 group-hover:text-slate-900">Solutions</span>
                 <motion.svg
                   animate={{ rotate: open ? 180 : 0 }}
                   transition={{ duration: 0.25, ease }}
+                  className="relative"
                   width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -191,9 +219,16 @@ export default function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <Link
               href="https://login.jenveda.net/"
-              className="rounded-xl px-4 py-2 text-[13px] font-semibold text-slate-600 transition-colors hover:text-violet-600"
+              className="relative px-4 py-2 text-[13px] font-semibold text-slate-600 group"
             >
-              Sign In
+              <motion.span
+                className="absolute inset-0 rounded-xl"
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileHover={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                style={{ background: "rgba(0,0,0,0.05)" }}
+              />
+              <span className="relative transition-colors duration-150 group-hover:text-violet-600">Sign In</span>
             </Link>
             <Link
               href="/contact"
@@ -228,7 +263,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease }}
-                className="absolute left-0 right-0 top-full mt-2 overflow-hidden rounded-2xl bg-white border border-slate-100 p-3 shadow-xl md:hidden"
+                className="absolute left-0 right-0 top-full overflow-hidden bg-white border-t border-slate-100 p-3 shadow-lg md:hidden"
               >
                 <div className="flex flex-col gap-0.5">
                   {navLinks.map((l) => (
@@ -253,6 +288,7 @@ export default function Navbar() {
           </AnimatePresence>
         </nav>
       </motion.header>
+
 
       {/* ── Backdrop ── */}
       <AnimatePresence>

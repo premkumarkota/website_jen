@@ -70,7 +70,7 @@ export default function CTA() {
               style={{ background:"rgba(37,99,235,0.07)", borderColor:"rgba(37,99,235,0.2)" }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color:"#2563EB" }}>Get Started Today</span>
+              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color:"#2563EB" }}>Start Today, Free</span>
             </motion.div>
 
             <motion.h2
@@ -80,8 +80,8 @@ export default function CTA() {
               className="text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight mb-5"
               style={{ color:"var(--text-1)" }}
             >
-              Ready to Transform{" "}
-              <span className="gradient-text">Your Business?</span>
+              See JenVeda Working{" "}
+              <span className="gradient-text">for Your Business</span>
             </motion.h2>
 
             <motion.p
@@ -91,8 +91,8 @@ export default function CTA() {
               className="text-base mb-10 max-w-lg mx-auto"
               style={{ color:"var(--text-2)" }}
             >
-              Join 500+ companies already streamlining their operations with JenVeda&apos;s
-              all-in-one ERP platform.
+              Join 500+ Indian businesses already saving time on payroll,
+              accounts, and daily operations.
             </motion.p>
 
             {/* Email form */}
@@ -116,7 +116,7 @@ export default function CTA() {
                 <>
                   <input
                     type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
+                    placeholder="Enter your work email"
                     className="flex-1 px-5 py-3.5 text-sm rounded-xl outline-none transition-all duration-200"
                     style={{
                       background:"rgba(255,255,255,0.8)", border:"1px solid rgba(0,0,0,0.12)",
@@ -128,7 +128,7 @@ export default function CTA() {
                   <button type="submit"
                     className="btn-primary group flex items-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-xl whitespace-nowrap overflow-hidden"
                   >
-                    <span className="relative z-10">Get Started</span>
+                    <span className="relative z-10">Book My Free Demo</span>
                     <svg className="relative z-10 w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -144,7 +144,7 @@ export default function CTA() {
               className="mt-4 text-xs"
               style={{ color:"var(--text-3)" }}
             >
-              No credit card required · Free onboarding · Cancel anytime
+              No credit card · Free setup help · Cancel anytime
             </motion.p>
 
             {/* Divider */}

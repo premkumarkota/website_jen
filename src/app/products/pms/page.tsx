@@ -9,83 +9,83 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    title: "Business Partners",
+    title: "Clients & Vendors in One Place",
     description:
-      "Manage customer and vendor relationships by maintaining company details, addresses, and key contacts for effective communication.",
+      "Maintain contacts, addresses, and key details for all your customers and suppliers. No more digging through emails or notebooks.",
     items: [
-      "Customer and vendor relationship management",
-      "Company details and address management",
-      "Key contacts directory for communication",
+      "Customer and vendor profiles with full contact history",
+      "Company details, addresses, and communication records",
+      "Quick access to key contacts per partner",
     ],
   },
   {
-    title: "Opportunities",
+    title: "Turn Enquiries into Signed Projects",
     description:
-      "Streamline lead conversion and estimate new projects seamlessly with detailed opportunity tracking including bid dates, penalties, and revenue projections.",
+      "Track every lead, bid date, and revenue estimate. Never miss a follow-up or lose a proposal in your inbox.",
     items: [
-      "Lead conversion pipeline management",
-      "Bid date and penalty tracking",
-      "Revenue estimation and projections",
+      "Lead-to-project conversion pipeline",
+      "Bid dates, penalties, and submission deadlines tracked",
+      "Revenue estimates and project value projections",
     ],
   },
   {
-    title: "Quotations",
+    title: "Professional Quotes, Sent Fast",
     description:
-      "Create professional price lists for products and services with cost breakdowns, payment information, and reusable templates.",
+      "Build accurate quotations using ready-made templates. Include pricing, payment terms, and GST — in minutes, not hours.",
     items: [
-      "Price lists with cost and payment information",
-      "Created using pre-designed templates",
-      "Professional and consistent formatting",
+      "Price lists with itemised costs and payment terms",
+      "Pre-designed templates for consistent formatting",
+      "GST applicability built into every quotation",
     ],
   },
   {
-    title: "Project Creation",
+    title: "Set Projects Up for Success",
     description:
-      "Begin projects by entering customer details, project amounts, start and end dates, and milestones for clear project planning.",
+      "Define scope, timelines, budgets, and milestones upfront. Everyone knows what needs to happen — and when.",
     items: [
-      "Customer details and project amounts",
-      "Start/end dates and milestone tracking",
-      "Clear project planning structure",
+      "Customer details and agreed project value on record",
+      "Start and end dates with milestone tracking",
+      "Clear project structure before work begins",
     ],
   },
   {
-    title: "Time Logs",
+    title: "Track Where Your Team's Time Goes",
     description:
-      "Record task time by selecting project, team members, dates, and milestones for accurate work hour tracking and reporting.",
+      "Employees log hours against projects and milestones. You know exactly what's being worked on — and what's falling behind.",
     items: [
-      "Project and team member selection",
-      "Date and milestone-based tracking",
-      "Accurate work hour reporting",
+      "Log hours by project, team member, and milestone",
+      "Date-based tracking for accurate billing and reporting",
+      "Work hour reports by project or team member",
     ],
   },
   {
-    title: "Products & Services",
+    title: "Your Rate Card, Always Ready",
     description:
-      "Add products and services with tax applicability and measurement units. Manage stock levels and pricing from a central dashboard.",
+      "Maintain a master list of services, materials, and pricing — with GST applicability built in. Use it across all quotations and invoices.",
     items: [
-      "Tax applicability and measurement units",
-      "Stock level management",
-      "Centralized pricing dashboard",
+      "Products and services with tax applicability set",
+      "Measurement units and pricing in one place",
+      "Feeds directly into quotations and project billing",
     ],
   },
   {
-    title: "Templates",
+    title: "Consistent, Professional Documents",
     description:
-      "Pre-designed structures for invoices, opportunities, and quotations ensuring consistency and professionalism across all documents.",
+      "Use ready-made templates for invoices, quotations, and proposals. Look professional every time, without extra effort.",
     items: [
-      "Invoice templates",
-      "Opportunity and quotation templates",
-      "Consistent professional formatting",
+      "Invoice templates ready to use",
+      "Opportunity and quotation templates for quick turnaround",
+      "Consistent formatting across all client-facing documents",
     ],
   },
   {
-    title: "Reports",
+    title: "Full Project Cost Visibility",
     description:
-      "Comprehensive reports displaying raw materials, services used, time spent, project costs, and remaining stock to inform decision-making.",
+      "See materials used, hours logged, costs incurred, and what's left — all per project. Make informed calls before it's too late.",
     items: [
-      "Raw materials and services tracking",
-      "Time spent and project cost analysis",
-      "Remaining stock overview",
+      "Raw materials and services used per project",
+      "Hours logged and project cost breakdown",
+      "Remaining stock and budget overview in real time",
     ],
   },
 ];
@@ -94,12 +94,12 @@ export default function PMSPage() {
   return (
     <ProductPageLayout
       badge="Project Management"
-      title="Empower Your Projects With"
-      titleAccent="Project Management Mastery"
+      title="Deliver Projects on Time,"
+      titleAccent="Every Time."
       subtitle="Project Management Software"
-      description="Manage business partners, opportunities, quotations, project creation, time logs, and comprehensive reports — all in one integrated platform."
+      description="JenVeda PMS keeps your projects on track — from the first quote to the final invoice. Know where your team's time goes and control project costs in real time."
       features={features}
-      ctaText="Get Started"
+      ctaText="Book a Free Demo"
       accentColor="#1D4ED8"
     />
   );

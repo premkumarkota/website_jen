@@ -9,68 +9,68 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    title: "Employee Management",
+    title: "Employee Records, Always Organised",
     description:
-      "Efficiently manage employee records including personal details, employment information, asset management, and entitlement settings.",
+      "Keep every employee's details, documents, and history in one place. No more hunting through files or spreadsheets.",
     items: [
-      "Personal information — name, gender, DOB, contact details",
-      "Employment tracking — joining dates, probation, resignation, notice periods",
-      "Qualifications — educational backgrounds with institution details",
-      "Asset management — categorization and tracking of organizational resources",
+      "Personal details, contact info, and documents — all in one profile",
+      "Joining dates, probation periods, and exit tracking",
+      "Educational qualifications and certifications on record",
+      "Company asset allocation and tracking per employee",
     ],
   },
   {
-    title: "Leave Management",
+    title: "Leave Approvals in One Click",
     description:
-      "Efficiently manage leave balances, requests, approvals, and recommendations through streamlined leave management.",
+      "Employees apply for leave. Managers approve. Balances update automatically. No back-and-forth over WhatsApp.",
     items: [
-      "Leave history — applied, recommended, approved, rejected, cancelled",
-      "Leave entitlement — HR admins customize entitlements and designate approvers",
-      "Leave types — medical, annual, special and custom categories",
-      "Workflow — structured process from submission through approval",
+      "Full leave history — applied, approved, rejected, and cancelled",
+      "HR sets leave entitlements and designates approvers",
+      "Supports medical, annual, special, and custom leave types",
+      "Clear approval workflow from submission to confirmation",
     ],
   },
   {
-    title: "Claims Management",
+    title: "Reimbursements Without the Drama",
     description:
-      "Systematic handling of reimbursement claims including submission, review, approval, and processing.",
+      "Staff submit expense claims with supporting documents. Managers approve or reject in seconds. Everything is tracked and auditable.",
     items: [
-      "Apply claims with supporting documentation",
-      "Manager review and approval functionality",
-      "HR creates claim type categories and setup",
-      "Set limits and assign verifiers/approvers",
+      "Employees upload claims with supporting documents",
+      "Manager review and one-click approval",
+      "HR defines claim categories and spending limits",
+      "Assign verifiers and approvers by team or department",
     ],
   },
   {
-    title: "Payroll Management",
+    title: "Payroll That Runs Itself",
     description:
-      "Configure CTC, earnings, deductions, and run payroll with automatic calculations. Generate payslips summarizing earnings, deductions, and net pay.",
+      "Set up salary structures once. Every month, run payroll in minutes — with payslips auto-generated and PF/ESI calculations handled automatically.",
     items: [
-      "Payroll entitlement — configure CTC and earnings percentages",
-      "Pay components — basic salary, allowances, bonuses, PF contributions",
-      "Run payroll — group-wise processing with automatic calculations",
-      "Payslips — monthly documents with complete salary breakdown",
+      "Configure CTC, earnings percentages, and deduction rules once",
+      "Covers basic salary, allowances, bonuses, and PF contributions",
+      "Group-wise payroll processing with automatic calculations",
+      "Auto-generated monthly payslips with full salary breakdown",
     ],
   },
   {
-    title: "Attendance Management",
+    title: "Know Who's In, Right Now",
     description:
-      "Track employee attendance with mobile check-in, bulk operations, and comprehensive attendance history.",
+      "Employees check in from their phone. Managers track attendance live. No more physical registers or end-of-day guesswork.",
     items: [
-      "Mobile check-in/check-out — location-based attendance recording",
-      "Bulk check-in/check-out — manager marks attendance for multiple employees",
-      "Supervisor tracking of reporting employees",
-      "Attendance history with present and absent days",
+      "Mobile check-in and check-out with location tracking",
+      "Bulk attendance marking for managers across teams",
+      "Real-time view of who is present, absent, or on leave",
+      "Complete attendance history with present and absent records",
     ],
   },
   {
-    title: "Advance Payment",
+    title: "Salary Advances Without the Paperwork",
     description:
-      "Employees can request salary advances through self-service, while managers review, approve, or reject requests seamlessly.",
+      "Employees request salary advances online. You approve in one click. It auto-adjusts in the next payroll cycle.",
     items: [
-      "Self-service advance request submission",
-      "Manager approval workflow",
-      "Integration with payroll for deductions",
+      "Employees submit advance requests through self-service",
+      "Manager approves or rejects with a single click",
+      "Approved advances automatically deduct from next payroll",
     ],
   },
 ];
@@ -78,13 +78,13 @@ const features = [
 export default function HRMSPage() {
   return (
     <ProductPageLayout
-      badge="Human Resource Management"
-      title="Maximise Work Efficiency With"
-      titleAccent="HRMS Excellence"
+      badge="HR & Payroll"
+      title="Manage Your People."
+      titleAccent="Pay Them Right, Every Time."
       subtitle="Human Resource Management System"
-      description="Manage employee records, leaves, claims, attendance, payroll, and advance payments — all from one unified platform built for enterprise scale."
+      description="JenVeda HRMS handles attendance, leaves, payroll, and compliance — so your HR team spends less time on paperwork and more time on people."
       features={features}
-      ctaText="Get Started"
+      ctaText="Book a Free Demo"
       accentColor="#6D28D9"
     />
   );

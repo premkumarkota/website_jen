@@ -9,57 +9,57 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    title: "Inventory Adjustment",
+    title: "Fix Stock Errors Instantly",
     description:
-      "Adjust inventory quantities accurately to address issues like damaged goods or errors. Ensures precise stock levels through recorded data modifications.",
+      "Damaged goods, counting mistakes, supplier short-shipments — correct them immediately with a proper audit trail. Your books stay accurate.",
     items: [
-      "Accurate quantity adjustments for discrepancies",
-      "Damaged goods and error corrections",
-      "Recorded modifications for audit trails",
-      "Financial accuracy and accounting integration",
+      "Adjust quantities for damaged goods or counting discrepancies",
+      "Corrections are recorded with reason and date",
+      "Maintains audit trail for every adjustment",
+      "Automatically syncs with accounting for financial accuracy",
     ],
   },
   {
-    title: "Stock Transfer",
+    title: "Move Stock Across Branches with Ease",
     description:
-      "Move inventory within company locations to fulfill orders, balance stock, or enhance distribution across departments, branches, or warehouses.",
+      "Transfer materials between locations in seconds. Track every movement so nothing gets lost between warehouses or sites.",
     items: [
-      "Inter-location inventory movement",
-      "Order fulfillment and stock balancing",
-      "Cross-department and branch transfers",
-      "Complete transfer tracking and accounting",
+      "Transfer stock between branches, departments, or warehouses",
+      "Fulfil orders from the right location automatically",
+      "Balance stock across locations to avoid shortages",
+      "Every transfer recorded for complete traceability",
     ],
   },
   {
-    title: "Stock in Hand",
+    title: "Live Stock Levels, Always",
     description:
-      "Full visibility into current inventory quantities for each item. Monitor stock levels in real-time to prevent shortages or excess inventory.",
+      "See exactly how much stock you have, item by item, right now. Prevent stockouts before they disrupt your operations.",
     items: [
-      "Real-time stock level monitoring",
-      "Item-wise quantity tracking",
-      "Shortage and excess prevention",
-      "Effective inventory management support",
+      "Real-time stock quantities per item and location",
+      "Item-wise tracking with current availability",
+      "Get alerts before stock runs critically low",
+      "Supports better purchasing and reorder decisions",
     ],
   },
   {
-    title: "Stock Summary",
+    title: "Your Full Inventory Picture",
     description:
-      "Detailed overview of inventory including total value, turnover, and item summaries. Supports management decisions on reordering and identifying slow-moving items.",
+      "Total stock value, turnover, slow-moving items — everything you need to make smarter buying decisions and free up working capital.",
     items: [
-      "Total inventory value and turnover",
-      "Item-wise summary reports",
-      "Reorder point identification",
-      "Slow-moving and obsolete item detection",
+      "Total inventory value and turnover at a glance",
+      "Item-wise summary with quantities and values",
+      "Identify items approaching reorder points",
+      "Spot slow-moving and obsolete stock before it piles up",
     ],
   },
   {
-    title: "Project Stock Report",
+    title: "Track Materials Per Project",
     description:
-      "Track stock allocated to specific projects, monitor consumption, and ensure materials are available when needed for project execution.",
+      "Know exactly what materials are allocated to each project. Track consumption and flag shortfalls early — before work gets delayed.",
     items: [
-      "Project-wise stock allocation",
-      "Material consumption tracking",
-      "Availability forecasting for projects",
+      "Allocate stock to specific projects",
+      "Monitor material consumption as the project progresses",
+      "Flag shortfalls early to avoid project delays",
     ],
   },
 ];
@@ -67,13 +67,13 @@ const features = [
 export default function InventoryPage() {
   return (
     <ProductPageLayout
-      badge="Inventory Management"
-      title="Effortlessly Track Your Inventory With"
-      titleAccent="Smart Management"
+      badge="Stock & Inventory"
+      title="Always Know What's"
+      titleAccent="In Stock."
       subtitle="Inventory Management Solution"
-      description="Manage stock adjustments, transfers, real-time stock levels, comprehensive summaries, and project-specific stock reports — all in one place."
+      description="JenVeda Inventory gives you real-time visibility into stock levels, movements, and project materials — so you never run short or overstock."
       features={features}
-      ctaText="Get Started"
+      ctaText="Book a Free Demo"
       accentColor="#8B5CF6"
     />
   );

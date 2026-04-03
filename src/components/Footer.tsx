@@ -33,8 +33,9 @@ export default function Footer() {
               />
             </div>
             <p className="text-[17.5px] leading-relaxed max-w-sm mb-8" style={{ color:"#444" }}>
-              We create digital experiences for brands and companies by using technology.
-              Empowering businesses with next-gen ERP solutions.
+              JenVeda helps Indian MSMEs manage HR, payroll, accounts, and
+              inventory — without the complexity. Built in Hyderabad, trusted
+              across India.
             </p>
             <div className="text-[15.5px] space-y-1.5" style={{ color:"#444" }}>
               <p className="font-bold text-lg" style={{ color:"#333" }}>Jenveda Technologies Private Limited</p>

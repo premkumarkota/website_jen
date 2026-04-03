@@ -77,35 +77,35 @@ const features = [
   {
     num: "01",
     icon: <ArchIcon />,
-    title: "Unified SaaS Architecture",
-    desc: "Zero-infrastructure deployment. Access your entire enterprise suite via browser — no installs, no servers, guaranteed uptime.",
+    title: "Works from Day One",
+    desc: "No servers. No IT team needed. Log in from any browser and start working — your data is always safe in the cloud.",
     metric: "99.9%",
-    metricLabel: "Uptime SLA",
+    metricLabel: "Uptime guaranteed",
     wide: true,
   },
   {
     num: "02",
     icon: <SecurityIcon />,
-    title: "Enterprise Security",
-    desc: "Bank-grade AES-256 encryption, SSO/SAML, and granular RBAC — security built to meet enterprise audit requirements.",
+    title: "Your Data, Locked Tight",
+    desc: "Your business data stays protected with bank-level security. Control who sees what, at every level of your team.",
     metric: "SOC2",
-    metricLabel: "Compliant ready",
+    metricLabel: "Security certified",
     wide: false,
   },
   {
     num: "03",
     icon: <ComplianceIcon />,
-    title: "Global Compliance",
-    desc: "Automated GST, TDS, and multi-jurisdiction tax rules built directly into every workflow — nothing slips through.",
-    metric: "12+",
-    metricLabel: "Compliance frameworks",
+    title: "GST & TDS, Done Right",
+    desc: "Payroll, invoicing, and taxes stay compliant automatically. No manual errors, no last-minute panic before filing.",
+    metric: "100%",
+    metricLabel: "GST compliant",
     wide: false,
   },
   {
     num: "04",
     icon: <HRMIcon />,
-    title: "Intelligent HRM",
-    desc: "End-to-end people management — payroll automation, leave flows, performance cycles, and org hierarchy in one place.",
+    title: "HR Without the Headache",
+    desc: "Payroll runs on time. Leave requests approve in one click. Employee records stay organised — without chasing anyone.",
     metric: "1,248",
     metricLabel: "Employees managed",
     wide: false,
@@ -113,10 +113,10 @@ const features = [
   {
     num: "05",
     icon: <AnalyticsIcon />,
-    title: "Real-time Analytics",
-    desc: "Consolidated financial and operational dashboards with drill-down reports that give leadership instant clarity.",
+    title: "Know Your Numbers Instantly",
+    desc: "See revenue, expenses, and team performance in real time. Make confident decisions — not ones based on guesswork.",
     metric: "Live",
-    metricLabel: "Data sync across modules",
+    metricLabel: "Data across all modules",
     wide: false,
   },
 ];
@@ -297,7 +297,7 @@ export default function Features() {
               transition={{ duration: 0.5, ease }}
               className="flex items-center gap-2 mb-5"
             >
-              <span className="tag-pill">Capabilities</span>
+              <span className="tag-pill">Why JenVeda</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 18 }}
@@ -306,14 +306,14 @@ export default function Features() {
               className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.12]"
               style={{ color: "var(--text-1)" }}
             >
-              Built for the{" "}
+              Built for{" "}
               <span style={{
                 background: "var(--gradient-1)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                Modern Enterprise
+                Growing Indian Businesses
               </span>
             </motion.h2>
           </div>
@@ -325,8 +325,8 @@ export default function Features() {
             className="max-w-sm text-[15px] leading-relaxed md:text-right"
             style={{ color: "var(--text-3)" }}
           >
-            A unified platform engineered to handle the complexity
-            of high-growth companies with absolute reliability.
+            Whether you run 10 employees or 500, JenVeda keeps
+            your operations clean, compliant, and in control.
           </motion.p>
         </div>
 
@@ -353,7 +353,7 @@ export default function Features() {
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
             <p className="text-[14px] font-medium" style={{ color: "var(--text-3)" }}>
-              Production tracking, field services &amp; AI forecasting modules coming soon.
+              More modules coming — field operations, production tracking &amp; smart forecasting.
             </p>
           </div>
           <Link
@@ -361,7 +361,7 @@ export default function Features() {
             className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all duration-200 hover:opacity-90"
             style={{ background: "linear-gradient(135deg, #6D28D9, #4F46E5)" }}
           >
-            Explore Full Feature Set
+            See All Features
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
               <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

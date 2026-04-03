@@ -4,11 +4,11 @@ import { motion, useInView } from "framer-motion";
 import { gsap } from "@/lib/gsap";
 
 const stats = [
-  { end: 500,  suffix: "+",  label: "Companies Onboarded",   color: "#6D28D9" },
-  { end: 5,    suffix: "",   label: "Integrated Modules",    color: "#1D4ED8" },
-  { end: 99.9, suffix: "%",  label: "Uptime SLA",            color: "#D1008F", decimals: 1 },
-  { end: 24,   suffix: "/7", label: "Phone & Online Support", color: "#8B5CF6" },
-  { end: 100,  suffix: "%",  label: "Cloud Native",           color: "#312E81" },
+  { end: 500,  suffix: "+",  label: "Businesses Trust JenVeda", color: "#6D28D9" },
+  { end: 5,    suffix: "",   label: "Integrated Modules",       color: "#1D4ED8" },
+  { end: 99.9, suffix: "%",  label: "Uptime Guaranteed",        color: "#D1008F", decimals: 1 },
+  { end: 24,   suffix: "/7", label: "Support, Every Day",       color: "#8B5CF6" },
+  { end: 100,  suffix: "%",  label: "Cloud-Based, Always",      color: "#312E81" },
 ];
 
 export default function StatsBar() {
@@ -56,7 +56,7 @@ export default function StatsBar() {
           className="text-center text-xs font-bold tracking-[0.2em] uppercase mb-14"
           style={{ color: "var(--text-3)" }}
         >
-          Trusted by businesses across industries
+          Trusted by Indian businesses across industries
         </motion.p>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
