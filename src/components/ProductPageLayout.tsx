@@ -41,11 +41,11 @@ export default function ProductPageLayout({
       <section className="relative overflow-hidden pt-36 pb-24 md:pt-48 md:pb-32">
         {/* Background Sophistication */}
         <div className="absolute inset-0 pointer-events-none">
-          <div 
+          <div
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] opacity-[0.08]"
-            style={{ 
+            style={{
               background: `radial-gradient(circle, ${accentColor} 0%, transparent 70%)`,
-              filter: "blur(120px)" 
+              filter: "blur(120px)"
             }}
           />
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
@@ -78,7 +78,7 @@ export default function ProductPageLayout({
           >
             {subtitle}
           </motion.p>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -115,23 +115,21 @@ export default function ProductPageLayout({
                 <button
                   key={feature.title}
                   onClick={() => setActiveTab(i)}
-                  className={`relative flex items-center gap-4 rounded-2xl p-5 text-left transition-all duration-300 ${
-                    activeTab === i 
-                      ? "bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]" 
+                  className={`relative flex items-center gap-4 rounded-2xl p-5 text-left transition-all duration-300 ${activeTab === i
+                      ? "bg-white shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]"
                       : "hover:bg-white/50"
-                  }`}
+                    }`}
                 >
                   {activeTab === i && (
-                    <motion.div 
+                    <motion.div
                       layoutId="active-light"
                       className="absolute left-0 w-1 h-8 rounded-full"
                       style={{ background: accentColor }}
                     />
                   )}
-                  <div 
-                    className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                      activeTab === i ? "bg-violet-100 text-violet-600" : "bg-slate-100 text-slate-400"
-                    }`}
+                  <div
+                    className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${activeTab === i ? "bg-violet-100 text-violet-600" : "bg-slate-100 text-slate-400"
+                      }`}
                   >
                     <span className="text-[14px] font-bold">{String(i + 1).padStart(2, "0")}</span>
                   </div>
@@ -161,7 +159,7 @@ export default function ProductPageLayout({
                       <p className="mt-6 text-[16px] leading-relaxed text-slate-500">
                         {features[activeTab].description}
                       </p>
-                      
+
                       <div className="mt-10 space-y-4">
                         {features[activeTab].items?.map((item) => (
                           <div key={item} className="flex items-center gap-3 text-[14px] font-medium text-slate-700">
@@ -173,10 +171,10 @@ export default function ProductPageLayout({
                         ))}
                       </div>
                     </div>
-                    
+
                     <div className="flex-1 relative aspect-square md:aspect-auto md:h-[320px] rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden flex items-center justify-center group">
-                       <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity" style={{ background: `radial-gradient(circle, ${accentColor} 0%, transparent 70%)` }} />
-                       <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Interface Preview Unavailable</p>
+                      <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity" style={{ background: `radial-gradient(circle, ${accentColor} 0%, transparent 70%)` }} />
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-slate-400">Interface Preview Unavailable</p>
                     </div>
                   </div>
                 </motion.div>
@@ -189,12 +187,12 @@ export default function ProductPageLayout({
       {/* Trust Bar */}
       <section className="py-16 border-y border-slate-100">
         <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-8">
-           <p className="text-sm font-bold text-slate-400 uppercase tracking-widest italic">Empowering industry leaders with {title}</p>
-           <div className="flex gap-10 grayscale opacity-40">
-              <div className="h-8 w-24 bg-slate-200 rounded animate-pulse" />
-              <div className="h-8 w-24 bg-slate-200 rounded animate-pulse" />
-              <div className="h-8 w-24 bg-slate-200 rounded animate-pulse" />
-           </div>
+          <p className="text-sm font-bold text-slate-400 uppercase tracking-widest italic">Empowering industry leaders with {title}</p>
+          <div className="flex gap-10 grayscale opacity-40">
+            <div className="h-8 w-24 bg-slate-200 rounded animate-pulse" />
+            <div className="h-8 w-24 bg-slate-200 rounded animate-pulse" />
+            <div className="h-8 w-24 bg-slate-200 rounded animate-pulse" />
+          </div>
         </div>
       </section>
 
@@ -205,7 +203,7 @@ export default function ProductPageLayout({
           <div className="relative z-10">
             <h2 className="text-fluid-h2 text-white font-black">{ctaText}</h2>
             <p className="mt-8 text-slate-400 text-lg max-w-2xl mx-auto">
-              Join 500+ enterprises leveraging JenVeda to drive operational efficiency and growth.
+              Join 50+ enterprises leveraging JenVeda to drive operational efficiency and growth.
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-4">
               <Link href="/contact" className="btn-enterprise">

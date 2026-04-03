@@ -43,7 +43,7 @@ const pillars = [
     chips: ["Rule-based payroll deductions", "Auto leave balance tracking", "Approval chain enforcement", "Configurable salary components"],
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
       </svg>
     ),
   },
@@ -54,7 +54,7 @@ const pillars = [
     chips: ["HR + Payroll unified", "GST-ready accounting", "Inventory with stock alerts", "Project cost tracking"],
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
       </svg>
     ),
   },
@@ -65,7 +65,7 @@ const pillars = [
     chips: ["Indian payroll compliance", "GST & TDS filing-ready", "Multi-branch hierarchy", "Owner-controlled access"],
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+        <circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
       </svg>
     ),
   },
@@ -76,28 +76,28 @@ const pillars = [
     chips: ["Real-time dashboards", "Role-based access", "Mobile-first attendance", "Automated reports"],
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
       </svg>
     ),
   },
 ];
 
 const comparisonRows = [
-  { feature: "Payroll processing",       bad: "Manual Excel, error-prone",          good: "Automated, rule-based, error-free" },
-  { feature: "Leave management",         bad: "WhatsApp & paper registers",          good: "Policy-enforced digital workflows" },
-  { feature: "Multi-branch visibility",  bad: "Phone calls & follow-up emails",      good: "Live dashboard across all branches" },
-  { feature: "GST compliance",           bad: "CA rework every quarter",             good: "GST-ready invoicing, built-in" },
-  { feature: "Approvals",                bad: "Lost in chat threads",                good: "Defined chain, tracked & audited" },
-  { feature: "Source of truth",          bad: "5 spreadsheets, 3 inboxes",           good: "One system, one login" },
-  { feature: "Onboarding time",          bad: "Weeks of training & setup",           good: "Operational within days" },
-  { feature: "Reporting",                bad: "Manual compilation at month-end",     good: "Instant, on-demand reports" },
+  { feature: "Payroll processing", bad: "Manual Excel, error-prone", good: "Automated, rule-based, error-free" },
+  { feature: "Leave management", bad: "WhatsApp & paper registers", good: "Policy-enforced digital workflows" },
+  { feature: "Multi-branch visibility", bad: "Phone calls & follow-up emails", good: "Live dashboard across all branches" },
+  { feature: "GST compliance", bad: "CA rework every quarter", good: "GST-ready invoicing, built-in" },
+  { feature: "Approvals", bad: "Lost in chat threads", good: "Defined chain, tracked & audited" },
+  { feature: "Source of truth", bad: "5 spreadsheets, 3 inboxes", good: "One system, one login" },
+  { feature: "Onboarding time", bad: "Weeks of training & setup", good: "Operational within days" },
+  { feature: "Reporting", bad: "Manual compilation at month-end", good: "Instant, on-demand reports" },
 ];
 
 const stats = [
-  { value: "3×",     label: "Faster payroll runs",        sub: "vs manual calculation" },
-  { value: "500+",   label: "Businesses trust JenVeda",   sub: "across India" },
-  { value: "99.9%",  label: "Guaranteed uptime SLA",      sub: "always on, always reliable" },
-  { value: "1 day",  label: "Average onboarding",         sub: "from signup to live" },
+  { value: "3×", label: "Faster payroll runs", sub: "vs manual calculation" },
+  { value: "50+", label: "Businesses trust JenVeda", sub: "across India" },
+  { value: "99.9%", label: "Guaranteed uptime SLA", sub: "always on, always reliable" },
+  { value: "1 day", label: "Average onboarding", sub: "from signup to live" },
 ];
 
 /* ─────────────────────────────────────────
@@ -135,23 +135,23 @@ function PillarCard({ p, i }: { p: typeof pillars[0]; i: number }) {
       </div>
 
       {/* Title */}
-      <h3 className="text-[19px] font-extrabold tracking-tight text-slate-900 leading-snug mb-3">
+      <h3 className="text-[22px] font-black tracking-tight text-black leading-snug mb-3">
         {p.title}
       </h3>
 
       {/* Description */}
-      <p className="text-[14px] leading-relaxed text-slate-500 mb-6">{p.desc}</p>
+      <p className="text-[17px] leading-relaxed font-medium text-black mb-6">{p.desc}</p>
 
       {/* Chips */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5">
         {p.chips.map(chip => (
           <span
             key={chip}
-            className="inline-flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1 rounded-full"
-            style={{ background: "rgba(109,40,217,0.06)", color: "#5B21B6", border: "1px solid rgba(109,40,217,0.1)" }}
+            className="inline-flex items-center gap-1.5 text-[14.5px] font-bold px-4 py-1.5 rounded-full"
+            style={{ background: "rgba(109,40,217,0.06)", color: "#5B21B6", border: "1px solid rgba(109,40,217,0.12)" }}
           >
-            <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
-              <circle cx="3.5" cy="3.5" r="3.5" fill="#6D28D9" fillOpacity="0.5"/>
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+              <circle cx="4" cy="4" r="4" fill="#6D28D9" fillOpacity="0.5" />
             </svg>
             {chip}
           </span>
@@ -165,12 +165,12 @@ function PillarCard({ p, i }: { p: typeof pillars[0]; i: number }) {
    MAIN PAGE
 ───────────────────────────────────────── */
 export default function WhyJenVedaClient() {
-  const heroRef    = useRef(null);
+  const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
-  const statsRef   = useRef(null);
+  const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-60px" });
-  const cmpRef     = useRef(null);
-  const cmpInView  = useInView(cmpRef, { once: true, margin: "-60px" });
+  const cmpRef = useRef(null);
+  const cmpInView = useInView(cmpRef, { once: true, margin: "-60px" });
 
   return (
     <div className="bg-white min-h-screen">
@@ -220,20 +220,19 @@ export default function WhyJenVedaClient() {
             transition={{ duration: 0.7, delay: 0.08, ease }}
             className="text-fluid-h1 font-black tracking-tight text-slate-900"
           >
-            Stop looking like a brochure.
+            Built to Drive Decisions.
             <br />
-            <span className="gradient-text">Act like your best salesperson.</span>
+            <span className="gradient-text"> Not Just Display Data.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
-            className="mt-7 text-[17.5px] leading-relaxed text-slate-500 max-w-2xl mx-auto"
+            className="mt-7 text-[20px] font-medium leading-relaxed text-black max-w-2xl mx-auto"
           >
-            Thousands of Indian businesses are still running payroll on Excel,
-            chasing approvals on WhatsApp, and making decisions from last month's data.
-            The cost isn't just inefficiency — it's lost control of your business.
+            JenVeda helps you instantly understand what improves after you switch
+            — faster execution, better governance, and zero operational confusion.
           </motion.p>
 
           {/* Mini trust row */}
@@ -241,12 +240,12 @@ export default function WhyJenVedaClient() {
             initial={{ opacity: 0, y: 10 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3, ease }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] font-semibold text-slate-400"
+            className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[14.5px] font-bold text-slate-400"
           >
-            {["Trusted by 500+ Indian businesses", "GST & Compliance ready", "Setup in under a day"].map((t) => (
+            {["Trusted by 50+ Indian businesses", "GST & Compliance ready", "Setup in under a day"].map((t) => (
               <span key={t} className="flex items-center gap-2">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7l3 3 6-6" stroke="#6D28D9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2.5 7l3 3 6-6" stroke="#6D28D9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 {t}
               </span>
@@ -271,7 +270,7 @@ export default function WhyJenVedaClient() {
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
               The hidden cost of <span className="gradient-text">staying manual</span>
             </h2>
-            <p className="mt-4 text-[16px] text-slate-500 max-w-xl mx-auto leading-relaxed">
+            <p className="mt-4 text-[20px] font-medium text-black max-w-xl mx-auto leading-relaxed">
               Every month without the right system is a month of wasted hours,
               compounding errors, and decisions made too late.
             </p>
@@ -298,8 +297,8 @@ export default function WhyJenVedaClient() {
                 >
                   {p.stat}
                 </div>
-                <p className="text-[15px] font-bold text-slate-800 mb-3 leading-snug">{p.label}</p>
-                <p className="text-[13.5px] leading-relaxed text-slate-500">{p.desc}</p>
+                <p className="text-[17.5px] font-extrabold text-black mb-3 leading-snug">{p.label}</p>
+                <p className="text-[16px] font-medium leading-relaxed text-black/80">{p.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -324,7 +323,7 @@ export default function WhyJenVedaClient() {
                 Four principles that make<br className="hidden md:block" />
                 <span className="gradient-text"> JenVeda different.</span>
               </h2>
-              <p className="text-[15px] text-slate-500 max-w-sm leading-relaxed md:text-right">
+              <p className="text-[18px] text-black font-medium max-w-sm leading-relaxed md:text-right">
                 Not just another ERP. A system designed to remove every friction point in how Indian businesses operate.
               </p>
             </div>
@@ -353,7 +352,7 @@ export default function WhyJenVedaClient() {
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
               JenVeda vs <span className="gradient-text">the old way</span>
             </h2>
-            <p className="mt-4 text-[15.5px] text-slate-500 max-w-lg mx-auto">
+            <p className="mt-4 text-[19px] text-black font-medium max-w-lg mx-auto">
               See exactly what changes when you move from scattered tools to a single connected platform.
             </p>
           </motion.div>
@@ -388,26 +387,26 @@ export default function WhyJenVedaClient() {
                 style={{ border: "1px solid rgba(0,0,0,0.05)" }}
               >
                 {/* Feature label */}
-                <p className="text-[14px] font-semibold text-slate-700">{row.feature}</p>
+                <p className="text-[16px] font-bold text-black">{row.feature}</p>
 
                 {/* Traditional — bad */}
                 <div className="flex items-center gap-2.5">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-red-50 flex items-center justify-center">
-                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                      <path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#DC2626" strokeWidth="1.5" strokeLinecap="round"/>
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-50 flex items-center justify-center">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2.5 2.5l5 5M7.5 2.5l-5 5" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </div>
-                  <span className="text-[13px] text-slate-400">{row.bad}</span>
+                  <span className="text-[15.5px] font-medium text-black/60">{row.bad}</span>
                 </div>
 
                 {/* JenVeda — good */}
                 <div className="flex items-center gap-2.5">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-violet-50 flex items-center justify-center">
-                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                      <path d="M1.5 4.5l2 2 4-4" stroke="#6D28D9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-50 flex items-center justify-center">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                      <path d="M1.5 4.5l3 3 5-5.5" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <span className="text-[13px] font-medium text-slate-800">{row.good}</span>
+                  <span className="text-[15.5px] font-bold text-black">{row.good}</span>
                 </div>
               </motion.div>
             ))}
@@ -444,8 +443,8 @@ export default function WhyJenVedaClient() {
                 <span className="text-[3.2rem] md:text-[3.6rem] font-black tracking-tight leading-none mb-3 gradient-text">
                   {s.value}
                 </span>
-                <p className="text-[14px] font-bold text-slate-800 mb-1">{s.label}</p>
-                <p className="text-[12px] text-slate-400">{s.sub}</p>
+                <p className="text-[17.5px] font-black text-black mb-1">{s.label}</p>
+                <p className="text-[15px] font-bold text-slate-900">{s.sub}</p>
               </motion.div>
             ))}
           </div>
@@ -495,7 +494,7 @@ export default function WhyJenVedaClient() {
               >
                 Book a Free Demo
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M3 7h8M7.5 4l3 3-3 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 7h8M7.5 4l3 3-3 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
               <Link

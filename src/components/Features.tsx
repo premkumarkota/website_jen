@@ -10,12 +10,12 @@ const ArchIcon = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
     <defs>
       <linearGradient id="g-arch" x1="0" y1="0" x2="26" y2="26" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#A78BFA"/><stop offset="1" stopColor="#6D28D9"/>
+        <stop stopColor="#A78BFA" /><stop offset="1" stopColor="#6D28D9" />
       </linearGradient>
     </defs>
-    <rect x="2" y="15" width="6" height="9" rx="1.5" fill="url(#g-arch)" fillOpacity="0.6"/>
-    <rect x="10" y="9" width="6" height="15" rx="1.5" fill="url(#g-arch)" fillOpacity="0.85"/>
-    <rect x="18" y="4" width="6" height="20" rx="1.5" fill="url(#g-arch)"/>
+    <rect x="2" y="15" width="6" height="9" rx="1.5" fill="url(#g-arch)" fillOpacity="0.6" />
+    <rect x="10" y="9" width="6" height="15" rx="1.5" fill="url(#g-arch)" fillOpacity="0.85" />
+    <rect x="18" y="4" width="6" height="20" rx="1.5" fill="url(#g-arch)" />
   </svg>
 );
 
@@ -23,11 +23,11 @@ const SecurityIcon = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
     <defs>
       <linearGradient id="g-sec" x1="3" y1="2" x2="23" y2="24" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#C4B5FD"/><stop offset="1" stopColor="#6D28D9"/>
+        <stop stopColor="#C4B5FD" /><stop offset="1" stopColor="#6D28D9" />
       </linearGradient>
     </defs>
-    <path d="M13 2L4 6v7c0 5.25 3.85 10.15 9 11.35C18.15 23.15 22 18.25 22 13V6L13 2z" fill="url(#g-sec)" fillOpacity="0.15" stroke="url(#g-sec)" strokeWidth="1.4"/>
-    <path d="M9 13l3 3 5-5" stroke="url(#g-sec)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M13 2L4 6v7c0 5.25 3.85 10.15 9 11.35C18.15 23.15 22 18.25 22 13V6L13 2z" fill="url(#g-sec)" fillOpacity="0.15" stroke="url(#g-sec)" strokeWidth="1.4" />
+    <path d="M9 13l3 3 5-5" stroke="url(#g-sec)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -35,12 +35,12 @@ const ComplianceIcon = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
     <defs>
       <linearGradient id="g-comp" x1="3" y1="3" x2="23" y2="23" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#DDD6FE"/><stop offset="1" stopColor="#6D28D9"/>
+        <stop stopColor="#DDD6FE" /><stop offset="1" stopColor="#6D28D9" />
       </linearGradient>
     </defs>
-    <circle cx="13" cy="13" r="10" fill="url(#g-comp)" fillOpacity="0.1" stroke="url(#g-comp)" strokeWidth="1.4"/>
-    <circle cx="13" cy="13" r="5.5" fill="url(#g-comp)" fillOpacity="0.12"/>
-    <path d="M9 13l3 3 5-5.5" stroke="url(#g-comp)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="13" cy="13" r="10" fill="url(#g-comp)" fillOpacity="0.1" stroke="url(#g-comp)" strokeWidth="1.4" />
+    <circle cx="13" cy="13" r="5.5" fill="url(#g-comp)" fillOpacity="0.12" />
+    <path d="M9 13l3 3 5-5.5" stroke="url(#g-comp)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -48,13 +48,13 @@ const HRMIcon = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
     <defs>
       <linearGradient id="g-hrm" x1="4" y1="4" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#C4B5FD"/><stop offset="1" stopColor="#7C3AED"/>
+        <stop stopColor="#C4B5FD" /><stop offset="1" stopColor="#7C3AED" />
       </linearGradient>
     </defs>
-    <circle cx="13" cy="9" r="4" fill="url(#g-hrm)" fillOpacity="0.9"/>
-    <path d="M5 23c0-4.42 3.58-8 8-8s8 3.58 8 8" stroke="url(#g-hrm)" strokeWidth="1.8" strokeLinecap="round"/>
-    <circle cx="21" cy="9" r="2.5" fill="url(#g-hrm)" fillOpacity="0.45"/>
-    <path d="M21 18c0-2.5-1.2-4.7-3-6" stroke="url(#g-hrm)" strokeWidth="1.4" strokeLinecap="round" strokeOpacity="0.5"/>
+    <circle cx="13" cy="9" r="4" fill="url(#g-hrm)" fillOpacity="0.9" />
+    <path d="M5 23c0-4.42 3.58-8 8-8s8 3.58 8 8" stroke="url(#g-hrm)" strokeWidth="1.8" strokeLinecap="round" />
+    <circle cx="21" cy="9" r="2.5" fill="url(#g-hrm)" fillOpacity="0.45" />
+    <path d="M21 18c0-2.5-1.2-4.7-3-6" stroke="url(#g-hrm)" strokeWidth="1.4" strokeLinecap="round" strokeOpacity="0.5" />
   </svg>
 );
 
@@ -62,14 +62,14 @@ const AnalyticsIcon = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
     <defs>
       <linearGradient id="g-ana" x1="3" y1="10" x2="23" y2="20" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#EDE9FE"/><stop offset="1" stopColor="#7C3AED"/>
+        <stop stopColor="#EDE9FE" /><stop offset="1" stopColor="#7C3AED" />
       </linearGradient>
     </defs>
-    <path d="M4 19l5-5 4 4 5-7 4 3" stroke="url(#g-ana)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="9" cy="14" r="2" fill="url(#g-ana)"/>
-    <circle cx="13" cy="18" r="2" fill="url(#g-ana)" fillOpacity="0.7"/>
-    <circle cx="18" cy="11" r="2" fill="url(#g-ana)" fillOpacity="0.85"/>
-    <circle cx="22" cy="14" r="2" fill="url(#g-ana)" fillOpacity="0.6"/>
+    <path d="M4 19l5-5 4 4 5-7 4 3" stroke="url(#g-ana)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="9" cy="14" r="2" fill="url(#g-ana)" />
+    <circle cx="13" cy="18" r="2" fill="url(#g-ana)" fillOpacity="0.7" />
+    <circle cx="18" cy="11" r="2" fill="url(#g-ana)" fillOpacity="0.85" />
+    <circle cx="22" cy="14" r="2" fill="url(#g-ana)" fillOpacity="0.6" />
   </svg>
 );
 
@@ -183,7 +183,7 @@ function FeatureCard({ f, i, inView, colSpan }: {
           {/* Number watermark */}
           <motion.span
             variants={{
-              rest:    { opacity: 0.04, scale: 1 },
+              rest: { opacity: 0.04, scale: 1 },
               hovered: { opacity: 0.08, scale: 1.05 },
             }}
             transition={{ duration: 0.4 }}
@@ -196,7 +196,7 @@ function FeatureCard({ f, i, inView, colSpan }: {
           {/* Icon */}
           <motion.div
             variants={{
-              rest:    { scale: 1, rotate: 0, boxShadow: "0 0 0 0px rgba(109,40,217,0)" },
+              rest: { scale: 1, rotate: 0, boxShadow: "0 0 0 0px rgba(109,40,217,0)" },
               hovered: { scale: 1.1, rotate: -4, boxShadow: "0 8px 24px rgba(109,40,217,0.18)" },
             }}
             transition={{ duration: 0.35, ease }}
@@ -213,15 +213,15 @@ function FeatureCard({ f, i, inView, colSpan }: {
           <div className="flex-1">
             <motion.h3
               variants={{
-                rest:    { color: "#0F172A" },
+                rest: { color: "#0F172A" },
                 hovered: { color: "#5B21B6" },
               }}
               transition={{ duration: 0.25 }}
-              className="text-[17px] font-bold leading-snug mb-3"
+              className="text-[20px] font-bold leading-snug mb-3 text-black"
             >
               {f.title}
             </motion.h3>
-            <p className="text-[13.5px] leading-relaxed" style={{ color: "#64748B" }}>
+            <p className="text-[17px] font-medium leading-relaxed text-black">
               {f.desc}
             </p>
           </div>
@@ -234,14 +234,14 @@ function FeatureCard({ f, i, inView, colSpan }: {
             <div className="flex items-center gap-2.5">
               <motion.span
                 variants={{
-                  rest:    { color: "#6D28D9" },
+                  rest: { color: "#6D28D9" },
                   hovered: { color: "#5B21B6" },
                 }}
                 className="text-xl font-black tabular-nums"
               >
                 {f.metric}
               </motion.span>
-              <span className="text-[11px] font-medium" style={{ color: "#94A3B8" }}>
+              <span className="text-[13px] font-bold text-slate-900">
                 {f.metricLabel}
               </span>
             </div>
@@ -249,7 +249,7 @@ function FeatureCard({ f, i, inView, colSpan }: {
             {/* Arrow that slides in */}
             <motion.div
               variants={{
-                rest:    { opacity: 0, x: -8 },
+                rest: { opacity: 0, x: -8 },
                 hovered: { opacity: 1, x: 0 },
               }}
               transition={{ duration: 0.3, ease }}
@@ -257,7 +257,7 @@ function FeatureCard({ f, i, inView, colSpan }: {
               style={{ background: "rgba(109,40,217,0.1)" }}
             >
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="#6D28D9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="#6D28D9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </motion.div>
           </div>
@@ -306,14 +306,15 @@ export default function Features() {
               className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.12]"
               style={{ color: "var(--text-1)" }}
             >
-              Built for{" "}
+              Built for businesses where
+              {" "}
               <span style={{
                 background: "var(--gradient-1)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}>
-                Growing Indian Businesses
+                process clarity directly impacts growth.
               </span>
             </motion.h2>
           </div>
@@ -322,8 +323,7 @@ export default function Features() {
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16, ease }}
-            className="max-w-sm text-[15px] leading-relaxed md:text-right"
-            style={{ color: "var(--text-3)" }}
+            className="max-w-sm text-[19px] font-medium leading-relaxed md:text-right text-black"
           >
             Whether you run 10 employees or 500, JenVeda keeps
             your operations clean, compliant, and in control.
@@ -352,7 +352,7 @@ export default function Features() {
         >
           <div className="flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-            <p className="text-[14px] font-medium" style={{ color: "var(--text-3)" }}>
+            <p className="text-[16px] font-bold text-black">
               More modules coming — field operations, production tracking &amp; smart forecasting.
             </p>
           </div>
@@ -363,7 +363,7 @@ export default function Features() {
           >
             See All Features
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
         </motion.div>

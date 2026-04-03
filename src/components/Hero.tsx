@@ -12,10 +12,10 @@ import ParallaxSection, {
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const clients = [
-  { src: "/lakshmi_toyota.jpg",      alt: "Lakshmi Toyota"    },
-  { src: "/mallareddy.jpg",          alt: "Mallareddy"        },
-  { src: "/mvr_constructions.jpeg",  alt: "MVR Constructions" },
-  { src: "/santhosh_maruthi.jpeg",   alt: "Santhosh Maruthi"  },
+  { src: "/lakshmi_toyota.jpg", alt: "Lakshmi Toyota" },
+  { src: "/mallareddy.jpg", alt: "Mallareddy" },
+  { src: "/mvr_constructions.jpeg", alt: "MVR Constructions" },
+  { src: "/santhosh_maruthi.jpeg", alt: "Santhosh Maruthi" },
 ];
 
 export default function Hero() {
@@ -124,9 +124,9 @@ export default function Hero() {
                   transition={{ duration: 0.75, delay: 0.1, ease }}
                   className="text-[2.8rem] font-extrabold leading-[1.12] tracking-[-0.025em] text-slate-900 sm:text-[3.4rem] lg:text-[4rem] text-center"
                 >
-                  Run Your Entire
+                  Run Your Business
                   <br />
-                  <span className="gradient-text">Business on One Platform</span>
+                  <span className="gradient-text">with Clarity, Control, and Confidence.</span>
                 </motion.h1>
 
                 {/* Subtext */}
@@ -134,7 +134,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.2, ease }}
-                  className="mt-6 max-w-[520px] text-[17px] leading-relaxed text-slate-500 text-center"
+                  className="mt-6 max-w-[520px] text-[20px] font-medium leading-relaxed text-black text-center"
                 >
                   JenVeda handles your HR, payroll, accounts, and inventory — so
                   you spend less time chasing data and more time growing your business.
@@ -157,7 +157,7 @@ export default function Hero() {
                   >
                     Book a Free Demo
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M3 7h8M7.5 4l3 3-3 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M3 7h8M7.5 4l3 3-3 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
                   <Link
@@ -175,8 +175,8 @@ export default function Hero() {
                   transition={{ duration: 0.6, delay: 0.5, ease }}
                   className="mt-10 flex flex-col items-center gap-3"
                 >
-                  <p className="text-[12px] font-semibold uppercase tracking-widest text-slate-400">
-                    Trusted by 500+ Indian businesses
+                  <p className="text-[14px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                    Trusted by 50+ Indian businesses
                   </p>
                   <div className="flex items-center gap-2">
                     {clients.map((c) => (

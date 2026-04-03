@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
@@ -356,8 +356,70 @@ const modules = [
 export default function ERPSolution() {
   const [active, setActive] = useState(0);
   const inViewRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const inView = useInView(inViewRef, { once: true, margin: "-60px" });
   const m = modules[active];
+
+  // ── Horizontal scroll / swipe to switch modules ──
+  const swipeCooldown = useRef(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Only respond to horizontal scroll (trackpad two-finger)
+      if (Math.abs(e.deltaX) < 15 || Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      if (swipeCooldown.current) return;
+
+      swipeCooldown.current = true;
+      setTimeout(() => { swipeCooldown.current = false; }, 500);
+
+      if (e.deltaX > 0) {
+        // Swipe left → next module
+        setActive((prev) => Math.min(prev + 1, modules.length - 1));
+      } else {
+        // Swipe right → previous module
+        setActive((prev) => Math.max(prev - 1, 0));
+      }
+      e.preventDefault();
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStart.current) return;
+      const dx = e.changedTouches[0].clientX - touchStart.current.x;
+      const dy = e.changedTouches[0].clientY - touchStart.current.y;
+      touchStart.current = null;
+
+      // Only trigger if horizontal swipe is dominant and significant
+      if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+      if (swipeCooldown.current) return;
+
+      swipeCooldown.current = true;
+      setTimeout(() => { swipeCooldown.current = false; }, 500);
+
+      if (dx < 0) {
+        setActive((prev) => Math.min(prev + 1, modules.length - 1));
+      } else {
+        setActive((prev) => Math.max(prev - 1, 0));
+      }
+    };
+
+    card.addEventListener("wheel", handleWheel, { passive: false });
+    card.addEventListener("touchstart", handleTouchStart, { passive: true });
+    card.addEventListener("touchend", handleTouchEnd, { passive: true });
+
+    return () => {
+      card.removeEventListener("wheel", handleWheel);
+      card.removeEventListener("touchstart", handleTouchStart);
+      card.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
 
   return (
     <section
@@ -382,9 +444,7 @@ export default function ERPSolution() {
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease }}
-          >
-            <span className="tag-pill">Platform Modules</span>
-          </motion.div>
+          />
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -452,10 +512,11 @@ export default function ERPSolution() {
 
         {/* ── Showcase Card ── */}
         <motion.div
+          ref={cardRef}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3, ease }}
-          className="relative rounded-3xl overflow-hidden"
+          className="relative rounded-3xl overflow-hidden cursor-grab active:cursor-grabbing"
           style={{
             background: "white",
             border: "1px solid rgba(0,0,0,0.07)",
@@ -638,26 +699,20 @@ export default function ERPSolution() {
           transition={{ duration: 0.7, delay: 0.45, ease }}
           className="mt-4 relative rounded-2xl overflow-hidden px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6"
           style={{
-            background: "linear-gradient(135deg, #1e1b4b 0%, #3b0764 60%, #1e1b4b 100%)",
-            boxShadow: "0 20px 60px rgba(109,40,217,0.2)",
+            background: "white",
+            border: "1px solid rgba(15,23,42,0.08)",
+            boxShadow: "0 1px 3px rgba(0,0,0,0.02), 0 20px 40px -12px rgba(15,23,42,0.06)",
           }}
         >
-          <div className="absolute inset-0 opacity-[0.06]" style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }} />
-          <div className="absolute -top-16 -left-16 w-64 h-64 rounded-full" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.25), transparent 70%)" }} />
-          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full" style={{ background: "radial-gradient(circle, rgba(109,40,217,0.2), transparent 70%)" }} />
-
           <div className="relative">
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40">Single Data Layer · Real-time Sync</span>
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-slate-400">Single Data Layer · Real-time Sync</span>
             </div>
-            <p className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+            <p className="text-2xl md:text-[28px] font-black text-black tracking-tight leading-tight">
               All modules. One platform. Zero silos.
             </p>
-            <p className="text-sm text-white/45 font-light mt-1.5">
+            <p className="text-[17px] text-black font-medium mt-2 leading-relaxed">
               Changes in HRMS reflect instantly in Payroll. Inventory feeds directly into Accounting. Everything connected.
             </p>
           </div>
@@ -666,10 +721,10 @@ export default function ERPSolution() {
             {modules.map((mod) => (
               <div
                 key={mod.id}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-white/80 transition-all hover:text-white"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 transition-all hover:text-violet-600"
                 style={{
-                  background: "rgba(255,255,255,0.07)",
-                  border: "1px solid rgba(255,255,255,0.12)",
+                  background: "rgba(15,23,42,0.03)",
+                  border: "1px solid rgba(15,23,42,0.06)",
                 }}
               >
                 {mod.tag}

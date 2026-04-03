@@ -24,75 +24,56 @@ export default function ContactClient() {
     <div>
       {/* ── Hero ── */}
       <section
-        className="relative flex min-h-[52vh] items-center overflow-hidden"
-        style={{ background: "#05071A" }}
+        className="relative pt-36 pb-24 px-6 overflow-hidden"
       >
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 65% 55% at 15% 50%, rgba(109,40,217,0.24) 0%, transparent 62%)," +
-              "radial-gradient(ellipse 50% 40% at 90% 15%, rgba(209,0,143,0.12) 0%, transparent 55%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.028]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(139,92,246,1) 1px, transparent 1px)," +
-              "linear-gradient(90deg, rgba(139,92,246,1) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-          }}
-        />
+        {/* Background */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-[8%] top-[10%] w-[560px] h-[560px] rounded-full opacity-[0.055]"
+            style={{ background: "radial-gradient(circle, #6D28D9 0%, transparent 70%)", filter: "blur(100px)" }}
+          />
+          <div className="absolute right-[5%] bottom-0 w-[400px] h-[400px] rounded-full opacity-[0.04]"
+            style={{ background: "radial-gradient(circle, #D1008F 0%, transparent 70%)", filter: "blur(90px)" }}
+          />
+          <div className="absolute inset-0 opacity-[0.022]"
+            style={{ backgroundImage: "radial-gradient(rgba(109,40,217,0.6) 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+          />
+        </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-5xl px-6 py-32 xl:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-6 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.05, ease }}
-            className="mb-7 flex items-center gap-2 text-[12px] font-medium"
-            style={{ color: "rgba(196,181,253,0.45)" }}
+            className="mb-7 flex items-center gap-2 text-[12px] font-medium text-slate-400"
           >
-            <Link href="/" className="transition-colors hover:text-violet-300">Home</Link>
+            <Link href="/" className="transition-colors hover:text-violet-600">Home</Link>
             <span>/</span>
-            <span style={{ color: "#C4B5FD" }}>Contact</span>
+            <span className="text-slate-900">Contact</span>
           </motion.div>
 
           <motion.div {...stagger(0)}>
             <span
-              className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em]"
-              style={{
-                background: "rgba(109,40,217,0.18)",
-                border: "1px solid rgba(109,40,217,0.35)",
-                color: "#C4B5FD",
-              }}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold"
+              style={{ background: "rgba(109,40,217,0.07)", border: "1px solid rgba(109,40,217,0.15)" }}
             >
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full" style={{ background: "#A78BFA" }} />
-              Get in Touch
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full flex-shrink-0"
+                style={{ background: "var(--gradient-1)" }}
+              />
+              <span className="gradient-text uppercase tracking-wider">Get in Touch</span>
             </span>
           </motion.div>
 
           <motion.h1
             {...stagger(1)}
-            className="mt-6 max-w-2xl text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-white sm:text-[3rem] lg:text-[3.6rem]"
+            className="mt-6 max-w-2xl text-[2.8rem] font-black leading-[1.05] tracking-[-0.03em] text-slate-900 sm:text-[3.2rem] lg:text-[3.8rem]"
           >
             Let&apos;s build something{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #A78BFA 0%, #F472B6 52%, #60A5FA 100%)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              great together.
-            </span>
+            <span className="gradient-text">great together.</span>
           </motion.h1>
 
           <motion.p
             {...stagger(2)}
-            className="mt-5 max-w-[480px] text-[16px] leading-[1.8]"
-            style={{ color: "rgba(196,181,253,0.6)" }}
+            className="mt-5 max-w-[520px] text-[20px] font-medium leading-relaxed text-black"
           >
             Request a demo, ask a question, or talk to us about how JenVeda can
             transform your business operations.
@@ -140,9 +121,9 @@ export default function ContactClient() {
                   color: "#D1008F",
                   bg: "rgba(209,0,143,0.07)",
                   label: "Email",
-                  value: "Jenvedatech@gmail.com",
+                  value: "contact@jenveda.com",
                   sub: "We reply within 24 hours",
-                  href: "mailto:Jenvedatech@gmail.com",
+                  href: "mailto:contact@jenveda.com",
                   icon: (
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   ),
@@ -178,17 +159,17 @@ export default function ContactClient() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.1em]" style={{ color }}>
+                    <p className="text-[13px] font-bold uppercase tracking-[0.12em]" style={{ color }}>
                       {label}
                     </p>
                     {href ? (
-                      <a href={href} className="mt-0.5 block text-[15px] font-semibold text-slate-800 transition-colors hover:text-violet-700">
+                      <a href={href} className="mt-1 block text-[18px] font-black text-black transition-colors hover:text-violet-700">
                         {value}
                       </a>
                     ) : (
-                      <p className="mt-0.5 text-[15px] font-semibold text-slate-800">{value}</p>
+                      <p className="mt-1 text-[18px] font-black text-black">{value}</p>
                     )}
-                    <p className="mt-0.5 text-[13px] text-slate-400">{sub}</p>
+                    <p className="mt-1 text-[15.5px] font-medium text-black/60">{sub}</p>
                   </div>
                 </motion.div>
               ))}
@@ -212,7 +193,7 @@ export default function ContactClient() {
                     <Link
                       key={p.label}
                       href={p.href}
-                      className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-violet-50 hover:text-violet-700"
+                      className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-[15px] font-bold text-black transition-all hover:bg-violet-50 hover:text-violet-700"
                     >
                       <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--gradient-1)" }} />
                       {p.label}
@@ -262,7 +243,7 @@ export default function ContactClient() {
                     <div className="grid gap-4 sm:grid-cols-2">
                       {/* Name */}
                       <div>
-                        <label className="mb-1.5 block text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">
+                        <label className="mb-1.5 block text-[14.5px] font-bold uppercase tracking-[0.08em] text-black">
                           Full Name *
                         </label>
                         <input
@@ -276,7 +257,7 @@ export default function ContactClient() {
                       </div>
                       {/* Email */}
                       <div>
-                        <label className="mb-1.5 block text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">
+                        <label className="mb-1.5 block text-[14.5px] font-bold uppercase tracking-[0.08em] text-black">
                           Email Address *
                         </label>
                         <input

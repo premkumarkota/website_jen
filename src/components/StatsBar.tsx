@@ -14,28 +14,32 @@ const stats = [
 export default function StatsBar() {
   const sectionRef = useRef<HTMLElement>(null);
   const numRefs    = useRef<(HTMLSpanElement | null)[]>([]);
-  const triggered  = useRef(false);
-  const inView     = useInView(sectionRef, { once: true, margin: "-60px" });
+  const inView     = useInView(sectionRef, { once: false, margin: "-60px" });
 
   useEffect(() => {
-    if (!inView || triggered.current) return;
-    triggered.current = true;
-
-    stats.forEach((s, i) => {
-      const el = numRefs.current[i];
-      if (!el) return;
-      const obj = { val: 0 };
-      gsap.to(obj, {
-        val: s.end,
-        duration: 2.4,
-        delay: i * 0.15,
-        ease: "power2.out",
-        onUpdate() {
-          const v = s.decimals ? obj.val.toFixed(s.decimals) : Math.round(obj.val);
-          el.textContent = `${v}${s.suffix}`;
-        },
+    if (inView) {
+      stats.forEach((s, i) => {
+        const el = numRefs.current[i];
+        if (!el) return;
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: s.end,
+          duration: 2.4,
+          delay: i * 0.15,
+          ease: "power2.out",
+          onUpdate() {
+            const v = s.decimals ? obj.val.toFixed(s.decimals) : Math.round(obj.val);
+            el.textContent = `${v}${s.suffix}`;
+          },
+        });
       });
-    });
+    } else {
+      // Optional: reset to 0 when out of view so it's fresh for next entrance
+      stats.forEach((s, i) => {
+        const el = numRefs.current[i];
+        if (el) el.textContent = `0${s.suffix}`;
+      });
+    }
   }, [inView]);
 
   return (

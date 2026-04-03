@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import StatsBar from "@/components/StatsBar";
 import Clients from "@/components/Clients";
+import CoreCapabilities from "@/components/CoreCapabilities";
 import ERPSolution from "@/components/ERPSolution";
 import Features from "@/components/Features";
 import SecurityCompliance from "@/components/SecurityCompliance";
@@ -16,6 +17,7 @@ export default function Home() {
       {/* Every subsequent section rises up into view as you scroll */}
       <SectionReveal><StatsBar /></SectionReveal>
       <SectionReveal><Clients /></SectionReveal>
+      <SectionReveal><CoreCapabilities /></SectionReveal>
       <SectionReveal><ERPSolution /></SectionReveal>
       <SectionReveal><Features /></SectionReveal>
       <SectionReveal><SecurityCompliance /></SectionReveal>
