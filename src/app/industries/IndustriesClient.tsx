@@ -202,7 +202,7 @@ function PainItem({ text }: { text: string }) {
           <path d="M4 1v3M4 5.5v1" stroke="#94a3b8" strokeWidth="1.4" strokeLinecap="round"/>
         </svg>
       </span>
-      <span className="text-[14px] leading-relaxed text-slate-500">{text}</span>
+      <span className="text-[17px] leading-relaxed font-medium text-black">{text}</span>
     </li>
   );
 }
@@ -238,12 +238,12 @@ function OutcomeCard({
         {item.icon}
       </div>
       <h4
-        className="text-[14px] font-bold mb-1.5"
+        className="text-[18px] font-bold mb-2"
         style={{ color: "#0F172A" }}
       >
         {item.title}
       </h4>
-      <p className="text-[13px] leading-relaxed text-slate-500">{item.desc}</p>
+      <p className="text-[16px] leading-relaxed font-medium text-black">{item.desc}</p>
     </motion.div>
   );
 }
@@ -265,7 +265,7 @@ function IndustryPanel({ industry }: { industry: typeof industries[0] }) {
             initial={{ opacity: 0, y: 8 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.4, ease }}
-            className="text-[12px] font-bold uppercase tracking-[0.18em] mb-4"
+            className="text-[14px] font-bold uppercase tracking-[0.18em] mb-4"
             style={{ color: industry.color }}
           >
             {industry.tagline}
@@ -302,7 +302,7 @@ function IndustryPanel({ industry }: { industry: typeof industries[0] }) {
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.12, ease }}
-            className="text-[15px] leading-relaxed text-slate-500 max-w-md"
+            className="text-[19px] leading-relaxed font-medium text-black max-w-md"
           >
             {industry.subtext}
           </motion.p>
@@ -318,7 +318,7 @@ function IndustryPanel({ industry }: { industry: typeof industries[0] }) {
             <svg className="flex-shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M8 1.5L10.06 5.67L14.72 6.35L11.36 9.62L12.12 14.26L8 12.1L3.88 14.26L4.64 9.62L1.28 6.35L5.94 5.67L8 1.5Z" fill={industry.color} fillOpacity="0.8"/>
             </svg>
-            <p className="text-[12.5px] leading-relaxed" style={{ color: industry.color }}>
+            <p className="text-[15px] font-semibold leading-relaxed" style={{ color: industry.color }}>
               {industry.proof}
             </p>
           </motion.div>
@@ -331,7 +331,7 @@ function IndustryPanel({ industry }: { industry: typeof industries[0] }) {
           transition={{ duration: 0.55, delay: 0.1, ease }}
           className="p-6 rounded-2xl bg-slate-50 border border-slate-100"
         >
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-5">
+          <p className="text-[14px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-5">
             What we hear from {industry.shortLabel}
           </p>
           <ul className="flex flex-col gap-4">
@@ -348,7 +348,7 @@ function IndustryPanel({ industry }: { industry: typeof industries[0] }) {
           initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.18, ease }}
-          className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-5"
+          className="text-[14px] font-bold uppercase tracking-[0.18em] text-slate-400 mb-5"
         >
           How JenVeda helps
         </motion.p>
@@ -439,7 +439,7 @@ export default function IndustriesClient() {
             initial={{ opacity: 0, y: 16 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16, ease }}
-            className="mt-6 text-[17px] leading-relaxed text-slate-500 max-w-2xl mx-auto"
+            className="mt-6 text-[20px] font-medium leading-relaxed text-black max-w-2xl mx-auto"
           >
             Unclear approvals, inconsistent payroll, and no visibility on operations
             cost Indian businesses time and money every day. JenVeda is built
@@ -517,13 +517,13 @@ export default function IndustriesClient() {
           >
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-violet-500 mb-2">
+                <p className="text-[14px] font-bold uppercase tracking-[0.18em] text-violet-500 mb-2">
                   Every industry. Same four modules.
                 </p>
-                <h3 className="text-[17px] font-extrabold text-slate-900 mb-1">
+                <h3 className="text-[20px] font-extrabold text-black mb-1">
                   HRMS · PMS · Accounting · Inventory
                 </h3>
-                <p className="text-[13.5px] text-slate-500 max-w-lg">
+                <p className="text-[17px] font-medium text-black max-w-lg">
                   Regardless of your industry, JenVeda runs your people, projects, books,
                   and stock — from one login, with data that talks to each other.
                 </p>
@@ -568,7 +568,7 @@ export default function IndustriesClient() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: 0.08, ease }}
-            className="text-[15.5px] leading-relaxed text-slate-500 mb-8 max-w-xl mx-auto"
+            className="text-[19px] font-medium leading-relaxed text-black mb-8 max-w-xl mx-auto"
           >
             Tell us about your business in a 30-minute call. We'll show you
             exactly how JenVeda works for your specific team size, industry,

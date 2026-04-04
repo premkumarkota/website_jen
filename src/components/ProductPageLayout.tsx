@@ -74,7 +74,7 @@ export default function ProductPageLayout({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease }}
-            className="mt-8 text-xl font-medium text-slate-500 max-w-2xl mx-auto"
+            className="mt-8 text-[22px] font-bold text-black max-w-2xl mx-auto"
           >
             {subtitle}
           </motion.p>
@@ -83,7 +83,7 @@ export default function ProductPageLayout({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease }}
-            className="mt-6 text-[16px] leading-loose text-slate-400 max-w-3xl mx-auto"
+            className="mt-6 text-[19px] font-medium leading-relaxed text-black max-w-3xl mx-auto"
           >
             {description}
           </motion.p>
@@ -134,7 +134,7 @@ export default function ProductPageLayout({
                     <span className="text-[14px] font-bold">{String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <div>
-                    <h3 className={`text-[15px] font-bold transition-colors ${activeTab === i ? "text-slate-900" : "text-slate-500"}`}>
+                    <h3 className={`text-[17.5px] font-bold transition-colors ${activeTab === i ? "text-slate-900" : "text-slate-500"}`}>
                       {feature.title}
                     </h3>
                   </div>
@@ -155,16 +155,16 @@ export default function ProductPageLayout({
                 >
                   <div className="flex flex-col md:flex-row gap-12">
                     <div className="flex-1">
-                      <h4 className="text-2xl font-black text-slate-900 tracking-tight">{features[activeTab].title}</h4>
-                      <p className="mt-6 text-[16px] leading-relaxed text-slate-500">
+                      <h4 className="text-3xl font-black text-slate-900 tracking-tight">{features[activeTab].title}</h4>
+                      <p className="mt-6 text-[18px] leading-relaxed font-medium text-black">
                         {features[activeTab].description}
                       </p>
 
                       <div className="mt-10 space-y-4">
                         {features[activeTab].items?.map((item) => (
-                          <div key={item} className="flex items-center gap-3 text-[14px] font-medium text-slate-700">
-                            <div className="h-5 w-5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
-                              <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                          <div key={item} className="flex items-center gap-3 text-[16.5px] font-bold text-black">
+                            <div className="h-5.5 w-5.5 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+                              <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                             </div>
                             {item}
                           </div>
@@ -202,7 +202,7 @@ export default function ProductPageLayout({
           <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(rgba(109,40,217,0.3) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
           <div className="relative z-10">
             <h2 className="text-fluid-h2 text-white font-black">{ctaText}</h2>
-            <p className="mt-8 text-slate-400 text-lg max-w-2xl mx-auto">
+            <p className="mt-8 text-slate-300 text-[20px] font-medium max-w-2xl mx-auto">
               Join 50+ enterprises leveraging JenVeda to drive operational efficiency and growth.
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-4">

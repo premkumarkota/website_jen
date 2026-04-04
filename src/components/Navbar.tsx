@@ -79,7 +79,7 @@ const solutions = [
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Why JenVeda", href: "/why-jenveda" },
-  { label: "Industries", href: "/industries" },
+  { label: "Serving Industries", href: "/industries" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
