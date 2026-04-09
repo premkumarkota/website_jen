@@ -91,10 +91,10 @@ export default function Hero() {
           {/* Stays at normal scroll speed — closest to viewer */}
           <div
             ref={contentRef}
-            className="hero-content relative z-10 mx-auto w-full max-w-7xl px-6 pt-28 pb-16 md:pt-36 lg:pt-40"
+            className="hero-content relative z-10 mx-auto w-full max-w-7xl px-4 pt-28 pb-16 sm:px-6 md:pt-36 lg:pt-40"
             style={{ willChange: "transform, opacity" }}
           >
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="mx-auto max-w-3xl text-center lg:max-w-5xl">
               <div className="flex flex-col items-center">
 
                 {/* Badge */}
@@ -104,7 +104,7 @@ export default function Hero() {
                   transition={{ duration: 0.6, ease }}
                 >
                   <div
-                    className="mb-7 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[12px] font-semibold"
+                    className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-semibold sm:mb-7 sm:px-3.5 sm:text-[12px]"
                     style={{
                       background: "rgba(109,40,217,0.07)",
                       border: "1px solid rgba(109,40,217,0.15)",
@@ -122,11 +122,12 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.1, ease }}
-                  className="text-[2.8rem] font-extrabold leading-[1.12] tracking-[-0.025em] text-slate-900 sm:text-[3.4rem] lg:text-[3.4rem] text-center"
+                  className="text-center text-[2.35rem] font-extrabold leading-[1.06] tracking-[-0.04em] text-slate-900 sm:text-[3.25rem] lg:text-[3.8rem] xl:text-[4.15rem]"
+                  style={{ textWrap: "balance" }}
                 >
                   Run Your Business
                   <br />
-                  <span className="gradient-text whitespace-nowrap">with Clarity, Control, and Confidence.</span>
+                  <span className="gradient-text block lg:whitespace-nowrap">with Clarity, Control, and Confidence.</span>
                 </motion.h1>
 
                 {/* Subtext */}
@@ -134,7 +135,8 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.2, ease }}
-                  className="mt-6 max-w-[520px] text-[20px] font-medium leading-relaxed text-black text-center"
+                  className="mt-5 max-w-[34rem] px-1 text-center text-[17px] font-medium leading-relaxed text-black sm:mt-6 sm:text-[20px]"
+                  style={{ textWrap: "balance" }}
                 >
                   JenVeda handles your HR, payroll, accounts, and inventory — so
                   you spend less time chasing data and more time growing your business.
@@ -145,11 +147,11 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, delay: 0.3, ease }}
-                  className="mt-9 flex flex-wrap items-center justify-center gap-4"
+                  className="mt-9 flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4"
                 >
                   <Link
                     href="/contact"
-                    className="flex items-center gap-2 rounded-xl px-6 py-3 text-[15px] font-bold text-white transition-all duration-200 hover:opacity-90 hover:shadow-lg"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-[15px] font-bold text-white transition-all duration-200 hover:opacity-90 hover:shadow-lg sm:w-auto"
                     style={{
                       background: "linear-gradient(135deg, #6D28D9, #4F46E5)",
                       boxShadow: "0 4px 20px rgba(109,40,217,0.3)",
@@ -162,9 +164,9 @@ export default function Hero() {
                   </Link>
                   <Link
                     href="#products"
-                    className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 backdrop-blur-sm px-6 py-3 text-[15px] font-semibold text-slate-700 transition-all duration-200 hover:border-violet-200 hover:text-violet-700 hover:bg-violet-50"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-6 py-3 text-[15px] font-semibold text-slate-700 backdrop-blur-sm transition-all duration-200 hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700 sm:w-auto"
                   >
-                    See What's Inside
+                    See What&apos;s Inside
                   </Link>
                 </motion.div>
 
@@ -173,18 +175,18 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5, ease }}
-                  className="mt-10 flex flex-col items-center gap-3"
+                  className="mt-10 flex w-full flex-col items-center gap-3"
                 >
-                  <p className="text-[14px] font-bold uppercase tracking-[0.15em] text-slate-400">
+                  <p className="px-2 text-center text-[12px] font-bold uppercase tracking-[0.15em] text-slate-400 sm:text-[14px]">
                     Trusted by 50+ Indian businesses
                   </p>
-                  <div className="flex items-center gap-2">
+                  <div className="grid w-full max-w-[18rem] grid-cols-2 gap-3 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center">
                     {clients.map((c) => (
                       <div
                         key={c.alt}
-                        className="h-16 w-32 relative flex-shrink-0 overflow-hidden rounded-lg grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                        className="relative h-14 w-full overflow-hidden rounded-lg grayscale opacity-70 transition-all duration-300 hover:grayscale-0 hover:opacity-100 sm:h-16 sm:w-32"
                       >
-                        <Image src={c.src} alt={c.alt} fill className="object-contain" />
+                        <Image src={c.src} alt={c.alt} fill sizes="(max-width: 640px) 40vw, 128px" className="object-contain" />
                       </div>
                     ))}
                   </div>

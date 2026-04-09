@@ -69,11 +69,20 @@ export default function Footer() {
               across India.
             </p>
             <p className="font-bold text-[15px] mb-4" style={{ color: "#333" }}>Jenveda Technologies Private Limited</p>
-            <div className="flex gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
               {/* India */}
-              <div className="flex-1 px-4 py-3">
+              <div
+                className="rounded-2xl px-4 py-4"
+                style={{ background: "rgba(255,255,255,0.72)", border: "1px solid rgba(15,23,42,0.08)" }}
+              >
                 <p className="flex items-center gap-2 font-black text-[15px] mb-2" style={{ color: "#333" }}>
-                  <span className="text-xl">🇮🇳</span>
+                  <Image
+                    src="/flags/india.svg"
+                    alt="Flag of India"
+                    width={24}
+                    height={16}
+                    className="h-4 w-6 rounded-[3px] object-cover shadow-sm"
+                  />
                   <span>India</span>
                 </p>
                 <p className="text-[13px] leading-relaxed" style={{ color: "#555" }}>
@@ -83,9 +92,18 @@ export default function Footer() {
                 </p>
               </div>
               {/* Singapore */}
-              <div className="flex-1 px-4 py-3">
+              <div
+                className="rounded-2xl px-4 py-4"
+                style={{ background: "rgba(255,255,255,0.72)", border: "1px solid rgba(15,23,42,0.08)" }}
+              >
                 <p className="flex items-center gap-2 font-black text-[15px] mb-2" style={{ color: "#333" }}>
-                  <span className="text-xl">🇸🇬</span>
+                  <Image
+                    src="/flags/singapore.svg"
+                    alt="Flag of Singapore"
+                    width={24}
+                    height={16}
+                    className="h-4 w-6 rounded-[3px] object-cover shadow-sm"
+                  />
                   <span>Singapore</span>
                 </p>
                 <p className="text-[13px] leading-relaxed" style={{ color: "#555" }}>

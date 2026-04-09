@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -9,6 +10,8 @@ const GREETING: Message = {
 };
 
 export default function Chatbot() {
+  const panelWidth = "min(calc(100vw - 1.5rem), clamp(300px, 24vw, 360px), calc((100dvh - 7rem) * 0.62))";
+  const panelHeight = "min(calc(100dvh - 6.5rem), clamp(480px, 38vw, 580px), calc((100vw - 1.5rem) * 1.62))";
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState("");
@@ -77,10 +80,12 @@ export default function Chatbot() {
     <>
       {/* Chat Window */}
       <div
-        className="fixed bottom-24 right-6 z-50 flex flex-col transition-all duration-300 origin-bottom-right"
+        className="fixed z-50 flex origin-bottom-right flex-col transition-all duration-300"
         style={{
-          width: 360,
-          height: 580,
+          width: panelWidth,
+          height: panelHeight,
+          right: "calc(0.75rem + env(safe-area-inset-right))",
+          bottom: "calc(4.75rem + env(safe-area-inset-bottom))",
           opacity: open ? 1 : 0,
           transform: open ? "scale(1)" : "scale(0.85)",
           pointerEvents: open ? "auto" : "none",
@@ -90,10 +95,10 @@ export default function Chatbot() {
           border: "1px solid rgba(109,40,217,0.12)",
           overflow: "hidden",
         }}
-      >
+        >
         {/* Header */}
         <div
-          className="flex items-center justify-between px-5 py-4"
+          className="flex items-center justify-between px-4 py-3.5 sm:px-5 sm:py-4"
           style={{ background: "linear-gradient(135deg, #6D28D9 0%, #9333ea 100%)" }}
         >
           <div className="flex items-center gap-3">
@@ -124,7 +129,7 @@ export default function Chatbot() {
 
         {/* Messages */}
         <div
-          className="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+          className="flex-1 space-y-3 overflow-y-auto px-3.5 py-4 sm:px-4"
           style={{ flex: 1, overflowY: "auto", background: "#fafafa", overscrollBehavior: "contain" }}
           onWheel={(e) => e.stopPropagation()}
           onTouchMove={(e) => e.stopPropagation()}
@@ -181,9 +186,9 @@ export default function Chatbot() {
         </div>
 
         {/* Input */}
-        <div className="px-4 py-3 bg-white" style={{ borderTop: "1px solid rgba(109,40,217,0.08)" }}>
+        <div className="bg-white px-3.5 py-3 sm:px-4" style={{ borderTop: "1px solid rgba(109,40,217,0.08)" }}>
           <div
-            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl"
+            className="flex items-center gap-2 rounded-2xl px-3.5 py-2.5 sm:px-4"
             style={{ background: "#f5f3ff", border: "1.5px solid rgba(109,40,217,0.15)" }}
           >
             <input
@@ -213,8 +218,13 @@ export default function Chatbot() {
           </div>
           <div className="flex items-center justify-center gap-1.5 mt-2">
             <span className="text-[11px]" style={{ color: "#aaa" }}>Powered by</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/jenveda%20logo%201.png" alt="JenVeda" style={{ width: 45, height: 45, objectFit: "contain" }} />
+            <Image
+              src="/jenveda%20logo%201.png"
+              alt="JenVeda"
+              width={45}
+              height={45}
+              className="h-[45px] w-[45px] object-contain"
+            />
             <span
               className="text-[11px] font-bold"
               style={{ background: "linear-gradient(135deg, #6D28D9, #D1008F)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
@@ -228,9 +238,12 @@ export default function Chatbot() {
       {/* Floating Button */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        className="fixed z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 hover:scale-110"
         style={{
-          width: 56, height: 56,
+          width: "clamp(52px, 14vw, 56px)",
+          height: "clamp(52px, 14vw, 56px)",
+          right: "calc(1rem + env(safe-area-inset-right))",
+          bottom: "calc(1rem + env(safe-area-inset-bottom))",
           background: "linear-gradient(135deg, #6D28D9 0%, #9333ea 100%)",
           boxShadow: "0 8px 24px rgba(109,40,217,0.4)",
         }}

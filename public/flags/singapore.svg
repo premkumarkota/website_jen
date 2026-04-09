@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" role="img" aria-labelledby="title">
+  <title>Flag of Singapore</title>
+  <rect width="60" height="40" fill="#fff"/>
+  <rect width="60" height="20" y="0" fill="#ef3340"/>
+  <g transform="translate(16 10)">
+    <circle r="7.2" fill="#fff"/>
+    <circle cx="2.4" r="5.8" fill="#ef3340"/>
+    <g fill="#fff">
+      <path d="M0-7.3l0.92 2.63h2.77L1.45-3.05l0.86 2.68L0-1.96l-2.31 1.59 0.86-2.68-2.24-1.65h2.77z" transform="translate(6.8 -2.3) scale(0.38)"/>
+      <path d="M0-7.3l0.92 2.63h2.77L1.45-3.05l0.86 2.68L0-1.96l-2.31 1.59 0.86-2.68-2.24-1.65h2.77z" transform="translate(10.2 -5.9) scale(0.38)"/>
+      <path d="M0-7.3l0.92 2.63h2.77L1.45-3.05l0.86 2.68L0-1.96l-2.31 1.59 0.86-2.68-2.24-1.65h2.77z" transform="translate(13.9 -2.9) scale(0.38)"/>
+      <path d="M0-7.3l0.92 2.63h2.77L1.45-3.05l0.86 2.68L0-1.96l-2.31 1.59 0.86-2.68-2.24-1.65h2.77z" transform="translate(12.6 1.7) scale(0.38)"/>
+      <path d="M0-7.3l0.92 2.63h2.77L1.45-3.05l0.86 2.68L0-1.96l-2.31 1.59 0.86-2.68-2.24-1.65h2.77z" transform="translate(8.2 2.8) scale(0.38)"/>
+    </g>
+  </g>
+</svg>

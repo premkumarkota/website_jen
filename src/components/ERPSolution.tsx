@@ -423,7 +423,7 @@ export default function ERPSolution() {
   return (
     <section
       id="products"
-      className="py-32 px-6 relative overflow-hidden"
+      className="relative overflow-hidden px-4 py-24 sm:px-6 sm:py-32"
       style={{ background: "var(--bg-surface)" }}
     >
       {/* Subtle bg texture */}
@@ -438,7 +438,7 @@ export default function ERPSolution() {
       <div ref={inViewRef} className="max-w-7xl mx-auto relative">
 
         {/* ── Header ── */}
-        <div className="text-center mb-16">
+        <div className="mb-12 text-center sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -448,7 +448,7 @@ export default function ERPSolution() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="mt-6 mb-4 text-4xl md:text-[3.2rem] lg:text-[3.8rem] font-extrabold tracking-[-0.03em] leading-[1.1]"
+            className="mt-6 mb-4 text-[2.2rem] font-extrabold leading-[1.08] tracking-[-0.04em] sm:text-4xl md:text-[3.2rem] lg:text-[3.8rem]"
             style={{ color: "var(--text-1)" }}
           >
             One Platform.
@@ -466,7 +466,7 @@ export default function ERPSolution() {
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.14, ease }}
-            className="max-w-xl mx-auto text-[20px] font-medium leading-relaxed text-black"
+            className="mx-auto max-w-xl px-2 text-[17px] font-medium leading-relaxed text-black sm:text-[20px]"
           >
             Four deeply integrated modules. Shared data layer. One login for your entire enterprise operation.
           </motion.p>
@@ -477,10 +477,10 @@ export default function ERPSolution() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.22, ease }}
-          className="flex justify-center mb-8"
+          className="mb-8 overflow-x-auto px-1 hide-scrollbar"
         >
           <div
-            className="inline-flex items-center gap-1 p-1.5 rounded-2xl"
+            className="mx-auto inline-flex min-w-max items-center gap-1 rounded-2xl p-1.5"
             style={{
               background: "white",
               border: "1px solid rgba(0,0,0,0.07)",
@@ -491,7 +491,7 @@ export default function ERPSolution() {
               <button
                 key={mod.id}
                 onClick={() => setActive(i)}
-                className="relative px-5 py-2.5 rounded-xl text-sm font-bold transition-colors duration-200 flex items-center gap-2 z-10"
+                className="relative z-10 flex items-center gap-2 rounded-xl px-3.5 py-2.5 text-xs font-bold transition-colors duration-200 sm:px-5 sm:text-sm"
                 style={{ color: active === i ? "white" : "var(--text-3)" }}
               >
                 {active === i && (
@@ -503,7 +503,7 @@ export default function ERPSolution() {
                   />
                 )}
                 <span className="text-[13px] font-black opacity-60">{mod.number}</span>
-                <span className="text-[15.5px] font-bold">{mod.tag}</span>
+                <span className="text-[14px] font-bold sm:text-[15.5px]">{mod.tag}</span>
               </button>
             ))}
           </div>
@@ -515,7 +515,7 @@ export default function ERPSolution() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3, ease }}
-          className="relative rounded-3xl overflow-hidden cursor-grab active:cursor-grabbing"
+          className="relative cursor-grab overflow-hidden rounded-[28px] active:cursor-grabbing sm:rounded-3xl"
           style={{
             background: "white",
             border: "1px solid rgba(0,0,0,0.07)",
@@ -525,10 +525,10 @@ export default function ERPSolution() {
           {/* Top gradient accent */}
           <div className="h-[2px]" style={{ background: "linear-gradient(90deg, #6D28D9, #A855F7 50%, #6D28D9)" }} />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[540px]">
+          <div className="grid min-h-[480px] grid-cols-1 sm:min-h-[540px] lg:grid-cols-12">
 
             {/* ── LEFT: Content ── */}
-            <div className="lg:col-span-5 flex flex-col justify-between p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-100">
+            <div className="flex flex-col justify-between border-b border-slate-100 p-6 sm:p-8 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={m.id}
@@ -554,19 +554,19 @@ export default function ERPSolution() {
 
                   {/* Headline */}
                   <h3
-                    className="text-[2rem] lg:text-[2.2rem] font-extrabold leading-[1.15] tracking-tight mb-5 whitespace-pre-line"
+                    className="mb-5 whitespace-pre-line text-[1.85rem] font-extrabold leading-[1.12] tracking-tight sm:text-[2rem] lg:text-[2.2rem]"
                     style={{ color: "var(--text-1)" }}
                   >
                     {m.headline}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[18px] font-medium leading-relaxed mb-8 text-black">
+                  <p className="mb-8 text-[16.5px] font-medium leading-relaxed text-black sm:text-[18px]">
                     {m.desc}
                   </p>
 
                   {/* Feature list */}
-                  <ul className="space-y-3 mb-10 flex-1">
+                  <ul className="mb-10 flex-1 space-y-2.5 sm:space-y-3">
                     {m.features.map((f, fi) => (
                       <motion.li
                         key={f}
@@ -583,18 +583,18 @@ export default function ERPSolution() {
                             <path d="M2 5l2.5 2.5L8 3" stroke="#6D28D9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </div>
-                        <span className="text-[16.5px] font-bold text-black">{f}</span>
+                        <span className="text-[15.5px] font-bold text-black sm:text-[16.5px]">{f}</span>
                       </motion.li>
                     ))}
                   </ul>
 
                   {/* Bottom row */}
                   <div
-                    className="flex items-center justify-between pt-7"
+                    className="flex flex-col items-start gap-4 pt-7 sm:flex-row sm:items-center sm:justify-between"
                     style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}
                   >
                     <div>
-                      <p className="text-[1.6rem] font-black tabular-nums tracking-tight" style={{ color: "#6D28D9" }}>
+                      <p className="text-[1.45rem] font-black tabular-nums tracking-tight sm:text-[1.6rem]" style={{ color: "#6D28D9" }}>
                         {m.stat}
                       </p>
                       <p className="text-xs font-medium mt-0.5" style={{ color: "var(--text-3)" }}>
@@ -603,7 +603,7 @@ export default function ERPSolution() {
                     </div>
                     <Link
                       href={m.href}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all duration-200 hover:opacity-90 hover:gap-3"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:gap-3 hover:opacity-90 sm:w-auto"
                       style={{ background: "linear-gradient(135deg, #6D28D9, #4F46E5)" }}
                     >
                       Explore {m.tag}
@@ -617,7 +617,7 @@ export default function ERPSolution() {
             </div>
 
             {/* ── RIGHT: Product UI Mock ── */}
-            <div className="lg:col-span-7 relative bg-slate-50/60 p-6 lg:p-8 flex flex-col">
+            <div className="relative flex flex-col bg-slate-50/60 p-4 sm:p-6 lg:col-span-7 lg:p-8">
               {/* Browser chrome */}
               <div
                 className="flex-1 rounded-2xl overflow-hidden flex flex-col"
@@ -627,7 +627,7 @@ export default function ERPSolution() {
                 }}
               >
                 {/* Chrome bar */}
-                <div className="flex items-center gap-3 px-4 py-3 bg-white border-b border-slate-100 flex-shrink-0">
+                <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-slate-100 bg-white px-3 py-2.5 sm:gap-3 sm:px-4 sm:py-3">
                   <div className="flex items-center gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                     <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
@@ -672,7 +672,7 @@ export default function ERPSolution() {
               </div>
 
               {/* Module switcher dots at bottom */}
-              <div className="flex items-center justify-center gap-2 mt-4">
+              <div className="mt-3 flex items-center justify-center gap-2 sm:mt-4">
                 {modules.map((mod, i) => (
                   <button
                     key={mod.id}
@@ -696,7 +696,7 @@ export default function ERPSolution() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.45, ease }}
-          className="mt-4 relative rounded-2xl overflow-hidden px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="relative mt-4 flex flex-col items-center justify-between gap-5 overflow-hidden rounded-2xl px-6 py-6 sm:gap-6 sm:px-8 sm:py-8 md:flex-row md:px-10"
           style={{
             background: "white",
             border: "1px solid rgba(15,23,42,0.08)",
@@ -704,19 +704,19 @@ export default function ERPSolution() {
           }}
         >
           <div className="relative">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex flex-wrap items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-slate-400">Single Data Layer · Real-time Sync</span>
             </div>
-            <p className="text-2xl md:text-[28px] font-black text-black tracking-tight leading-tight">
+            <p className="text-[1.85rem] font-black leading-tight tracking-tight text-black sm:text-2xl md:text-[28px]">
               All modules. One platform. Zero silos.
             </p>
-            <p className="text-[17px] text-black font-medium mt-2 leading-relaxed">
+            <p className="mt-2 text-[16px] font-medium leading-relaxed text-black sm:text-[17px]">
               Changes in HRMS reflect instantly in Payroll. Inventory feeds directly into Accounting. Everything connected.
             </p>
           </div>
 
-          <div className="relative flex items-center gap-2 flex-shrink-0">
+          <div className="relative flex flex-wrap items-center justify-center gap-2 md:justify-end">
             {modules.map((mod) => (
               <div
                 key={mod.id}

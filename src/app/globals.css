@@ -223,4 +223,13 @@ h1, h2, h3, .font-heading {
 ::-webkit-scrollbar-thumb { background: rgba(109,40,217,0.30); border-radius: 99px; }
  ::-webkit-scrollbar-thumb:hover { background: rgba(109,40,217,0.50); }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection { background: rgba(209,0,143,0.20); color: var(--text-1); }
