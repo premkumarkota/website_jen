@@ -18,11 +18,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JenVeda – Cutting-Edge ERP Software Solution",
+  title: {
+    default: "JenVeda – Cutting-Edge ERP Software Solution",
+    template: "%s | JenVeda",
+  },
   description:
     "Streamline your operations, boost productivity, and drive profitability with JenVeda's comprehensive ERP software. HRMS, PMS, Accounting, and Inventory — all in one platform.",
+  metadataBase: new URL("https://jenveda.com"),
   icons: {
     icon: "/new%20logo%201.png",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "JenVeda",
+    title: "JenVeda – Cutting-Edge ERP Software Solution",
+    description:
+      "Streamline your operations, boost productivity, and drive profitability with JenVeda's comprehensive ERP software. HRMS, PMS, Accounting, and Inventory — all in one platform.",
+    url: "https://jenveda.com",
+    images: [{ url: "/jenveda_dashboard.png", width: 1200, height: 630, alt: "JenVeda ERP Dashboard" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JenVeda – Cutting-Edge ERP Software Solution",
+    description:
+      "Streamline your operations, boost productivity, and drive profitability with JenVeda's comprehensive ERP software.",
+    images: ["/jenveda_dashboard.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
