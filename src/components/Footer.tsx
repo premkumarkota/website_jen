@@ -68,11 +68,32 @@ export default function Footer() {
               inventory — without the complexity. Built in Hyderabad, trusted
               across India.
             </p>
-            <div className="text-[15.5px] space-y-1.5" style={{ color: "#444" }}>
-              <p className="font-bold text-lg" style={{ color: "#333" }}>Jenveda Technologies Private Limited</p>
-              <p>201, Padmaja Jansi Enclave, Opp. K.S Bakers,</p>
-              <p>Bhagyanagar Colony, KPHB main road,</p>
-              <p>Hyderabad, Telangana 500072</p>
+            <p className="font-bold text-[15px] mb-4" style={{ color: "#333" }}>Jenveda Technologies Private Limited</p>
+            <div className="flex gap-6">
+              {/* India */}
+              <div className="flex-1 px-4 py-3">
+                <p className="flex items-center gap-2 font-black text-[15px] mb-2" style={{ color: "#333" }}>
+                  <span className="text-xl">🇮🇳</span>
+                  <span>India</span>
+                </p>
+                <p className="text-[13px] leading-relaxed" style={{ color: "#555" }}>
+                  201, Padmaja Jansi Enclave,<br />
+                  Opp. K.S Bakers, KPHB main road,<br />
+                  <strong style={{ color: "#333" }}>Hyderabad, Telangana 500072</strong>
+                </p>
+              </div>
+              {/* Singapore */}
+              <div className="flex-1 px-4 py-3">
+                <p className="flex items-center gap-2 font-black text-[15px] mb-2" style={{ color: "#333" }}>
+                  <span className="text-xl">🇸🇬</span>
+                  <span>Singapore</span>
+                </p>
+                <p className="text-[13px] leading-relaxed" style={{ color: "#555" }}>
+                  160 Robinson Road, #14-04,<br />
+                  Singapore Business Federation Center,<br />
+                  <strong style={{ color: "#333" }}>Singapore 068914</strong>
+                </p>
+              </div>
             </div>
           </div>
 

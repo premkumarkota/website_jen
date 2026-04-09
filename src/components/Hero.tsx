@@ -122,11 +122,11 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.75, delay: 0.1, ease }}
-                  className="text-[2.8rem] font-extrabold leading-[1.12] tracking-[-0.025em] text-slate-900 sm:text-[3.4rem] lg:text-[4rem] text-center"
+                  className="text-[2.8rem] font-extrabold leading-[1.12] tracking-[-0.025em] text-slate-900 sm:text-[3.4rem] lg:text-[3.4rem] text-center"
                 >
                   Run Your Business
                   <br />
-                  <span className="gradient-text">with Clarity, Control, and Confidence.</span>
+                  <span className="gradient-text whitespace-nowrap">with Clarity, Control, and Confidence.</span>
                 </motion.h1>
 
                 {/* Subtext */}

@@ -12,11 +12,11 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 function HRMSMock() {
   const rows = [
-    { init: "AS", name: "Arjun Sharma",  role: "Sr. Engineer",   dept: "Engineering", status: "active" },
-    { init: "PR", name: "Priya Reddy",   role: "Brand Manager",  dept: "Marketing",   status: "leave"  },
-    { init: "VS", name: "Vikram Singh",  role: "Finance Lead",   dept: "Finance",     status: "active" },
-    { init: "DM", name: "Divya Mehta",   role: "Ops Manager",    dept: "Operations",  status: "active" },
-    { init: "RG", name: "Rahul Gupta",   role: "HR Specialist",  dept: "HR",          status: "active" },
+    { init: "AS", name: "Arjun Sharma", role: "Sr. Engineer", dept: "Engineering", status: "active" },
+    { init: "PR", name: "Priya Reddy", role: "Brand Manager", dept: "Marketing", status: "leave" },
+    { init: "VS", name: "Vikram Singh", role: "Finance Lead", dept: "Finance", status: "active" },
+    { init: "DM", name: "Divya Mehta", role: "Ops Manager", dept: "Operations", status: "active" },
+    { init: "RG", name: "Rahul Gupta", role: "HR Specialist", dept: "HR", status: "active" },
   ];
   return (
     <div className="flex h-full">
@@ -25,7 +25,7 @@ function HRMSMock() {
         <div className="w-6 h-6 rounded-lg bg-violet-500 flex items-center justify-center mb-2">
           <span className="text-white font-black text-[9px]">J</span>
         </div>
-        {["M","E","P","L","R"].map((l, i) => (
+        {["M", "E", "P", "L", "R"].map((l, i) => (
           <div key={l} className={`w-7 h-7 rounded-lg flex items-center justify-center text-[9px] font-bold cursor-pointer transition-colors ${i === 1 ? "bg-violet-600 text-white" : "text-slate-500 hover:text-slate-300"}`}>{l}</div>
         ))}
       </div>
@@ -39,7 +39,7 @@ function HRMSMock() {
           </div>
           <div className="flex items-center gap-2">
             <div className="h-5 w-24 rounded-md bg-slate-100 flex items-center px-2 gap-1">
-              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2.5"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
               <span className="text-[8px] text-slate-400">Search...</span>
             </div>
             <div className="h-5 px-2 rounded-md bg-violet-600 flex items-center">
@@ -49,7 +49,7 @@ function HRMSMock() {
         </div>
         {/* Stats strip */}
         <div className="grid grid-cols-4 gap-px bg-slate-100 border-b border-slate-100">
-          {[["1,248","Total"],["1,214","Active"],["34","On Leave"],["₹48L","Payroll"]].map(([v,l]) => (
+          {[["1,248", "Total"], ["1,214", "Active"], ["34", "On Leave"], ["₹48L", "Payroll"]].map(([v, l]) => (
             <div key={l} className="bg-white px-3 py-2">
               <p className="text-[11px] font-black text-slate-800">{v}</p>
               <p className="text-[8px] text-slate-400">{l}</p>
@@ -59,7 +59,7 @@ function HRMSMock() {
         {/* Table */}
         <div className="flex-1 overflow-hidden">
           <div className="grid grid-cols-4 px-3 py-1.5 border-b border-slate-100">
-            {["Employee","Department","Role","Status"].map(h => (
+            {["Employee", "Department", "Role", "Status"].map(h => (
               <p key={h} className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">{h}</p>
             ))}
           </div>
@@ -84,10 +84,10 @@ function HRMSMock() {
 
 function PMSMock() {
   const cols = [
-    { label: "Backlog",     dot: "#94a3b8", cards: ["API Gateway Design", "DB Migration Plan", "Auth Flow Spec"] },
+    { label: "Backlog", dot: "#94a3b8", cards: ["API Gateway Design", "DB Migration Plan", "Auth Flow Spec"] },
     { label: "In Progress", dot: "#6D28D9", cards: ["Dashboard Rebuild", "Mobile Responsive"] },
-    { label: "Review",      dot: "#f59e0b", cards: ["Notifications Module", "PDF Export"] },
-    { label: "Done",        dot: "#10b981", cards: ["Design System v2", "CI/CD Pipeline"] },
+    { label: "Review", dot: "#f59e0b", cards: ["Notifications Module", "PDF Export"] },
+    { label: "Done", dot: "#10b981", cards: ["Design System v2", "CI/CD Pipeline"] },
   ];
   return (
     <div className="flex h-full">
@@ -95,7 +95,7 @@ function PMSMock() {
         <div className="w-6 h-6 rounded-lg bg-violet-500 flex items-center justify-center mb-2">
           <span className="text-white font-black text-[9px]">J</span>
         </div>
-        {["D","P","T","G","R"].map((l, i) => (
+        {["D", "P", "T", "G", "R"].map((l, i) => (
           <div key={l} className={`w-7 h-7 rounded-lg flex items-center justify-center text-[9px] font-bold cursor-pointer ${i === 1 ? "bg-violet-600 text-white" : "text-slate-500"}`}>{l}</div>
         ))}
       </div>
@@ -137,12 +137,12 @@ function PMSMock() {
 
 function AccountingMock() {
   const bars = [38, 55, 42, 70, 58, 80, 65, 78, 62, 88, 75, 96];
-  const months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+  const months = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
   const invoices = [
-    { id: "#1024", name: "Lakshmi Toyota",    amount: "₹1,24,000", status: "paid"    },
-    { id: "#1025", name: "MVR Constructions", amount: "₹86,500",   status: "pending" },
-    { id: "#1026", name: "Prithvi Toyota",    amount: "₹2,40,000", status: "paid"    },
-    { id: "#1027", name: "Elite Post Tensions",amount: "₹58,200",  status: "overdue" },
+    { id: "#1024", name: "Lakshmi Toyota", amount: "₹1,24,000", status: "paid" },
+    { id: "#1025", name: "MVR Constructions", amount: "₹86,500", status: "pending" },
+    { id: "#1026", name: "Prithvi Toyota", amount: "₹2,40,000", status: "paid" },
+    { id: "#1027", name: "Elite Post Tensions", amount: "₹58,200", status: "overdue" },
   ];
   return (
     <div className="flex h-full">
@@ -150,7 +150,7 @@ function AccountingMock() {
         <div className="w-6 h-6 rounded-lg bg-violet-500 flex items-center justify-center mb-2">
           <span className="text-white font-black text-[9px]">J</span>
         </div>
-        {["D","I","E","P","R"].map((l, i) => (
+        {["D", "I", "E", "P", "R"].map((l, i) => (
           <div key={l} className={`w-7 h-7 rounded-lg flex items-center justify-center text-[9px] font-bold cursor-pointer ${i === 0 ? "bg-violet-600 text-white" : "text-slate-500"}`}>{l}</div>
         ))}
       </div>
@@ -182,7 +182,7 @@ function AccountingMock() {
         {/* Invoice list */}
         <div className="flex-1 overflow-hidden">
           <div className="grid grid-cols-4 px-3 py-1.5 border-b border-slate-100">
-            {["Invoice","Client","Amount","Status"].map(h => (
+            {["Invoice", "Client", "Amount", "Status"].map(h => (
               <p key={h} className="text-[8px] font-bold text-slate-400 uppercase tracking-wider">{h}</p>
             ))}
           </div>
@@ -191,11 +191,10 @@ function AccountingMock() {
               <span className="text-[9px] font-bold text-violet-600">{inv.id}</span>
               <span className="text-[9px] text-slate-600 truncate">{inv.name}</span>
               <span className="text-[9px] font-black text-slate-800">{inv.amount}</span>
-              <span className={`inline-flex w-fit px-1.5 py-0.5 rounded-full text-[8px] font-bold ${
-                inv.status === "paid" ? "bg-emerald-50 text-emerald-600" :
+              <span className={`inline-flex w-fit px-1.5 py-0.5 rounded-full text-[8px] font-bold ${inv.status === "paid" ? "bg-emerald-50 text-emerald-600" :
                 inv.status === "pending" ? "bg-amber-50 text-amber-500" :
-                "bg-red-50 text-red-500"
-              }`}>{inv.status}</span>
+                  "bg-red-50 text-red-500"
+                }`}>{inv.status}</span>
             </div>
           ))}
         </div>
@@ -206,11 +205,11 @@ function AccountingMock() {
 
 function InventoryMock() {
   const items = [
-    { name: "Raw Materials",    pct: 78, units: "1,240", alert: false },
-    { name: "Finished Goods",   pct: 45, units: "890",   alert: false },
-    { name: "Spare Parts",      pct: 18, units: "340",   alert: true  },
-    { name: "Packaging Stock",  pct: 62, units: "2,100", alert: false },
-    { name: "WIP Components",   pct: 12, units: "250",   alert: true  },
+    { name: "Raw Materials", pct: 78, units: "1,240", alert: false },
+    { name: "Finished Goods", pct: 45, units: "890", alert: false },
+    { name: "Spare Parts", pct: 18, units: "340", alert: true },
+    { name: "Packaging Stock", pct: 62, units: "2,100", alert: false },
+    { name: "WIP Components", pct: 12, units: "250", alert: true },
   ];
   return (
     <div className="flex h-full">
@@ -218,7 +217,7 @@ function InventoryMock() {
         <div className="w-6 h-6 rounded-lg bg-violet-500 flex items-center justify-center mb-2">
           <span className="text-white font-black text-[9px]">J</span>
         </div>
-        {["D","S","W","O","R"].map((l, i) => (
+        {["D", "S", "W", "O", "R"].map((l, i) => (
           <div key={l} className={`w-7 h-7 rounded-lg flex items-center justify-center text-[9px] font-bold cursor-pointer ${i === 1 ? "bg-violet-600 text-white" : "text-slate-500"}`}>{l}</div>
         ))}
       </div>
@@ -231,7 +230,7 @@ function InventoryMock() {
           <span className="px-2 py-0.5 rounded-full text-[8px] font-bold bg-red-50 text-red-500">⚠ 2 low stock alerts</span>
         </div>
         <div className="grid grid-cols-3 gap-px bg-slate-100 border-b border-slate-100">
-          {[["4,820","Total SKUs"],["98.4%","Fill Rate"],["3","Warehouses"]].map(([v,l]) => (
+          {[["4,820", "Total SKUs"], ["98.4%", "Fill Rate"], ["3", "Warehouses"]].map(([v, l]) => (
             <div key={l} className="bg-white px-3 py-2">
               <p className="text-[11px] font-black text-slate-800">{v}</p>
               <p className="text-[8px] text-slate-400">{l}</p>
@@ -452,22 +451,22 @@ export default function ERPSolution() {
             className="mt-6 mb-4 text-4xl md:text-[3.2rem] lg:text-[3.8rem] font-extrabold tracking-[-0.03em] leading-[1.1]"
             style={{ color: "var(--text-1)" }}
           >
-            One Platform.{" "}
+            One Platform.
+            <br />
             <span style={{
               background: "var(--gradient-1)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}>
-              Every Module.
+              To Control Today - Scale Tomorrow.
             </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.14, ease }}
-            className="max-w-xl mx-auto text-lg font-light leading-relaxed"
-            style={{ color: "var(--text-2)" }}
+            className="max-w-xl mx-auto text-[20px] font-medium leading-relaxed text-black"
           >
             Four deeply integrated modules. Shared data layer. One login for your entire enterprise operation.
           </motion.p>
@@ -503,8 +502,8 @@ export default function ERPSolution() {
                     transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                   />
                 )}
-                <span className="text-[10px] font-black opacity-50">{mod.number}</span>
-                {mod.tag}
+                <span className="text-[13px] font-black opacity-60">{mod.number}</span>
+                <span className="text-[15.5px] font-bold">{mod.tag}</span>
               </button>
             ))}
           </div>
@@ -562,7 +561,7 @@ export default function ERPSolution() {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[15px] leading-relaxed mb-8" style={{ color: "var(--text-3)" }}>
+                  <p className="text-[18px] font-medium leading-relaxed mb-8 text-black">
                     {m.desc}
                   </p>
 
@@ -584,7 +583,7 @@ export default function ERPSolution() {
                             <path d="M2 5l2.5 2.5L8 3" stroke="#6D28D9" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </div>
-                        <span className="text-[14px] font-medium" style={{ color: "var(--text-2)" }}>{f}</span>
+                        <span className="text-[16.5px] font-bold text-black">{f}</span>
                       </motion.li>
                     ))}
                   </ul>

@@ -214,8 +214,8 @@ export default function Navbar() {
                 <li key={l.label}>
                   <Link
                     href={l.href}
-                    className="relative block px-3.5 py-2 text-[15px] font-semibold group"
-                    style={{ color: active ? "#6D28D9" : "#475569" }}
+                    className="relative block px-3.5 py-2 text-[15.5px] font-bold group"
+                    style={{ color: active ? "#6D28D9" : "#1e293b" }}
                   >
                     {/* Hover background pill */}
                     <motion.span
@@ -247,8 +247,8 @@ export default function Navbar() {
               <button
                 ref={btnRef}
                 onClick={() => setOpen((v) => !v)}
-                className="relative flex items-center gap-1.5 px-3.5 py-2 text-[15px] font-semibold group"
-                style={{ color: open || isActive ? "#6D28D9" : "#475569" }}
+                className="relative flex items-center gap-1.5 px-3.5 py-2 text-[15.5px] font-bold group"
+                style={{ color: open || isActive ? "#6D28D9" : "#1e293b" }}
               >
                 <motion.span
                   className="absolute inset-0 rounded-xl"

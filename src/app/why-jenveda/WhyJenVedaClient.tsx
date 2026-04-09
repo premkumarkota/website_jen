@@ -242,7 +242,7 @@ export default function WhyJenVedaClient() {
             transition={{ duration: 0.5, delay: 0.3, ease }}
             className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[14.5px] font-bold text-slate-400"
           >
-            {["Trusted by 50+ Indian businesses", "GST & Compliance ready", "Setup in under a day"].map((t) => (
+            {["Trusted by 50+ Indian businesses", "GST & Compliance ready", "Setup in  a day"].map((t) => (
               <span key={t} className="flex items-center gap-2">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2.5 7l3 3 6-6" stroke="#6D28D9" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -324,7 +324,7 @@ export default function WhyJenVedaClient() {
                 <span className="gradient-text"> JenVeda different.</span>
               </h2>
               <p className="text-[18px] text-black font-medium max-w-sm leading-relaxed md:text-right">
-                Not just another ERP. A system designed to remove every friction point in how Indian businesses operate.
+                Not just another ERP. A system designed to remove every friction point in how  businesses operate.
               </p>
             </div>
           </motion.div>

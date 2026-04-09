@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { gsap } from "@/lib/gsap";
 
 const stats = [
-  { end: 500,  suffix: "+",  label: "Businesses Trust JenVeda", color: "#6D28D9" },
+  { end: 50,   suffix: "+",  label: "Businesses Trust JenVeda", color: "#6D28D9" },
   { end: 5,    suffix: "",   label: "Integrated Modules",       color: "#1D4ED8" },
   { end: 99.9, suffix: "%",  label: "Uptime Guaranteed",        color: "#D1008F", decimals: 1 },
   { end: 24,   suffix: "/7", label: "Support, Every Day",       color: "#8B5CF6" },
