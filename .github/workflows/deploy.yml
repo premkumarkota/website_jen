@@ -19,7 +19,7 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install all dependencies
         run: npm ci
 
       - name: Build Next.js app
@@ -30,15 +30,17 @@ jobs:
           WHATSAPP_NUMBER: ${{ secrets.WHATSAPP_NUMBER }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
+      - name: Remove dev dependencies
+        run: npm prune --production
+
       - name: Create deployment package
         run: |
           zip -r deploy.zip . \
-            --include=".next/*" \
-            --include="public/*" \
-            --include="package.json" \
-            --include="package-lock.json" \
-            --include="next.config.*" \
-            --include="web.config"
+            --exclude=".git/*" \
+            --exclude="src/*" \
+            --exclude=".github/*" \
+            --exclude="*.md" \
+            --exclude=".env*"
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
