@@ -3,7 +3,7 @@ name: Deploy to Azure
 on:
   push:
     branches:
-      - dev        # triggers on every push to dev branch
+      - dev
 
 jobs:
   build-and-deploy:
@@ -30,9 +30,18 @@ jobs:
           WHATSAPP_NUMBER: ${{ secrets.WHATSAPP_NUMBER }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
+      - name: Create deployment package
+        run: |
+          zip -r deploy.zip . \
+            --include=".next/*" \
+            --include="public/*" \
+            --include="package.json" \
+            --include="package-lock.json" \
+            --include="next.config.*"
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'jenvedawebsite'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+          package: deploy.zip
