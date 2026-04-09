@@ -37,7 +37,8 @@ jobs:
             --include="public/*" \
             --include="package.json" \
             --include="package-lock.json" \
-            --include="next.config.*"
+            --include="next.config.*" \
+            --include="web.config"
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
