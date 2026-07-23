@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -12,7 +13,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 function HRMSMock() {
   const rows = [
-    { init: "AS", name: "Arjun Sharma", role: "Sr. Engineer", dept: "Engineering", status: "active" },
+    { init: "AS", name: "Arjun reddy", role: "Sr. Engineer", dept: "Engineering", status: "active" },
     { init: "PR", name: "Priya Reddy", role: "Brand Manager", dept: "Marketing", status: "leave" },
     { init: "VS", name: "Vikram Singh", role: "Finance Lead", dept: "Finance", status: "active" },
     { init: "DM", name: "Divya Mehta", role: "Ops Manager", dept: "Operations", status: "active" },
@@ -288,7 +289,21 @@ const modules = [
     stat: "1,248",
     statLabel: "Employees Managed",
     href: "/products/hrms",
-    mock: <HRMSMock />,
+    mock: (
+      <div className="relative flex-1 bg-white flex flex-col overflow-y-auto hide-scrollbar">
+        <img
+          src="/HRMS_dashboard.png"
+          alt="HRMS Dashboard"
+          className="w-full object-contain object-top"
+        />
+        <img
+          src="/HRMS_dashboard2.png"
+          alt="HRMS Dashboard Summary"
+          className="w-full object-contain -mt-[1px]"
+          style={{ transform: "scale(1.008) translateX(4px)", transformOrigin: "left top" }}
+        />
+      </div>
+    ),
   },
   {
     id: "pms",
@@ -620,7 +635,7 @@ export default function ERPSolution() {
             <div className="relative flex flex-col bg-slate-50/60 p-4 sm:p-6 lg:col-span-7 lg:p-8">
               {/* Browser chrome */}
               <div
-                className="flex-1 rounded-2xl overflow-hidden flex flex-col"
+                className="flex-1 rounded-2xl overflow-hidden flex flex-col bg-white"
                 style={{
                   border: "1px solid rgba(0,0,0,0.08)",
                   boxShadow: "0 8px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
@@ -641,7 +656,7 @@ export default function ERPSolution() {
                       <rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
                     </svg>
                     <span className="text-[9px] font-medium text-slate-400 select-none">
-                      app.jenveda.net/{m.id}
+                      https://jenveda.com/{m.id}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">

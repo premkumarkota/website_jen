@@ -10,13 +10,14 @@ const capabilities = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <defs>
           <linearGradient id="cc-1" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#A78BFA" />
-            <stop offset="1" stopColor="#6D28D9" />
+            <stop stopColor="#8B5CF6" />
+            <stop offset="1" stopColor="#4F46E5" />
           </linearGradient>
         </defs>
-        <circle cx="9" cy="7" r="4" stroke="url(#cc-1)" strokeWidth="1.6" />
-        <path d="M2 21v-2a5 5 0 015-5h4a5 5 0 015 5v2" stroke="url(#cc-1)" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M19 8v6M16 11h6" stroke="url(#cc-1)" strokeWidth="1.6" strokeLinecap="round" />
+        <rect x="4" y="7" width="16" height="10" rx="2" stroke="url(#cc-1)" strokeWidth="1.7" />
+        <rect x="7" y="5" width="10" height="3" rx="1" fill="url(#cc-1)" fillOpacity="0.18" />
+        <circle cx="12" cy="12" r="2.2" stroke="url(#cc-1)" strokeWidth="1.5" />
+        <path d="M6.5 12H7M17 12h.5" stroke="url(#cc-1)" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
     title: "One-click Payroll. Zero Confusion.",
@@ -27,14 +28,12 @@ const capabilities = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <defs>
           <linearGradient id="cc-2" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#A78BFA" />
-            <stop offset="1" stopColor="#6D28D9" />
+            <stop stopColor="#8B5CF6" />
+            <stop offset="1" stopColor="#4F46E5" />
           </linearGradient>
         </defs>
-        <rect x="3" y="3" width="7" height="18" rx="1.5" stroke="url(#cc-2)" strokeWidth="1.6" />
-        <rect x="14" y="8" width="7" height="13" rx="1.5" stroke="url(#cc-2)" strokeWidth="1.6" />
-        <rect x="14" y="3" width="7" height="3" rx="1" fill="url(#cc-2)" fillOpacity="0.4" />
-        <path d="M5.5 8h2M5.5 11h2M5.5 14h2" stroke="url(#cc-2)" strokeWidth="1.2" strokeLinecap="round" />
+        <circle cx="12" cy="12" r="7" stroke="url(#cc-2)" strokeWidth="1.7" />
+        <path d="M12 8.5V12l2.6 2" stroke="url(#cc-2)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "Attendance Without Disputes",
@@ -45,12 +44,15 @@ const capabilities = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <defs>
           <linearGradient id="cc-3" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#A78BFA" />
-            <stop offset="1" stopColor="#6D28D9" />
+            <stop stopColor="#8B5CF6" />
+            <stop offset="1" stopColor="#4F46E5" />
           </linearGradient>
         </defs>
-        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="url(#cc-3)" strokeWidth="1.6" />
-        <path d="M9 12l2 2 4-4" stroke="url(#cc-3)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 6.5h8" stroke="url(#cc-3)" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M10 4.5h4" stroke="url(#cc-3)" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M7 17.5l10-10" stroke="url(#cc-3)" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M10.2 18.2L5.8 13.8" stroke="url(#cc-3)" strokeWidth="1.7" strokeLinecap="round" />
+        <path d="M18.2 10.2l-4.4-4.4" stroke="url(#cc-3)" strokeWidth="1.7" strokeLinecap="round" />
       </svg>
     ),
     title: "Compliance Built Into Workflow",
@@ -61,15 +63,18 @@ const capabilities = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <defs>
           <linearGradient id="cc-4" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#A78BFA" />
-            <stop offset="1" stopColor="#6D28D9" />
+            <stop stopColor="#8B5CF6" />
+            <stop offset="1" stopColor="#4F46E5" />
           </linearGradient>
         </defs>
-        <rect x="2" y="3" width="20" height="14" rx="2" stroke="url(#cc-4)" strokeWidth="1.6" />
-        <path d="M2 7h20" stroke="url(#cc-4)" strokeWidth="1.4" />
-        <path d="M8 21h8M12 17v4" stroke="url(#cc-4)" strokeWidth="1.6" strokeLinecap="round" />
-        <rect x="5" y="10" width="4" height="4" rx="0.8" fill="url(#cc-4)" fillOpacity="0.25" />
-        <rect x="11" y="10" width="4" height="4" rx="0.8" fill="url(#cc-4)" fillOpacity="0.15" />
+        <circle cx="12" cy="12" r="1.8" stroke="url(#cc-4)" strokeWidth="1.5" />
+        <circle cx="12" cy="5.5" r="1.8" stroke="url(#cc-4)" strokeWidth="1.5" />
+        <circle cx="12" cy="18.5" r="1.8" stroke="url(#cc-4)" strokeWidth="1.5" />
+        <circle cx="5.5" cy="12" r="1.8" stroke="url(#cc-4)" strokeWidth="1.5" />
+        <circle cx="18.5" cy="12" r="1.8" stroke="url(#cc-4)" strokeWidth="1.5" />
+        <circle cx="7.5" cy="7.5" r="1.6" stroke="url(#cc-4)" strokeWidth="1.4" />
+        <circle cx="16.5" cy="7.5" r="1.6" stroke="url(#cc-4)" strokeWidth="1.4" />
+        <path d="M12 7.3v2.9M12 13.8v2.4M7.3 12h2.9M13.8 12h2.4M8.7 8.7l1.8 1.8M15.3 8.7l-1.8 1.8" stroke="url(#cc-4)" strokeWidth="1.3" strokeLinecap="round" />
       </svg>
     ),
     title: "Multi-Branch Control at Scale",
@@ -80,15 +85,13 @@ const capabilities = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <defs>
           <linearGradient id="cc-5" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#A78BFA" />
-            <stop offset="1" stopColor="#6D28D9" />
+            <stop stopColor="#8B5CF6" />
+            <stop offset="1" stopColor="#4F46E5" />
           </linearGradient>
         </defs>
-        <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#cc-5)" strokeWidth="1.6" />
-        <path d="M3 9h18" stroke="url(#cc-5)" strokeWidth="1.4" />
-        <path d="M9 9v12" stroke="url(#cc-5)" strokeWidth="1.4" />
-        <rect x="11" y="12" width="7" height="3" rx="0.6" fill="url(#cc-5)" fillOpacity="0.3" />
-        <rect x="11" y="17" width="5" height="2" rx="0.5" fill="url(#cc-5)" fillOpacity="0.15" />
+        <path d="M5 17l4-4 2.8 2.8L18.5 9" stroke="url(#cc-5)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M15.5 9h3v3" stroke="url(#cc-5)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M5 19h14" stroke="url(#cc-5)" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
     title: "ERP Visibility for Leadership",
@@ -99,13 +102,13 @@ const capabilities = [
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <defs>
           <linearGradient id="cc-6" x1="0" y1="0" x2="24" y2="24">
-            <stop stopColor="#A78BFA" />
-            <stop offset="1" stopColor="#6D28D9" />
+            <stop stopColor="#8B5CF6" />
+            <stop offset="1" stopColor="#4F46E5" />
           </linearGradient>
         </defs>
-        <rect x="4" y="4" width="16" height="16" rx="3" stroke="url(#cc-6)" strokeWidth="1.6" />
-        <circle cx="12" cy="12" r="3" stroke="url(#cc-6)" strokeWidth="1.4" />
-        <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="url(#cc-6)" strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M12 4.5l1.4 3.6L17 9.5l-3.6 1.4L12 14.5l-1.4-3.6L7 9.5l3.6-1.4L12 4.5z" stroke="url(#cc-6)" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M17.8 14.8l.8 2 .9.3-2 .8-.8 2-.8-2-2-.8 2-.3.8-2z" fill="url(#cc-6)" />
+        <path d="M6.2 14.7l.5 1.2 1.2.5-1.2.5-.5 1.2-.5-1.2-1.2-.5 1.2-.5.5-1.2z" fill="url(#cc-6)" />
       </svg>
     ),
     title: "AI Layer for Smarter Action",
@@ -179,56 +182,70 @@ export default function CoreCapabilities() {
           {capabilities.map((cap, i) => (
             <motion.div
               key={cap.title}
-              initial={{ opacity: 0, y: 24 }}
+              /* ── Entrance stagger ── */
+              initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{
                 duration: 0.6,
-                delay: 0.18 + i * 0.08,
+                delay: 0.18 + i * 0.09,
                 ease,
               }}
-              className="group relative rounded-2xl p-7 transition-all duration-400"
+              /* ── Hover: card lift + shadow (transition lives inside whileHover) ── */
+              whileHover={{
+                y: -6,
+                boxShadow:
+                  "0 20px 48px -12px rgba(109,40,217,0.12), 0 8px 20px -6px rgba(15,23,42,0.08)",
+                transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+              }}
+              className="group relative rounded-2xl p-7"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid rgba(15,23,42,0.08)",
                 boxShadow: "0 1px 3px rgba(0,0,0,0.02)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.transform = "translateY(-6px)";
-                el.style.borderColor = "rgba(109,40,217,0.2)";
-                el.style.boxShadow =
-                  "0 24px 64px -16px rgba(15,23,42,0.1), 0 8px 24px -8px rgba(109,40,217,0.08)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.transform = "translateY(0)";
-                el.style.borderColor = "rgba(15,23,42,0.08)";
-                el.style.boxShadow = "0 1px 3px rgba(0,0,0,0.02)";
+                willChange: "transform",
               }}
             >
-              {/* Icon */}
+              {/* Purple tint overlay — fades in on hover via CSS transition */}
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+                className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(109,40,217,0.1), rgba(139,92,246,0.08))",
+                    "linear-gradient(135deg, rgba(109,40,217,0.03) 0%, rgba(139,92,246,0.05) 100%)",
+                }}
+              />
+
+              {/* Border highlight — fades in on hover */}
+              <div
+                className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ boxShadow: "inset 0 0 0 1.5px rgba(109,40,217,0.20)" }}
+              />
+
+              {/* Icon */}
+              <motion.div
+                className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(109,40,217,0.08), rgba(139,92,246,0.06))",
                   border: "1px solid rgba(109,40,217,0.1)",
+                }}
+                whileHover={{
+                  scale: 1.12,
+                  boxShadow: "0 6px 20px rgba(109,40,217,0.18)",
+                  transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
                 }}
               >
                 {cap.icon}
-              </div>
+              </motion.div>
 
               {/* Title */}
-              <h3 className="text-[20px] font-extrabold tracking-tight mb-3 leading-snug text-black">
+              <h3 className="relative text-[20px] font-extrabold tracking-tight mb-3 leading-snug text-black">
                 {cap.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[17.5px] font-medium leading-relaxed mb-6 text-black">
+              <p className="relative text-[17.5px] font-medium leading-relaxed text-black">
                 {cap.desc}
               </p>
-
-
             </motion.div>
           ))}
         </div>

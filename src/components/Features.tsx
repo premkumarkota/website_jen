@@ -356,16 +356,33 @@ export default function Features() {
               More modules coming — field operations, production tracking &amp; smart forecasting.
             </p>
           </div>
-          <Link
-            href="/contact"
-            className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl text-[13px] font-bold text-white transition-all duration-200 hover:opacity-90"
-            style={{ background: "linear-gradient(135deg, #6D28D9, #4F46E5)" }}
+          <motion.div
+            className="flex-shrink-0 rounded-full"
+            whileHover={{ y: -2, boxShadow: "0 8px 28px rgba(109,40,217,0.35)" }}
+            whileTap={{ y: 0, scale: 0.97 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            See All Features
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+            <Link
+              href="/contact"
+              className="group relative flex items-center gap-2 overflow-hidden rounded-full px-5 py-2.5 text-[13px] font-bold text-white transition-all duration-300"
+            >
+              {/* Gradient Background */}
+              <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 transition-all duration-500 group-hover:scale-105"></span>
+
+              {/* Shine Effect */}
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none">
+                <span className="absolute -left-1/2 top-0 h-full w-1/2 bg-white/20 blur-md rotate-12 translate-x-0 group-hover:translate-x-[250%] transition-all duration-700"></span>
+              </span>
+
+              {/* Button Content */}
+              <span className="relative z-10 flex items-center gap-1.5 transition-all duration-300 group-hover:translate-x-1">
+                See All Features
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+            </Link>
+          </motion.div>
         </motion.div>
 
       </div>

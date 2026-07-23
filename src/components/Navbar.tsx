@@ -80,6 +80,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Why JenVeda", href: "/why-jenveda" },
   { label: "Serving Industries", href: "/industries" },
+  { label: "Videos", href: "/#videos" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -124,6 +125,30 @@ export default function Navbar() {
   }, []);
 
   const isActive = pathname.startsWith("/products/");
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.includes("#")) {
+      const [path, hash] = href.split("#");
+      const isCurrentHome = pathname === "/" || pathname === "";
+      const isTargetHome = path === "/" || path === "";
+
+      if (isCurrentHome && isTargetHome) {
+        e.preventDefault();
+        const targetEl = document.getElementById(hash);
+        if (targetEl) {
+          if (typeof window !== "undefined" && (window as any).lenis) {
+            (window as any).lenis.scrollTo(targetEl, { offset: -80 });
+          } else {
+            targetEl.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+        if (typeof window !== "undefined" && window.history) {
+          window.history.replaceState(null, "", pathname);
+        }
+        setMobile(false);
+      }
+    }
+  };
 
   return (
     <>
@@ -214,6 +239,7 @@ export default function Navbar() {
                 <li key={l.label}>
                   <Link
                     href={l.href}
+                    onClick={(e) => handleNavClick(e, l.href)}
                     className="relative block px-3.5 py-2 text-[15.5px] font-bold group"
                     style={{ color: active ? "#6D28D9" : "#1e293b" }}
                   >
@@ -271,30 +297,48 @@ export default function Navbar() {
           </ul>
 
           {/* Right CTAs */}
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-2.5 md:flex">
+            {/* Sign In — ghost button */}
             <Link
               href="https://login.jenveda.net/"
-              className="relative px-4 py-2 text-[14.5px] font-semibold text-slate-600 group"
+              className="relative px-4 py-2 text-[14px] font-semibold rounded-xl border transition-all duration-200 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700"
+              style={{
+                color: "#1e293b",
+                borderColor: "rgba(15,23,42,0.15)",
+                background: "transparent",
+              }}
             >
-              <motion.span
-                className="absolute inset-0 rounded-xl"
-                initial={{ opacity: 0, scale: 0.85 }}
-                whileHover={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                style={{ background: "rgba(0,0,0,0.05)" }}
-              />
-              <span className="relative transition-colors duration-150 group-hover:text-violet-600">Sign In</span>
+              Sign In
             </Link>
-            <Link
-              href="/contact"
-              className="flex items-center gap-1.5 rounded-xl px-4 py-2 text-[14.5px] font-bold text-white transition-all duration-200 hover:opacity-90"
-              style={{ background: "linear-gradient(135deg, #6D28D9, #4F46E5)" }}
+
+            {/* Talk to Sales — pill primary CTA */}
+            <motion.div
+              className="rounded-full"
+              whileHover={{ y: -2, boxShadow: "0 8px 28px rgba(109,40,217,0.35)" }}
+              whileTap={{ y: 0, scale: 0.97 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              Talk to Sales
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
+              <Link
+                href="/contact"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2 text-[14px] font-bold text-white transition-all duration-300"
+              >
+                {/* Gradient Background */}
+                <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 transition-all duration-500 group-hover:scale-105"></span>
+
+                {/* Shine Effect */}
+                <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none">
+                  <span className="absolute -left-1/2 top-0 h-full w-1/2 bg-white/20 blur-md rotate-12 translate-x-0 group-hover:translate-x-[250%] transition-all duration-700"></span>
+                </span>
+
+                {/* Button Content */}
+                <span className="relative z-10 flex items-center gap-1.5 transition-all duration-300 group-hover:translate-x-1">
+                  Talk to Sales
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
+              </Link>
+            </motion.div>
           </div>
 
           {/* Hamburger */}
@@ -322,7 +366,15 @@ export default function Navbar() {
               >
                 <div className="flex flex-col gap-0.5">
                   {navLinks.map((l) => (
-                    <Link key={l.label} href={l.href} className="block rounded-xl px-3 py-2.5 text-[13px] font-semibold text-slate-700 hover:bg-slate-50" onClick={() => setMobile(false)}>
+                    <Link
+                      key={l.label}
+                      href={l.href}
+                      className="block rounded-xl px-3 py-2.5 text-[13px] font-semibold text-slate-700 hover:bg-slate-50"
+                      onClick={(e) => {
+                        handleNavClick(e, l.href);
+                        setMobile(false);
+                      }}
+                    >
                       {l.label}
                     </Link>
                   ))}
@@ -334,8 +386,17 @@ export default function Navbar() {
                     </Link>
                   ))}
                   <div className="mt-3 flex flex-col gap-2 pt-3 border-t border-slate-100">
-                    <Link href="https://login.jenveda.net/" className="rounded-xl border border-slate-200 py-2.5 text-center text-[13px] font-semibold text-slate-700">Sign In</Link>
-                    <Link href="/contact" className="rounded-xl py-2.5 text-center text-[13px] font-bold text-white" style={{ background: "linear-gradient(135deg, #6D28D9, #4F46E5)" }}>Talk to Sales</Link>
+                    <Link href="https://login.jenveda.net/" className="rounded-xl border border-slate-200 py-2.5 text-center text-[13px] font-semibold text-slate-700 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700 transition-all duration-200">Sign In</Link>
+                    <Link href="/contact" className="group relative overflow-hidden rounded-full py-2.5 text-center text-[13px] font-bold text-white transition-all duration-300 shadow-md">
+                      <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 transition-all duration-500 group-hover:scale-105"></span>
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none">
+                        <span className="absolute -left-1/2 top-0 h-full w-1/2 bg-white/20 blur-md rotate-12 translate-x-0 group-hover:translate-x-[250%] transition-all duration-700"></span>
+                      </span>
+                      <span className="relative z-10 flex items-center justify-center gap-2 transition-all duration-300 group-hover:translate-x-1">
+                        Talk to Sales
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { gsap } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function CTA() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -14,7 +14,6 @@ export default function CTA() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const { ScrollTrigger } = require("gsap/ScrollTrigger");
       gsap.to(blob1Ref.current, {
         yPercent: -30, xPercent: 8, ease: "none",
         scrollTrigger: { trigger: sectionRef.current, start: "top bottom", end: "bottom top", scrub: 1.6 },
@@ -38,10 +37,16 @@ export default function CTA() {
       <div ref={inViewRef} className="max-w-5xl mx-auto relative">
         {/* Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-3xl overflow-hidden"
+          initial={{ opacity: 0, y: 50, scale: 0.94 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+          transition={{ 
+            type: "spring", 
+            stiffness: 260, 
+            damping: 24, 
+            mass: 0.8,
+            delay: 0.1
+          }}
+          className="relative rounded-3xl overflow-hidden shadow-2xl"
           style={{ background: "linear-gradient(135deg,#EFF6FF 0%,#EEF2FF 50%,#F0FDFA 100%)", border: "1px solid rgba(37,99,235,0.15)", boxShadow: "0 20px 60px rgba(37,99,235,0.1)" }}
         >
           {/* Top glow border */}

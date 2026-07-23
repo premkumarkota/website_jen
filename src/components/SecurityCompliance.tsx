@@ -119,13 +119,23 @@ export default function SecurityCompliance() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={inView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.36 + i * 0.07, ease }}
-                  className="h-11 px-6 rounded-xl flex items-center justify-center transition-all duration-300 cursor-default hover:bg-violet-50 hover:border-violet-200"
+                  whileHover={{
+                    y: -3,
+                    scale: 1.03,
+                    boxShadow: "0 12px 24px -8px rgba(109,40,217,0.25)",
+                    transition: { duration: 0.2, ease: "easeOut" },
+                  }}
+                  whileTap={{ scale: 0.96 }}
+                  className="group h-11 px-6 rounded-xl flex items-center justify-center transition-all duration-300 cursor-pointer hover:bg-violet-50 hover:border-violet-200"
                   style={{
-                    background: "rgba(0,0,0,0.025)",
+                    background: "rgba(0,0,0,0.015)",
                     border: "1px solid rgba(0,0,0,0.07)",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
                   }}
                 >
-                  <span className="font-bold text-[13px] text-slate-500">{c}</span>
+                  <span className="font-bold text-[13px] text-slate-500 transition-colors duration-300 group-hover:text-violet-700">
+                    {c}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
@@ -139,15 +149,43 @@ export default function SecurityCompliance() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease }}
-                whileHover={{ y: -3, transition: { duration: 0.2 } }}
-                className="p-6 rounded-2xl border border-slate-100 bg-slate-50/80 cursor-default"
-                style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.03)" }}
+                whileHover={{
+                  y: -6,
+                  boxShadow:
+                    "0 20px 48px -12px rgba(109,40,217,0.12), 0 8px 20px -6px rgba(15,23,42,0.08)",
+                  transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+                }}
+                className="group relative p-6 rounded-2xl cursor-pointer text-left focus:outline-none transition-all"
+                style={{
+                  background: "var(--bg-card, #ffffff)",
+                  border: "1px solid rgba(15,23,42,0.08)",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.02)",
+                  willChange: "transform",
+                }}
               >
-                <div className="h-10 w-10 flex items-center justify-center rounded-xl bg-violet-50 text-violet-600 mb-4">
+                {/* Purple tint overlay — fades in on hover */}
+                <div
+                  className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(109,40,217,0.03) 0%, rgba(139,92,246,0.05) 100%)",
+                  }}
+                />
+
+                {/* Border highlight — fades in on hover */}
+                <div
+                  className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ boxShadow: "inset 0 0 0 1.5px rgba(109,40,217,0.20)" }}
+                />
+
+                <motion.div
+                  className="relative h-10 w-10 flex items-center justify-center rounded-xl bg-violet-50 text-violet-600 mb-4"
+                  whileHover={{ scale: 1.1, transition: { duration: 0.25 } }}
+                >
                   {fact.icon}
-                </div>
-                <h3 className="text-[14px] font-bold text-slate-900 mb-1.5">{fact.title}</h3>
-                <p className="text-[13px] text-slate-500 leading-relaxed">{fact.desc}</p>
+                </motion.div>
+                <h3 className="relative text-[14px] font-bold text-slate-900 mb-1.5 z-10">{fact.title}</h3>
+                <p className="relative text-[13px] text-slate-500 leading-relaxed z-10">{fact.desc}</p>
               </motion.div>
             ))}
           </div>

@@ -110,9 +110,15 @@ function PillarCard({ p, i }: { p: typeof pillars[0]; i: number }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 36 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: (i % 2) * 0.1, ease }}
+      initial={{ opacity: 0, y: 36, scale: 0.94 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ 
+        type: "spring",
+        stiffness: 260,
+        damping: 25,
+        mass: 0.8,
+        delay: (i % 2) * 0.1 
+      }}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="relative group p-8 rounded-2xl bg-white border border-slate-100 overflow-hidden cursor-default"
       style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
@@ -280,16 +286,33 @@ export default function WhyJenVedaClient() {
             {painPoints.map((p, i) => (
               <motion.div
                 key={p.stat}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="relative p-8 rounded-2xl overflow-hidden"
-                style={{ background: p.accentBg, border: `1px solid ${p.accentBorder}`, boxShadow: "0 2px 16px rgba(0,0,0,0.03)" }}
+                transition={{ duration: 0.4, delay: i * 0.1, type: "spring", stiffness: 350, damping: 28 }}
+                whileHover={{ 
+                  y: -10, 
+                  scale: 1.03,
+                  boxShadow: "0 25px 50px -12px rgba(0,0,0,0.12)",
+                  transition: { type: "spring", stiffness: 500, damping: 25 } 
+                }}
+                className="group relative p-8 rounded-[1.5rem] overflow-hidden transition-colors duration-500"
+                style={{ 
+                  background: p.accentBg, 
+                  border: `1px solid ${p.accentBorder}`, 
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.03)" 
+                }}
               >
-                <div className="absolute top-0 left-0 w-full h-[3px] rounded-t-2xl"
+                {/* Default subtle top line (matches original but fades on hover) */}
+                <div 
+                  className="absolute top-0 left-0 w-full h-[4px] rounded-t-[1.5rem] opacity-40 transition-opacity duration-300 group-hover:opacity-0"
                   style={{ background: `linear-gradient(90deg, ${p.accentColor}, transparent)` }}
+                />
+                
+                {/* Beautiful left-to-right tracing line on hover */}
+                <div 
+                  className="absolute top-0 left-0 w-full h-[4px] rounded-t-[1.5rem] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  style={{ background: `linear-gradient(90deg, ${p.accentColor}, ${p.accentColor}CC)` }}
                 />
                 <div
                   className="text-[3.5rem] font-black tracking-tight leading-none mb-3"
@@ -377,39 +400,52 @@ export default function WhyJenVedaClient() {
 
           {/* Rows */}
           <div className="flex flex-col gap-2">
+          {/* Rows */}
+          <div className="flex flex-col gap-2">
             {comparisonRows.map((row, i) => (
               <motion.div
                 key={row.feature}
                 initial={{ opacity: 0, x: -12 }}
                 animate={cmpInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.45, delay: 0.15 + i * 0.05, ease }}
-                className="grid grid-cols-[1fr_1fr_1fr] gap-3 items-center px-4 py-4 rounded-xl hover:bg-slate-50 transition-colors duration-150"
+                whileHover={{ 
+                  scale: 1.015,
+                  x: 12,
+                  backgroundColor: "rgba(109, 40, 217, 0.04)",
+                  boxShadow: "0 15px 35px -12px rgba(109, 40, 217, 0.15)",
+                  transition: { type: "spring", stiffness: 500, damping: 28 }
+                }}
+                className="group relative grid grid-cols-[1fr_1fr_1fr] gap-3 items-center px-6 py-5 rounded-2xl cursor-default transition-all duration-300"
                 style={{ border: "1px solid rgba(0,0,0,0.05)" }}
               >
+                {/* Left accent bar revealed on hover */}
+                <div className="absolute left-0 top-3 bottom-3 w-[4px] rounded-r-full scale-y-0 group-hover:scale-y-100 origin-center transition-transform duration-300 bg-violet-500" />
+                
                 {/* Feature label */}
-                <p className="text-[16px] font-bold text-black">{row.feature}</p>
+                <p className="text-[16px] font-bold text-black transition-colors duration-300 group-hover:text-violet-700">{row.feature}</p>
 
                 {/* Traditional — bad */}
                 <div className="flex items-center gap-2.5">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-red-50 flex items-center justify-center">
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M2.5 2.5l5 5M7.5 2.5l-5 5" stroke="#DC2626" strokeWidth="2" strokeLinecap="round" />
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-red-50 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <svg width="12" height="12" viewBox="0 0 10 10" fill="none">
+                      <path d="M2.5 2.5l5 5M7.5 2.5l-5 5" stroke="#DC2626" strokeWidth="2.5" strokeLinecap="round" />
                     </svg>
                   </div>
-                  <span className="text-[15.5px] font-medium text-black/60">{row.bad}</span>
+                  <span className="text-[15.5px] font-medium text-black/60 group-hover:text-black transition-colors duration-300">{row.bad}</span>
                 </div>
 
                 {/* JenVeda — good */}
                 <div className="flex items-center gap-2.5">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-50 flex items-center justify-center">
-                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-50 flex items-center justify-center shadow-sm transition-all duration-300 group-hover:scale-125 group-hover:bg-emerald-100">
+                    <svg width="12" height="12" viewBox="0 0 11 11" fill="none">
                       <path d="M1.5 4.5l3 3 5-5.5" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <span className="text-[15.5px] font-bold text-black">{row.good}</span>
+                  <span className="text-[16px] font-bold text-black group-hover:text-violet-900 transition-colors duration-300">{row.good}</span>
                 </div>
               </motion.div>
             ))}
+          </div>
           </div>
         </div>
       </section>
@@ -457,11 +493,23 @@ export default function WhyJenVedaClient() {
       <section className="px-6 pt-16 pb-28">
         <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.65, ease }}
-            className="relative overflow-hidden rounded-3xl p-10 md:p-14 text-center"
+            initial={{ opacity: 0, y: 40, scale: 0.92 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 30, 
+              mass: 0.8,
+              delay: 0.1
+            }}
+            whileHover={{ 
+              scale: 1.02, 
+              y: -8,
+              boxShadow: "0 32px 80px rgba(109,40,217,0.16)",
+              transition: { type: "spring", stiffness: 400, damping: 25 }
+            }}
+            className="relative overflow-hidden rounded-3xl p-10 md:p-14 text-center shadow-xl cursor-default transition-shadow duration-300"
             style={{
               background: "linear-gradient(135deg, #F5F3FF 0%, #EFF6FF 100%)",
               border: "1px solid rgba(109,40,217,0.12)",

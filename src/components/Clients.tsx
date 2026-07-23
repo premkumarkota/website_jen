@@ -455,11 +455,15 @@ export default function Clients() {
       className="relative overflow-hidden py-24 px-6"
       style={{ background: "linear-gradient(180deg, var(--bg-surface), var(--bg-base))" }}
     >
-      {/* Shine sweep keyframe */}
+      {/* Shine sweep & Marquee keyframes */}
       <style>{`
         @keyframes shine-sweep {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(200%); }
+        }
+        @keyframes scroll-x {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
 
@@ -494,15 +498,32 @@ export default function Clients() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-          {clients.map((client, index) => (
-            <ClientCard
-              key={client.name}
-              client={client}
-              index={index}
-              onSelect={handleSelect}
-            />
-          ))}
+        {/* Horizontal Marquee Container */}
+        <div 
+          className="relative mt-12 flex overflow-hidden w-full"
+          style={{ 
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+          }}
+        >
+          <div 
+            className="flex w-max gap-4 hover:[animation-play-state:paused]"
+            style={{ animation: 'scroll-x 60s linear infinite' }}
+          >
+            {/* Duplicate the list 4 times for infinite scroll on ultra-wide screens */}
+            {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+              <div 
+                key={`${client.name}-${index}`} 
+                className="w-[200px] sm:w-[220px] md:w-[260px] shrink-0"
+              >
+                <ClientCard
+                  client={client}
+                  index={index % clients.length}
+                  onSelect={handleSelect}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const products = [
   { label: "HRMS", href: "/products/hrms" },
-  { label: "PMS", href: "/products/pms" },
   { label: "Accounting", href: "/products/accounting" },
+  { label: "PMS", href: "/products/pms" },
   { label: "Inventory", href: "/products/inventory" },
 ];
 const legal = ["Privacy Policy", "Support Policy", "Terms of Service"];
