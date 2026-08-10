@@ -10,8 +10,9 @@ const products = [
 ];
 const legal = [
   { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Data Deletion", href: "/data-deletion" },
   { label: "Support Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
 ];
 
 export default function Footer() {

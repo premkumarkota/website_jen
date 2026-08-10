@@ -82,17 +82,25 @@ const navLinks = [
   { label: "Serving Industries", href: "/industries" },
   { label: "Videos", href: "/#videos" },
   { label: "About", href: "/about" },
-  { label: "Privacy", href: "/privacy" },
   { label: "Contact", href: "/contact" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy", desc: "How we collect & protect your data." },
+  { label: "Terms of Service", href: "/terms", desc: "The rules for using JenVeda." },
+  { label: "Data Deletion", href: "/data-deletion", desc: "Request removal of your data." },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);   // Solutions dropdown
+  const [legalOpen, setLegalOpen] = useState(false); // Legal dropdown
   const [mobile, setMobile] = useState(false);
   const pathname = usePathname();
   const dropRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+  const legalDropRef = useRef<HTMLDivElement>(null);
+  const legalBtnRef = useRef<HTMLButtonElement>(null);
 
   // Scroll detection
   useEffect(() => {
@@ -102,7 +110,7 @@ export default function Navbar() {
   }, []);
 
   // Close on route change
-  useEffect(() => { setOpen(false); setMobile(false); }, [pathname]);
+  useEffect(() => { setOpen(false); setLegalOpen(false); setMobile(false); }, [pathname]);
 
   // Close on outside click
   useEffect(() => {
@@ -113,19 +121,26 @@ export default function Navbar() {
       ) {
         setOpen(false);
       }
+      if (
+        legalDropRef.current && !legalDropRef.current.contains(e.target as Node) &&
+        legalBtnRef.current && !legalBtnRef.current.contains(e.target as Node)
+      ) {
+        setLegalOpen(false);
+      }
     };
-    if (open) document.addEventListener("mousedown", handler);
+    if (open || legalOpen) document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
+  }, [open, legalOpen]);
 
   // Close on Escape
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); setLegalOpen(false); } };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
   const isActive = pathname.startsWith("/products/");
+  const isLegalActive = legalLinks.some((l) => l.href === pathname);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.includes("#")) {
@@ -159,15 +174,15 @@ export default function Navbar() {
         transition={{ duration: 0.7, ease }}
         className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled || open || mobile ? "rgba(255,255,255,0.97)" : "transparent",
-          backdropFilter: scrolled || open || mobile ? "blur(20px)" : "none",
-          WebkitBackdropFilter: scrolled || open || mobile ? "blur(20px)" : "none",
-          borderBottom: scrolled || open || mobile ? "1px solid rgba(0,0,0,0.07)" : "1px solid transparent",
-          boxShadow: scrolled || open || mobile ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
+          background: scrolled || open || legalOpen || mobile ? "rgba(255,255,255,0.97)" : "transparent",
+          backdropFilter: scrolled || open || legalOpen || mobile ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled || open || legalOpen || mobile ? "blur(20px)" : "none",
+          borderBottom: scrolled || open || legalOpen || mobile ? "1px solid rgba(0,0,0,0.07)" : "1px solid transparent",
+          boxShadow: scrolled || open || legalOpen || mobile ? "0 1px 12px rgba(0,0,0,0.06)" : "none",
         }}
       >
         <nav
-          className="relative mx-auto flex w-full max-w-7xl items-end justify-between px-6 py-3.5"
+          className="relative mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-3.5"
         >
           {/* Logo + Tagline */}
           <div className="flex flex-col flex-shrink-0">
@@ -232,7 +247,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav */}
-          <ul className="hidden items-center gap-0.5 md:flex">
+          <ul className="hidden items-center gap-0.5 xl:flex">
             {/* Regular links */}
             {navLinks.map((l) => {
               const active = pathname === l.href;
@@ -241,7 +256,7 @@ export default function Navbar() {
                   <Link
                     href={l.href}
                     onClick={(e) => handleNavClick(e, l.href)}
-                    className="relative block px-3.5 py-2 text-[15.5px] font-bold group"
+                    className="relative block whitespace-nowrap px-3.5 py-2 text-[15.5px] font-bold group"
                     style={{ color: active ? "#6D28D9" : "#1e293b" }}
                   >
                     {/* Hover background pill */}
@@ -273,8 +288,8 @@ export default function Navbar() {
             <li className="relative">
               <button
                 ref={btnRef}
-                onClick={() => setOpen((v) => !v)}
-                className="relative flex items-center gap-1.5 px-3.5 py-2 text-[15.5px] font-bold group"
+                onClick={() => { setOpen((v) => !v); setLegalOpen(false); }}
+                className="relative flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 text-[15.5px] font-bold group"
                 style={{ color: open || isActive ? "#6D28D9" : "#1e293b" }}
               >
                 <motion.span
@@ -295,10 +310,94 @@ export default function Navbar() {
                 </motion.svg>
               </button>
             </li>
+
+            {/* Legal trigger */}
+            <li className="relative">
+              <button
+                ref={legalBtnRef}
+                onClick={() => { setLegalOpen((v) => !v); setOpen(false); }}
+                className="relative flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 text-[15.5px] font-bold group"
+                style={{ color: legalOpen || isLegalActive ? "#6D28D9" : "#1e293b" }}
+              >
+                <motion.span
+                  className="absolute inset-0 rounded-xl"
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileHover={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ background: legalOpen || isLegalActive ? "rgba(109,40,217,0.08)" : "rgba(0,0,0,0.05)" }}
+                />
+                <span className="relative transition-colors duration-150 group-hover:text-slate-900">Legal</span>
+                <motion.svg
+                  animate={{ rotate: legalOpen ? 180 : 0 }}
+                  transition={{ duration: 0.25, ease }}
+                  className="relative"
+                  width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </motion.svg>
+              </button>
+
+              {/* Legal dropdown */}
+              <AnimatePresence>
+                {legalOpen && (
+                  <motion.div
+                    ref={legalDropRef}
+                    initial={{ opacity: 0, y: -10, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.97 }}
+                    transition={{ duration: 0.22, ease }}
+                    className="absolute right-0 top-full mt-3 w-[300px] origin-top-right overflow-hidden rounded-2xl bg-white"
+                    style={{ border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 24px 60px rgba(0,0,0,0.14), 0 4px 14px rgba(0,0,0,0.06)" }}
+                  >
+                    <div className="border-b border-slate-100 px-5 py-3">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">Legal & Policies</span>
+                    </div>
+                    <div className="p-2">
+                      {legalLinks.map((l, i) => {
+                        const active = pathname === l.href;
+                        return (
+                          <motion.div
+                            key={l.href}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.25, delay: 0.04 + i * 0.05, ease }}
+                          >
+                            <Link
+                              href={l.href}
+                              onClick={() => setLegalOpen(false)}
+                              className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-slate-50"
+                            >
+                              <span
+                                className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full transition-colors"
+                                style={{ background: active ? "#6D28D9" : "#CBD5E1" }}
+                              />
+                              <div className="min-w-0 flex-1">
+                                <p className="text-[13.5px] font-bold transition-colors group-hover:text-violet-700"
+                                  style={{ color: active ? "#6D28D9" : "#1e293b" }}
+                                >
+                                  {l.label}
+                                </p>
+                                <p className="mt-0.5 text-[11.5px] leading-snug text-slate-500">{l.desc}</p>
+                              </div>
+                              <svg
+                                className="ml-auto mt-1 flex-shrink-0 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100"
+                                width="14" height="14" viewBox="0 0 14 14" fill="none"
+                              >
+                                <path d="M3 7h8M7.5 4l3 3-3 3" stroke="#6D28D9" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </Link>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
           </ul>
 
           {/* Right CTAs */}
-          <div className="hidden items-center gap-2.5 md:flex">
+          <div className="hidden items-center gap-2.5 xl:flex">
             {/* Sign In — ghost button */}
             <Link
               href="https://login.jenveda.net/"
@@ -344,7 +443,7 @@ export default function Navbar() {
 
           {/* Hamburger */}
           <button
-            className="flex md:hidden items-center justify-center w-9 h-9 rounded-xl"
+            className="flex xl:hidden items-center justify-center w-9 h-9 rounded-xl"
             style={{ background: "rgba(109,40,217,0.07)" }}
             onClick={() => setMobile(!mobile)}
           >
@@ -363,7 +462,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease }}
-                className="absolute left-0 right-0 top-full overflow-hidden bg-white border-t border-slate-100 p-3 shadow-lg md:hidden"
+                className="absolute left-0 right-0 top-full overflow-hidden bg-white border-t border-slate-100 p-3 shadow-lg xl:hidden"
               >
                 <div className="flex flex-col gap-0.5">
                   {navLinks.map((l) => (
@@ -384,6 +483,13 @@ export default function Navbar() {
                     <Link key={s.label} href={s.href} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-semibold text-slate-700 hover:bg-violet-50 hover:text-violet-700" onClick={() => setMobile(false)}>
                       <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
                       {s.label}
+                    </Link>
+                  ))}
+                  <p className="px-3 pt-3 pb-1 text-[10px] font-bold tracking-widest uppercase text-slate-400">Legal</p>
+                  {legalLinks.map((l) => (
+                    <Link key={l.href} href={l.href} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-semibold text-slate-700 hover:bg-violet-50 hover:text-violet-700" onClick={() => setMobile(false)}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+                      {l.label}
                     </Link>
                   ))}
                   <div className="mt-3 flex flex-col gap-2 pt-3 border-t border-slate-100">
