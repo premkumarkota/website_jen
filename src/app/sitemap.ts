@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/why-jenveda`,             lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/industries`,              lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/contact`,                 lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/privacy`,                 lastModified: new Date(), changeFrequency: "yearly",  priority: 0.4 },
     { url: `${base}/products/hrms`,           lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/products/accounting`,     lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/products/pms`,            lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },

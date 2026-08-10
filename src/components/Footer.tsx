@@ -8,7 +8,11 @@ const products = [
   { label: "PMS", href: "/products/pms" },
   { label: "Inventory", href: "/products/inventory" },
 ];
-const legal = ["Privacy Policy", "Support Policy", "Terms of Service"];
+const legal = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Support Policy", href: "#" },
+  { label: "Terms of Service", href: "#" },
+];
 
 export default function Footer() {
   return (
@@ -175,12 +179,12 @@ export default function Footer() {
         >
           <div className="flex flex-wrap gap-8">
             {legal.map(l => (
-              <a key={l} href="#"
+              <Link key={l.label} href={l.href}
                 className="text-[15px] font-medium transition-colors hover:text-violet-600"
                 style={{ color: "#444" }}
               >
-                {l}
-              </a>
+                {l.label}
+              </Link>
             ))}
           </div>
           <p className="text-[15px] font-medium" style={{ color: "#444" }}>

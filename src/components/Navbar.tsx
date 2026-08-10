@@ -82,6 +82,7 @@ const navLinks = [
   { label: "Serving Industries", href: "/industries" },
   { label: "Videos", href: "/#videos" },
   { label: "About", href: "/about" },
+  { label: "Privacy", href: "/privacy" },
   { label: "Contact", href: "/contact" },
 ];
 
