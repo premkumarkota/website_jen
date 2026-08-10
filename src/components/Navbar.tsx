@@ -397,11 +397,11 @@ export default function Navbar() {
           </ul>
 
           {/* Right CTAs */}
-          <div className="hidden items-center gap-2.5 xl:flex">
+          <div className="hidden flex-shrink-0 items-center gap-2.5 xl:flex">
             {/* Sign In — ghost button */}
             <Link
               href="https://login.jenveda.net/"
-              className="relative px-4 py-2 text-[14px] font-semibold rounded-xl border transition-all duration-200 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700"
+              className="relative whitespace-nowrap px-4 py-2 text-[14px] font-semibold rounded-xl border transition-all duration-200 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700"
               style={{
                 color: "#1e293b",
                 borderColor: "rgba(15,23,42,0.15)",
@@ -420,7 +420,7 @@ export default function Navbar() {
             >
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-2 text-[14px] font-bold text-white transition-all duration-300"
+                className="group relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full px-5 py-2 text-[14px] font-bold text-white transition-all duration-300"
               >
                 {/* Gradient Background */}
                 <span className="absolute inset-0 bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 transition-all duration-500 group-hover:scale-105"></span>
