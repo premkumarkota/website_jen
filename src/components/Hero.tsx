@@ -157,7 +157,7 @@ export default function Hero() {
                       boxShadow: "0 4px 20px rgba(109,40,217,0.3)",
                     }}
                   >
-                    Book a Free Demo
+                    Book a Demo
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M7.5 4l3 3-3 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -166,7 +166,7 @@ export default function Hero() {
                     href="#products"
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-6 py-3 text-[15px] font-semibold text-slate-700 backdrop-blur-sm transition-all duration-200 hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700 sm:w-auto"
                   >
-                    See What&apos;s Inside
+                    Discover JenVeda
                   </Link>
                 </motion.div>
 
