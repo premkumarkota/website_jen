@@ -79,6 +79,7 @@ const solutions = [
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Why JenVeda", href: "/why-jenveda" },
+  { label: "DSO Calculator", href: "/dso-calculator" },
   { label: "Serving Industries", href: "/industries" },
   { label: "Videos", href: "/#videos" },
   { label: "About", href: "/about" },
@@ -182,7 +183,7 @@ export default function Navbar() {
         }}
       >
         <nav
-          className="relative mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-3.5"
+          className="relative mx-auto flex w-full max-w-[1440px] 2xl:max-w-[1500px] items-center justify-between gap-4 px-6 py-3.5"
         >
           {/* Logo + Tagline */}
           <div className="flex flex-col flex-shrink-0">
@@ -247,7 +248,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Nav */}
-          <ul className="hidden items-center gap-0.5 xl:flex">
+          <ul className="hidden items-center gap-0.5 min-[1320px]:flex">
             {/* Regular links */}
             {navLinks.map((l) => {
               const active = pathname === l.href;
@@ -256,7 +257,7 @@ export default function Navbar() {
                   <Link
                     href={l.href}
                     onClick={(e) => handleNavClick(e, l.href)}
-                    className="relative block whitespace-nowrap px-3.5 py-2 text-[15.5px] font-bold group"
+                    className="relative block whitespace-nowrap px-2 py-2 text-[14px] font-bold group 2xl:px-3.5 2xl:text-[15.5px]"
                     style={{ color: active ? "#6D28D9" : "#1e293b" }}
                   >
                     {/* Hover background pill */}
@@ -289,7 +290,7 @@ export default function Navbar() {
               <button
                 ref={btnRef}
                 onClick={() => { setOpen((v) => !v); setLegalOpen(false); }}
-                className="relative flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 text-[15.5px] font-bold group"
+                className="relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 text-[14px] font-bold group 2xl:px-3.5 2xl:text-[15.5px]"
                 style={{ color: open || isActive ? "#6D28D9" : "#1e293b" }}
               >
                 <motion.span
@@ -316,7 +317,7 @@ export default function Navbar() {
               <button
                 ref={legalBtnRef}
                 onClick={() => { setLegalOpen((v) => !v); setOpen(false); }}
-                className="relative flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 text-[15.5px] font-bold group"
+                className="relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 text-[14px] font-bold group 2xl:px-3.5 2xl:text-[15.5px]"
                 style={{ color: legalOpen || isLegalActive ? "#6D28D9" : "#1e293b" }}
               >
                 <motion.span
@@ -397,7 +398,7 @@ export default function Navbar() {
           </ul>
 
           {/* Right CTAs */}
-          <div className="hidden flex-shrink-0 items-center gap-2.5 xl:flex">
+          <div className="hidden flex-shrink-0 items-center gap-2.5 min-[1320px]:flex">
             {/* Sign In — ghost button */}
             <Link
               href="https://login.jenveda.net/"
@@ -443,7 +444,7 @@ export default function Navbar() {
 
           {/* Hamburger */}
           <button
-            className="flex xl:hidden items-center justify-center w-9 h-9 rounded-xl"
+            className="flex min-[1320px]:hidden items-center justify-center w-9 h-9 rounded-xl"
             style={{ background: "rgba(109,40,217,0.07)" }}
             onClick={() => setMobile(!mobile)}
           >
@@ -462,7 +463,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.25, ease }}
-                className="absolute left-0 right-0 top-full overflow-hidden bg-white border-t border-slate-100 p-3 shadow-lg xl:hidden"
+                className="absolute left-0 right-0 top-full overflow-hidden bg-white border-t border-slate-100 p-3 shadow-lg min-[1320px]:hidden"
               >
                 <div className="flex flex-col gap-0.5">
                   {navLinks.map((l) => (

@@ -233,3 +233,18 @@ h1, h2, h3, .font-heading {
 }
 
 ::selection { background: rgba(209,0,143,0.20); color: var(--text-1); }
+
+/* ─── DSO Calculator page (/dso-calculator) ──────── */
+/* Scoped type system: Inter body + Poppins display. revert-layer lets the
+   page's Tailwind weight/tracking utilities win over the global h1–h3 rule. */
+.dso-page {
+  font-family: var(--font-dso-body), 'Inter', sans-serif;
+}
+.dso-page :is(h1, h2, h3),
+.dso-page .dso-display {
+  font-family: var(--font-dso-display), 'Poppins', sans-serif;
+}
+.dso-page :is(h1, h2, h3) {
+  font-weight: revert-layer;
+  letter-spacing: revert-layer;
+}
