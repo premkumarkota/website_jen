@@ -7,7 +7,7 @@ const SYSTEM_PROMPT = `You are a helpful assistant for JenVeda Technologies, an 
 About JenVeda:
 - JenVeda helps Indian MSMEs manage HR, payroll, accounts, and inventory — without the complexity.
 - Tagline: Clarity. Confidence. Speed.
-- Contact: contact@jenveda.com | +91 72077 76559
+- Contact: contact@jenveda.com | +91 92479 77049
 - India Office: 201, Padmaja Jansi Enclave, KPHB main road, Hyderabad, Telangana 500072
 - Singapore Office: 160 Robinson Road, #14-04, Singapore Business Federation Center, Singapore 068914
 
