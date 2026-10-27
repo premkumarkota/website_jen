@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 ───────────────────────────────────────── */
 
 const ACCESS_KEY = "jv_ft_access";
-const OTP_LENGTH = 6; // set to 4 if the MSG91 template sends a 4-digit OTP
+const OTP_LENGTH = 4; // MSG91 template sends a 4-digit OTP
 const RESEND_SECONDS = 30;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
