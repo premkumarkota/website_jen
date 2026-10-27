@@ -312,6 +312,32 @@ export default function Navbar() {
               </button>
             </li>
 
+            {/* Finance Tools — standalone link, placed right after Solutions */}
+            <li>
+              <Link
+                href="/finance-tools"
+                className="relative block whitespace-nowrap px-2 py-2 text-[14px] font-bold group 2xl:px-3.5 2xl:text-[15.5px]"
+                style={{ color: pathname === "/finance-tools" ? "#6D28D9" : "#1e293b" }}
+              >
+                <motion.span
+                  className="absolute inset-0 rounded-xl"
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileHover={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ background: pathname === "/finance-tools" ? "rgba(109,40,217,0.08)" : "rgba(0,0,0,0.05)" }}
+                />
+                {pathname === "/finance-tools" && (
+                  <motion.span
+                    layoutId="nav-active-underline"
+                    className="absolute bottom-0 left-3 right-3 h-[2.5px] rounded-full"
+                    style={{ background: "var(--gradient-1)" }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                )}
+                <span className="relative transition-colors duration-150 group-hover:text-slate-900">Finance Tools</span>
+              </Link>
+            </li>
+
             {/* Legal trigger */}
             <li className="relative">
               <button
@@ -486,6 +512,10 @@ export default function Navbar() {
                       {s.label}
                     </Link>
                   ))}
+                  <Link href="/finance-tools" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-semibold text-slate-700 hover:bg-violet-50 hover:text-violet-700" onClick={() => setMobile(false)}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+                    Finance Tools
+                  </Link>
                   <p className="px-3 pt-3 pb-1 text-[10px] font-bold tracking-widest uppercase text-slate-400">Legal</p>
                   {legalLinks.map((l) => (
                     <Link key={l.href} href={l.href} className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-semibold text-slate-700 hover:bg-violet-50 hover:text-violet-700" onClick={() => setMobile(false)}>
