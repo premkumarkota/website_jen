@@ -81,7 +81,7 @@ const navLinks = [
   { label: "Why JenVeda", href: "/why-jenveda" },
   { label: "DSO Calculator", href: "/dso-calculator" },
   { label: "Serving Industries", href: "/industries" },
-  { label: "Videos", href: "/#videos" },
+  { label: "Videos", href: "/videos" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
