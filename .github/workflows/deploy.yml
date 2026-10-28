@@ -29,6 +29,9 @@ jobs:
           MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
           WHATSAPP_NUMBER: ${{ secrets.WHATSAPP_NUMBER }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MSG91_AUTH_KEY: ${{ secrets.MSG91_AUTH_KEY }}
+          MSG91_TEMPLATE_ID: ${{ secrets.MSG91_TEMPLATE_ID }}
+          MSG91_WIDGET_ID: ${{ secrets.MSG91_WIDGET_ID }}
 
       - name: Prepare standalone package
         run: |
