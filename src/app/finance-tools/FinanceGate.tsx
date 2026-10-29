@@ -85,7 +85,8 @@ function LockedPreview({ onUnlock }: { onUnlock: () => void }) {
 
 /* ── the registration modal ── */
 function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: () => void }) {
-  const [step, setStep] = useState<"phone" | "otp" | "register">("phone");
+  const [step, setStep] = useState<"phone" | "otp" | "register" | "consent">("phone");
+  const [agreed, setAgreed] = useState(false);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
@@ -158,12 +159,18 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
     }
   }
 
-  async function submitRegistration() {
+  function goToConsent() {
     setError("");
     if (!company.trim()) return setError("Please enter your company name.");
     if (!industry) return setError("Please select your company type.");
     if (!size) return setError("Please select your company size.");
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setError("Enter a valid work email, or leave it blank.");
+    setStep("consent");
+  }
+
+  async function agreeAndFinish() {
+    if (!agreed) return;
+    setError("");
     setLoading(true);
     try {
       const res = await fetch("/api/register", {
@@ -390,13 +397,73 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                 {error && <p className="mt-3 text-[13px] font-medium text-[#DC2626]">{error}</p>}
 
                 <button
-                  onClick={submitRegistration}
-                  disabled={loading}
-                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[15px] font-bold text-white transition hover:brightness-105 disabled:opacity-60"
+                  onClick={goToConsent}
+                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[15px] font-bold text-white transition hover:brightness-105"
                   style={{ background: "linear-gradient(90deg,#4A1E91,#E92F8E)" }}
                 >
-                  {loading ? <Spinner /> : "Get my free access"}
+                  Continue
                 </button>
+              </motion.div>
+            )}
+
+            {step === "consent" && (
+              <motion.div key="consent" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.25 }}>
+                <h3 className="text-[22px] font-extrabold tracking-tight text-[#1A1033]">Terms &amp; Privacy</h3>
+                <p className="mt-1.5 text-[14px] text-slate-500">Please review and accept to open the free tools.</p>
+
+                {/* scrollable policy content */}
+                <div className="mt-5 h-[240px] overflow-y-auto rounded-xl border border-slate-200 bg-[#FBFBFE] p-4 text-[13px] leading-[1.6] text-slate-600">
+                  <p className="font-bold text-[#1A1033]">1. Free tools</p>
+                  <p className="mt-1">JenVeda&apos;s Finance Tools are provided free for your own evaluation. The calculators run in your browser and are for guidance only — they are estimates, not financial, tax or legal advice.</p>
+
+                  <p className="mt-3 font-bold text-[#1A1033]">2. Information we collect</p>
+                  <p className="mt-1">To give you access we collect your name and mobile number (verified by a one-time SMS code), and the business details you provide — company name, type, size, role, work email and your note.</p>
+
+                  <p className="mt-3 font-bold text-[#1A1033]">3. How we use it</p>
+                  <p className="mt-1">We use these details to give you access to the tools and to contact you about JenVeda — including sending a detailed finance audit and relevant product information. We don&apos;t sell your data.</p>
+
+                  <p className="mt-3 font-bold text-[#1A1033]">4. OTP &amp; communication consent</p>
+                  <p className="mt-1">By continuing you agree to receive a one-time verification SMS, and follow-up calls, SMS, WhatsApp or email from our team about JenVeda. You can ask us to stop at any time.</p>
+
+                  <p className="mt-3 font-bold text-[#1A1033]">5. Your choices</p>
+                  <p className="mt-1">You can request access to, correction of, or deletion of your data at any time. For full details, read our{" "}
+                    <a href="/privacy" target="_blank" className="font-semibold text-[#6D28D9] hover:underline">Privacy Policy</a>,{" "}
+                    <a href="/terms" target="_blank" className="font-semibold text-[#6D28D9] hover:underline">Terms of Service</a>{" "}and{" "}
+                    <a href="/data-deletion" target="_blank" className="font-semibold text-[#6D28D9] hover:underline">Data Deletion</a> pages.
+                  </p>
+                  <p className="mt-3 text-[12px] text-slate-400">Last updated: October 2026.</p>
+                </div>
+
+                <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 transition hover:border-[#E92F8E]/40">
+                  <input
+                    type="checkbox"
+                    checked={agreed}
+                    onChange={(e) => setAgreed(e.target.checked)}
+                    className="mt-0.5 h-[18px] w-[18px] flex-shrink-0 cursor-pointer accent-[#6D28D9]"
+                  />
+                  <span className="text-[13px] leading-snug text-slate-700">
+                    I have read and agree to the <span className="font-semibold text-[#1A1033]">Terms of Service</span>, <span className="font-semibold text-[#1A1033]">Privacy Policy</span> and <span className="font-semibold text-[#1A1033]">Data Policy</span>.
+                  </span>
+                </label>
+
+                {error && <p className="mt-3 text-[13px] font-medium text-[#DC2626]">{error}</p>}
+
+                <div className="mt-5 flex items-center gap-3">
+                  <button
+                    onClick={() => { setStep("register"); setError(""); }}
+                    className="rounded-xl border border-slate-200 bg-white px-4 py-3.5 text-[14px] font-semibold text-slate-600 transition hover:bg-slate-50"
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={agreeAndFinish}
+                    disabled={!agreed || loading}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl py-3.5 text-[15px] font-bold text-white transition enabled:hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50"
+                    style={{ background: "linear-gradient(90deg,#4A1E91,#E92F8E)" }}
+                  >
+                    {loading ? <Spinner /> : "Agree & open tools"}
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
