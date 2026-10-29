@@ -13,6 +13,10 @@ const OTP_LENGTH = 4; // MSG91 template sends a 4-digit OTP
 const RESEND_SECONDS = 30;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
+const INDUSTRIES = ["Manufacturing", "Trading / Distribution", "Retail", "Auto Dealership", "Construction & Infra", "Services", "IT / Software", "Healthcare", "Education", "Other"];
+const SIZES = ["1–10", "11–50", "51–200", "201–500", "500+"];
+const ROLES = ["Owner / Founder", "Finance / Accounts", "HR", "Operations", "Other"];
+
 const perks = [
   "Cash Stuck — money trapped in DSO",
   "Profit Leakage — hidden margin loss",
@@ -81,7 +85,7 @@ function LockedPreview({ onUnlock }: { onUnlock: () => void }) {
 
 /* ── the registration modal ── */
 function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: () => void }) {
-  const [step, setStep] = useState<"phone" | "otp">("phone");
+  const [step, setStep] = useState<"phone" | "otp" | "register">("phone");
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
@@ -89,6 +93,17 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
   const [error, setError] = useState("");
   const [resend, setResend] = useState(0);
   const boxes = useRef<(HTMLInputElement | null)[]>([]);
+
+  // registration (after OTP verified)
+  const [company, setCompany] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [size, setSize] = useState("");
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [note, setNote] = useState("");
+
+  const inputCls = "mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[15px] text-[#1A1033] outline-none transition focus:border-[#E92F8E] focus:ring-2 focus:ring-[#E92F8E]/15";
+  const labelCls = "text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500";
 
   useEffect(() => {
     if (resend <= 0) return;
@@ -133,9 +148,34 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Invalid OTP.");
-      onVerified();
+      // OTP verified → collect business details before unlocking
+      setStep("register");
+      setError("");
+      setLoading(false);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Invalid or expired OTP.");
+      setLoading(false);
+    }
+  }
+
+  async function submitRegistration() {
+    setError("");
+    if (!company.trim()) return setError("Please enter your company name.");
+    if (!industry) return setError("Please select your company type.");
+    if (!size) return setError("Please select your company size.");
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setError("Enter a valid work email, or leave it blank.");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, mobile, email, company, industry, size, role, note }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || "Could not save your details.");
+      onVerified();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Something went wrong.");
       setLoading(false);
     }
   }
@@ -205,7 +245,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
           </button>
 
           <AnimatePresence mode="wait">
-            {step === "phone" ? (
+            {step === "phone" && (
               <motion.div key="phone" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.25 }}>
                 <h3 className="text-[22px] font-extrabold tracking-tight text-[#1A1033]">Get free access</h3>
                 <p className="mt-1.5 text-[14px] text-slate-500">We&apos;ll send a one-time code to verify your mobile.</p>
@@ -250,7 +290,9 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                   By continuing you agree to receive a one-time verification SMS. The tools are free.
                 </p>
               </motion.div>
-            ) : (
+            )}
+
+            {step === "otp" && (
               <motion.div key="otp" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.25 }}>
                 <h3 className="text-[22px] font-extrabold tracking-tight text-[#1A1033]">Enter the code</h3>
                 <p className="mt-1.5 text-[14px] text-slate-500">
@@ -281,7 +323,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[15px] font-bold text-white transition hover:brightness-105 disabled:opacity-60"
                   style={{ background: "linear-gradient(90deg,#4A1E91,#E92F8E)" }}
                 >
-                  {loading ? <Spinner /> : "Verify & unlock"}
+                  {loading ? <Spinner /> : "Verify & continue"}
                 </button>
 
                 <div className="mt-4 text-center text-[13px] text-slate-500">
@@ -291,6 +333,70 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                     <button onClick={sendOtp} disabled={loading} className="font-semibold text-[#E92F8E] hover:underline disabled:opacity-60">Resend OTP</button>
                   )}
                 </div>
+              </motion.div>
+            )}
+
+            {step === "register" && (
+              <motion.div key="register" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.25 }}>
+                <h3 className="text-[22px] font-extrabold tracking-tight text-[#1A1033]">Tell us about your business</h3>
+                <p className="mt-1.5 flex items-center gap-1.5 text-[14px] text-slate-500">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                  Mobile verified — a few details and the tools are yours.
+                </p>
+
+                <div className="mt-5 space-y-3.5">
+                  <label className="block">
+                    <span className={labelCls}>Company name</span>
+                    <input value={company} onChange={(e) => { setCompany(e.target.value); setError(""); }} placeholder="Acme Industries Pvt Ltd" className={inputCls} />
+                  </label>
+
+                  <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className={labelCls}>Company type</span>
+                      <select value={industry} onChange={(e) => { setIndustry(e.target.value); setError(""); }} className={inputCls}>
+                        <option value="" disabled>Select…</option>
+                        {INDUSTRIES.map((x) => <option key={x} value={x}>{x}</option>)}
+                      </select>
+                    </label>
+                    <label className="block">
+                      <span className={labelCls}>Company size</span>
+                      <select value={size} onChange={(e) => { setSize(e.target.value); setError(""); }} className={inputCls}>
+                        <option value="" disabled>Select…</option>
+                        {SIZES.map((x) => <option key={x} value={x}>{x} employees</option>)}
+                      </select>
+                    </label>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className={labelCls}>Your role <span className="normal-case tracking-normal text-slate-400">(optional)</span></span>
+                      <select value={role} onChange={(e) => setRole(e.target.value)} className={inputCls}>
+                        <option value="">Select…</option>
+                        {ROLES.map((x) => <option key={x} value={x}>{x}</option>)}
+                      </select>
+                    </label>
+                    <label className="block">
+                      <span className={labelCls}>Work email <span className="normal-case tracking-normal text-slate-400">(optional)</span></span>
+                      <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError(""); }} placeholder="you@company.com" className={inputCls} />
+                    </label>
+                  </div>
+
+                  <label className="block">
+                    <span className={labelCls}>What are you looking to improve? <span className="normal-case tracking-normal text-slate-400">(optional)</span></span>
+                    <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} placeholder="e.g. cut our DSO, fix payroll errors, GST compliance…" className={`${inputCls} resize-none`} />
+                  </label>
+                </div>
+
+                {error && <p className="mt-3 text-[13px] font-medium text-[#DC2626]">{error}</p>}
+
+                <button
+                  onClick={submitRegistration}
+                  disabled={loading}
+                  className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[15px] font-bold text-white transition hover:brightness-105 disabled:opacity-60"
+                  style={{ background: "linear-gradient(90deg,#4A1E91,#E92F8E)" }}
+                >
+                  {loading ? <Spinner /> : "Get my free access"}
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
