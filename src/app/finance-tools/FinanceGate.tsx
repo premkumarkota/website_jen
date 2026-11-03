@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 /* ─────────────────────────────────────────
@@ -48,9 +49,15 @@ export default function FinanceGate({ children }: { children: React.ReactNode })
   return (
     <>
       <LockedPreview onUnlock={() => setDismissed(false)} />
-      <AnimatePresence>
-        {!dismissed && <OtpModal onClose={() => setDismissed(true)} onVerified={unlock} />}
-      </AnimatePresence>
+      {/* Portal the modal to <body> so it escapes the SmoothScroll/GSAP wrapper's
+          stacking context — otherwise the fixed navbar (z-50) paints over it. */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {!dismissed && <OtpModal onClose={() => setDismissed(true)} onVerified={unlock} />}
+          </AnimatePresence>,
+          document.body,
+        )}
     </>
   );
 }
@@ -221,7 +228,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
 
   return (
     <motion.div
-      className="fixed inset-0 z-[90] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

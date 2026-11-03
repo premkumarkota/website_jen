@@ -76,31 +76,80 @@ const solutions = [
   },
 ];
 
-type MenuItem = { label: string; href: string; desc: string };
+type MenuItem = {
+  label: string;
+  href: string;
+  desc: string;
+  icon?: React.ReactNode;
+  tint?: string;   // icon tile background
+  accent?: string; // icon + badge colour
+  badge?: string;
+  minor?: boolean; // rendered compact in a "legal" sub-group
+};
+type MenuCta = { label: string; sub?: string; href: string };
+
+const iStroke = { fill: "none", stroke: "currentColor", strokeWidth: 1.9, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
 // ── 5 top-level groups: Solutions (mega) · Why JenVeda · Tools · Resources · Company ──
 const toolLinks: MenuItem[] = [
-  { label: "DSO Calculator", href: "/dso-calculator", desc: "Find the cash trapped in your receivables." },
-  { label: "Finance Tools", href: "/finance-tools", desc: "5 free calculators for cash, margin & stock." },
+  {
+    label: "DSO Calculator", href: "/dso-calculator", desc: "Find the cash trapped in your receivables.",
+    tint: "#EEF2FF", accent: "#4F46E5", badge: "Free",
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" {...iStroke}><rect x="4" y="2.5" width="16" height="19" rx="2.5" /><path d="M8 6h8M8 10h3M14 10h2M8 14h3M14 14h2M8 18h3" /></svg>,
+  },
+  {
+    label: "Finance Tools", href: "/finance-tools", desc: "5 free calculators for cash, margin & stock.",
+    tint: "#FDF2F8", accent: "#DB2777", badge: "5 tools",
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" {...iStroke}><path d="M3 17l5-5 3 3 4-6 6 6" /><path d="M3 21h18" /></svg>,
+  },
 ];
 const resourceLinks: MenuItem[] = [
-  { label: "Videos", href: "/videos", desc: "Product walkthroughs in high definition." },
-  { label: "Serving Industries", href: "/industries", desc: "The businesses JenVeda is built for." },
+  {
+    label: "Videos", href: "/videos", desc: "Product walkthroughs in high definition.",
+    tint: "#F5F3FF", accent: "#7C3AED",
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" {...iStroke}><rect x="2.5" y="5" width="19" height="14" rx="3" /><path d="M10 9.5l4.5 2.5L10 14.5z" fill="currentColor" stroke="none" /></svg>,
+  },
+  {
+    label: "Serving Industries", href: "/industries", desc: "The businesses JenVeda is built for.",
+    tint: "#ECFEFF", accent: "#0891B2",
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" {...iStroke}><path d="M3 21V9l7-4v4l8-4v16z" /><path d="M7 21v-4M14 13v0M17 13v0M14 17v0M17 17v0" /></svg>,
+  },
 ];
 const companyLinks: MenuItem[] = [
-  { label: "About", href: "/about", desc: "Our story, mission and team." },
-  { label: "Contact", href: "/contact", desc: "Talk to sales or support." },
-  { label: "Privacy Policy", href: "/privacy", desc: "How we collect & protect your data." },
-  { label: "Terms of Service", href: "/terms", desc: "The rules for using JenVeda." },
-  { label: "Data Deletion", href: "/data-deletion", desc: "Request removal of your data." },
+  {
+    label: "About", href: "/about", desc: "Our story, mission and team.",
+    tint: "#F5F3FF", accent: "#7C3AED",
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" {...iStroke}><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8v0" /></svg>,
+  },
+  {
+    label: "Contact", href: "/contact", desc: "Talk to sales or support.",
+    tint: "#FFF1F2", accent: "#E11D48",
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" {...iStroke}><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z" /></svg>,
+  },
+  {
+    label: "Privacy Policy", href: "/privacy", desc: "", minor: true,
+    icon: <svg width="14" height="14" viewBox="0 0 24 24" {...iStroke}><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" /></svg>,
+  },
+  {
+    label: "Terms of Service", href: "/terms", desc: "", minor: true,
+    icon: <svg width="14" height="14" viewBox="0 0 24 24" {...iStroke}><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5M9 13h6M9 17h6" /></svg>,
+  },
+  {
+    label: "Data Deletion", href: "/data-deletion", desc: "", minor: true,
+    icon: <svg width="14" height="14" viewBox="0 0 24 24" {...iStroke}><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13h10l1-13" /></svg>,
+  },
 ];
 
-/* ── reusable simple dropdown (Tools / Resources / Company) ── */
-function NavDropdown({ label, items, align = "left" }: { label: string; items: MenuItem[]; align?: "left" | "right" }) {
+/* ── reusable rich dropdown (Tools / Resources / Company) ── */
+function NavDropdown({ label, items, align = "left", cta, width = 352 }: {
+  label: string; items: MenuItem[]; align?: "left" | "right"; cta?: MenuCta; width?: number;
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLLIElement>(null);
   const pathname = usePathname();
   const active = items.some((i) => i.href === pathname);
+  const major = items.filter((i) => !i.minor);
+  const minor = items.filter((i) => i.minor);
 
   useEffect(() => {
     if (!open) return;
@@ -136,31 +185,73 @@ function NavDropdown({ label, items, align = "left" }: { label: string; items: M
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.97 }}
             transition={{ duration: 0.22, ease }}
-            className={`absolute top-full mt-3 w-[320px] overflow-hidden rounded-2xl bg-white ${align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left"}`}
-            style={{ border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 24px 60px rgba(0,0,0,0.14), 0 4px 14px rgba(0,0,0,0.06)" }}
+            className={`absolute top-full mt-3 overflow-hidden rounded-2xl bg-white ${align === "right" ? "right-0 origin-top-right" : "left-0 origin-top-left"}`}
+            style={{ width, border: "1px solid rgba(0,0,0,0.08)", boxShadow: "0 24px 60px rgba(0,0,0,0.14), 0 4px 14px rgba(0,0,0,0.06)" }}
           >
-            <div className="border-b border-slate-100 px-5 py-3">
+            <div className="px-5 pt-4 pb-1.5">
               <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400">{label}</span>
             </div>
-            <div className="p-2">
-              {items.map((l, i) => {
+            <div className="p-2 pt-0.5">
+              {major.map((l, i) => {
                 const isActive = pathname === l.href;
                 return (
                   <motion.div key={l.href} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.04 + i * 0.05, ease }}>
-                    <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-slate-50">
-                      <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full transition-colors" style={{ background: isActive ? "#6D28D9" : "#CBD5E1" }} />
+                    <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-center gap-3 rounded-xl p-2.5 transition-colors hover:bg-slate-50">
+                      <span
+                        className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg transition-transform duration-200 group-hover:scale-105"
+                        style={{ background: l.tint ?? "#F1F5F9", color: l.accent ?? "#6D28D9" }}
+                      >
+                        {l.icon}
+                      </span>
                       <div className="min-w-0 flex-1">
-                        <p className="text-[13.5px] font-bold transition-colors group-hover:text-violet-700" style={{ color: isActive ? "#6D28D9" : "#1e293b" }}>{l.label}</p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-[13.5px] font-bold transition-colors group-hover:text-violet-700" style={{ color: isActive ? "#6D28D9" : "#1e293b" }}>{l.label}</p>
+                          {l.badge && (
+                            <span className="rounded-full px-1.5 py-[1px] text-[8.5px] font-bold uppercase tracking-wide" style={{ background: l.tint, color: l.accent }}>{l.badge}</span>
+                          )}
+                        </div>
                         <p className="mt-0.5 text-[11.5px] leading-snug text-slate-500">{l.desc}</p>
                       </div>
-                      <svg className="ml-auto mt-1 flex-shrink-0 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M3 7h8M7.5 4l3 3-3 3" stroke="#6D28D9" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg className="ml-1 flex-shrink-0 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M3 7h8M7.5 4l3 3-3 3" stroke={l.accent ?? "#6D28D9"} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </Link>
                   </motion.div>
                 );
               })}
+
+              {minor.length > 0 && (
+                <div className="mt-1 border-t border-slate-100 px-1 pt-2">
+                  <p className="px-2 pb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-slate-300">Legal</p>
+                  {minor.map((l) => {
+                    const isActive = pathname === l.href;
+                    return (
+                      <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="group flex items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors hover:bg-slate-50">
+                        <span className="text-slate-400 transition-colors group-hover:text-violet-600" style={isActive ? { color: "#6D28D9" } : undefined}>{l.icon}</span>
+                        <span className="text-[12px] font-semibold transition-colors group-hover:text-violet-700" style={{ color: isActive ? "#6D28D9" : "#475569" }}>{l.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
             </div>
+
+            {cta && (
+              <Link
+                href={cta.href}
+                onClick={() => setOpen(false)}
+                className="group flex items-center justify-between gap-3 border-t border-slate-100 px-4 py-3 transition-colors"
+                style={{ background: "linear-gradient(135deg,#F5F3FF 0%,#FDF2F8 100%)" }}
+              >
+                <div className="min-w-0">
+                  <p className="text-[12.5px] font-bold text-violet-700">{cta.label}</p>
+                  {cta.sub && <p className="mt-0.5 text-[10.5px] leading-snug text-slate-500">{cta.sub}</p>}
+                </div>
+                <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-white text-violet-600 shadow-sm transition-transform duration-200 group-hover:translate-x-0.5">
+                  <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 4l3 3-3 3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </span>
+              </Link>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -279,9 +370,9 @@ export default function Navbar() {
             </li>
 
             {/* 3 · Tools · 4 · Resources · 5 · Company */}
-            <NavDropdown label="Tools" items={toolLinks} />
-            <NavDropdown label="Resources" items={resourceLinks} />
-            <NavDropdown label="Company" items={companyLinks} align="right" />
+            <NavDropdown label="Tools" items={toolLinks} width={368} cta={{ label: "Explore all free tools", sub: "5 live calculators · no sign-up", href: "/finance-tools" }} />
+            <NavDropdown label="Resources" items={resourceLinks} width={352} cta={{ label: "Watch JenVeda in action", sub: "Short product walkthroughs", href: "/videos" }} />
+            <NavDropdown label="Company" items={companyLinks} align="right" width={312} />
           </ul>
 
           {/* Right CTAs */}

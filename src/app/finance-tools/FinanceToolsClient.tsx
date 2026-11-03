@@ -142,14 +142,21 @@ function ToolPanel({ tool }: { tool: ToolDef }) {
           </div>
         </div>
 
-        <div className="rounded-[20px] bg-[#1A1033] p-5 text-white">
-          <div className="text-[11px] font-bold uppercase tracking-widest text-white/55">Jenveda Fix</div>
-          <div className="mt-3 space-y-2.5 text-[12.5px] leading-snug">
+        <div className="rounded-[20px] border border-[#E7DEFB] bg-gradient-to-br from-[#FBF7FF] to-[#F2FBF5] p-5">
+          <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#6D28D9]">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-[#6D28D9] text-[10px] text-white">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+            </span>
+            Jenveda Fix
+          </div>
+          <div className="mt-3.5 space-y-2.5 text-[12.5px] leading-snug">
             {result.fixes.map((f) => (
-              <div key={f.k} className="flex gap-2">
-                <span className="mt-[2px] text-[#E92F8E]">●</span>
+              <div key={f.k} className="flex gap-2.5">
+                <span className="mt-[1px] grid h-[18px] w-[18px] flex-shrink-0 place-items-center rounded-full bg-[#DCFCE7] text-[#059669]">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                </span>
                 <span>
-                  <b className="text-white">{f.k}:</b> <span className="text-white/75">{f.v}</span>
+                  <b className="text-[#1A1033]">{f.k}:</b> <span className="text-[#5F5F76]">{f.v}</span>
                 </span>
               </div>
             ))}
@@ -259,31 +266,26 @@ export default function FinanceToolsClient() {
                 onClick={() => setActiveId(t.id)}
                 className={`rounded-[16px] border p-3.5 text-left transition-all ${
                   on
-                    ? "border-transparent text-white shadow-[0_12px_28px_rgba(74,30,145,0.22)]"
+                    ? "border-[#6D28D9] bg-[#F7F2FE] shadow-[0_10px_24px_rgba(109,40,217,0.14)]"
                     : "border-[#F1ECFA] bg-white hover:border-[#E92F8E]/30 hover:shadow-sm"
                 }`}
-                style={on ? { background: BRAND } : undefined}
               >
                 <div className="flex items-center justify-between">
                   <span
-                    className={`grid h-7 w-7 place-items-center rounded-full text-[13px] font-bold ${
-                      on ? "bg-white/20 text-white" : "border border-[#F1ECFA] bg-[#FBF8FF] text-[#4A1E91]"
+                    className={`grid h-7 w-7 place-items-center rounded-full text-[13px] font-bold transition-colors ${
+                      on ? "bg-[#6D28D9] text-white" : "border border-[#F1ECFA] bg-[#FBF8FF] text-[#4A1E91]"
                     }`}
                   >
                     {t.icon}
                   </span>
-                  <span
-                    className={`rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] ${
-                      on ? "bg-white/20 text-white" : "border border-[#FFD8B8] bg-[#FFF1E6] text-[#9A4A00]"
-                    }`}
-                  >
+                  <span className="rounded-full border border-[#FFD8B8] bg-[#FFF1E6] px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-[#9A4A00]">
                     {t.pain}
                   </span>
                 </div>
-                <div className={`mt-3 text-[13px] font-bold leading-tight tracking-tight ${on ? "text-white" : "text-[#1A1033]"}`}>
+                <div className="mt-3 text-[13px] font-bold leading-tight tracking-tight text-[#1A1033]">
                   {t.short}
                 </div>
-                <div className={`text-[11px] ${on ? "text-white/70" : "text-[#8B8BA3]"}`}>{t.title}</div>
+                <div className={`text-[11px] ${on ? "text-[#6D28D9]" : "text-[#8B8BA3]"}`}>{t.title}</div>
               </button>
             );
           })}
