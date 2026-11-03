@@ -9,7 +9,8 @@ import { AnimatePresence, motion } from "framer-motion";
 ───────────────────────────────────────── */
 
 const ACCESS_KEY = "jv_ft_access";
-const OTP_LENGTH = 4; // MSG91 template sends a 4-digit OTP
+const SMS_OTP_LEN = 4; // MSG91 template sends a 4-digit OTP
+const EMAIL_OTP_LEN = 6; // email code (see api/otp/emailOtp.ts)
 const RESEND_SECONDS = 30;
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -86,10 +87,12 @@ function LockedPreview({ onUnlock }: { onUnlock: () => void }) {
 /* ── the registration modal ── */
 function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: () => void }) {
   const [step, setStep] = useState<"phone" | "otp" | "register" | "consent">("phone");
+  const [channel, setChannel] = useState<"sms" | "email">("sms");
+  const [otpLen, setOtpLen] = useState(SMS_OTP_LEN);
   const [agreed, setAgreed] = useState(false);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
-  const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
+  const [otp, setOtp] = useState<string[]>(Array(SMS_OTP_LEN).fill(""));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [resend, setResend] = useState(0);
@@ -113,23 +116,27 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
   }, [resend]);
 
   const validMobile = /^\d{10}$/.test(mobile);
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   async function sendOtp() {
     setError("");
     if (!name.trim()) return setError("Please enter your name.");
-    if (!validMobile) return setError("Enter a valid 10-digit mobile number.");
+    if (channel === "sms" && !validMobile) return setError("Enter a valid 10-digit mobile number.");
+    if (channel === "email" && !validEmail) return setError("Enter a valid email address.");
+    const len = channel === "email" ? EMAIL_OTP_LEN : SMS_OTP_LEN;
     setLoading(true);
     try {
       const res = await fetch("/api/otp/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile }),
+        body: JSON.stringify({ channel, mobile, email }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || "Could not send OTP.");
+      if (!res.ok) throw new Error(data?.error || "Could not send the code.");
+      setOtpLen(len);
       setStep("otp");
       setResend(RESEND_SECONDS);
-      setOtp(Array(OTP_LENGTH).fill(""));
+      setOtp(Array(len).fill(""));
       setTimeout(() => boxes.current[0]?.focus(), 60);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong.");
@@ -145,7 +152,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
       const res = await fetch("/api/otp/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile, otp: code, name }),
+        body: JSON.stringify({ channel, mobile, email, otp: code }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Invalid OTP.");
@@ -193,9 +200,9 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
     next[i] = d;
     setOtp(next);
     setError("");
-    if (d && i < OTP_LENGTH - 1) boxes.current[i + 1]?.focus();
+    if (d && i < otpLen - 1) boxes.current[i + 1]?.focus();
     const joined = next.join("");
-    if (joined.length === OTP_LENGTH && !next.includes("")) verifyOtp(joined);
+    if (joined.length === otpLen && !next.includes("")) verifyOtp(joined);
   }
 
   function onKey(i: number, e: React.KeyboardEvent<HTMLInputElement>) {
@@ -203,12 +210,12 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
   }
 
   function onPaste(e: React.ClipboardEvent) {
-    const text = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, OTP_LENGTH);
+    const text = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, otpLen);
     if (!text) return;
     e.preventDefault();
-    const next = Array(OTP_LENGTH).fill("").map((_, i) => text[i] ?? "");
+    const next = Array(otpLen).fill("").map((_, i) => text[i] ?? "");
     setOtp(next);
-    if (text.length === OTP_LENGTH) verifyOtp(text);
+    if (text.length === otpLen) verifyOtp(text);
     else boxes.current[text.length]?.focus();
   }
 
@@ -255,7 +262,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
             {step === "phone" && (
               <motion.div key="phone" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.25 }}>
                 <h3 className="text-[22px] font-extrabold tracking-tight text-[#1A1033]">Get free access</h3>
-                <p className="mt-1.5 text-[14px] text-slate-500">We&apos;ll send a one-time code to verify your mobile.</p>
+                <p className="mt-1.5 text-[14px] text-slate-500">We&apos;ll send a one-time code to verify you.</p>
 
                 <label className="mt-6 block">
                   <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">Full name</span>
@@ -267,21 +274,57 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                   />
                 </label>
 
-                <label className="mt-4 block">
-                  <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">Mobile number</span>
-                  <div className="mt-1.5 flex items-center rounded-xl border border-slate-200 bg-white px-3 transition focus-within:border-[#E92F8E] focus-within:ring-2 focus-within:ring-[#E92F8E]/15">
-                    <span className="pr-3 text-[15px] font-semibold text-slate-500">+91</span>
-                    <span className="h-5 w-px bg-slate-200" />
-                    <input
-                      value={mobile}
-                      onChange={(e) => { setMobile(e.target.value.replace(/\D/g, "").slice(0, 10)); setError(""); }}
-                      onKeyDown={(e) => { if (e.key === "Enter") sendOtp(); }}
-                      inputMode="numeric"
-                      placeholder="98765 43210"
-                      className="w-full bg-transparent px-3 py-3 text-[15px] tracking-wide outline-none"
-                    />
+                {/* channel chooser: SMS or Email */}
+                <div className="mt-4">
+                  <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">Verify with</span>
+                  <div className="mt-1.5 grid grid-cols-2 gap-2 rounded-xl bg-slate-100 p-1">
+                    {(["sms", "email"] as const).map((c) => (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => { setChannel(c); setError(""); }}
+                        className={`flex items-center justify-center gap-1.5 rounded-lg py-2.5 text-[14px] font-semibold transition ${channel === c ? "bg-white text-[#1A1033] shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+                      >
+                        {c === "sms" ? (
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+                        ) : (
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 5L2 7" /></svg>
+                        )}
+                        {c === "sms" ? "SMS" : "Email"}
+                      </button>
+                    ))}
                   </div>
-                </label>
+                </div>
+
+                {channel === "sms" ? (
+                  <label className="mt-4 block">
+                    <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">Mobile number</span>
+                    <div className="mt-1.5 flex items-center rounded-xl border border-slate-200 bg-white px-3 transition focus-within:border-[#E92F8E] focus-within:ring-2 focus-within:ring-[#E92F8E]/15">
+                      <span className="pr-3 text-[15px] font-semibold text-slate-500">+91</span>
+                      <span className="h-5 w-px bg-slate-200" />
+                      <input
+                        value={mobile}
+                        onChange={(e) => { setMobile(e.target.value.replace(/\D/g, "").slice(0, 10)); setError(""); }}
+                        onKeyDown={(e) => { if (e.key === "Enter") sendOtp(); }}
+                        inputMode="numeric"
+                        placeholder="98765 43210"
+                        className="w-full bg-transparent px-3 py-3 text-[15px] tracking-wide outline-none"
+                      />
+                    </div>
+                  </label>
+                ) : (
+                  <label className="mt-4 block">
+                    <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-slate-500">Email address</span>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => { setEmail(e.target.value); setError(""); }}
+                      onKeyDown={(e) => { if (e.key === "Enter") sendOtp(); }}
+                      placeholder="you@company.com"
+                      className="mt-1.5 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-[15px] outline-none transition focus:border-[#E92F8E] focus:ring-2 focus:ring-[#E92F8E]/15"
+                    />
+                  </label>
+                )}
 
                 {error && <p className="mt-3 text-[13px] font-medium text-[#DC2626]">{error}</p>}
 
@@ -291,10 +334,10 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[15px] font-bold text-white transition hover:brightness-105 disabled:opacity-60"
                   style={{ background: "linear-gradient(90deg,#4A1E91,#E92F8E)" }}
                 >
-                  {loading ? <Spinner /> : "Send OTP"}
+                  {loading ? <Spinner /> : channel === "sms" ? "Send OTP" : "Email me a code"}
                 </button>
                 <p className="mt-3 text-center text-[11.5px] leading-snug text-slate-400">
-                  By continuing you agree to receive a one-time verification SMS. The tools are free.
+                  By continuing you agree to receive a one-time verification {channel === "sms" ? "SMS" : "email"}. The tools are free.
                 </p>
               </motion.div>
             )}
@@ -303,7 +346,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
               <motion.div key="otp" initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -8 }} transition={{ duration: 0.25 }}>
                 <h3 className="text-[22px] font-extrabold tracking-tight text-[#1A1033]">Enter the code</h3>
                 <p className="mt-1.5 text-[14px] text-slate-500">
-                  Sent to <span className="font-semibold text-slate-700">+91 {mobile}</span>{" "}
+                  Sent to <span className="font-semibold text-slate-700">{channel === "sms" ? `+91 ${mobile}` : email}</span>{" "}
                   <button onClick={() => { setStep("phone"); setError(""); }} className="font-semibold text-[#E92F8E] hover:underline">Change</button>
                 </p>
 
@@ -417,7 +460,7 @@ function OtpModal({ onClose, onVerified }: { onClose: () => void; onVerified: ()
                   <p className="mt-1">JenVeda&apos;s Finance Tools are provided free for your own evaluation. The calculators run in your browser and are for guidance only — they are estimates, not financial, tax or legal advice.</p>
 
                   <p className="mt-3 font-bold text-[#1A1033]">2. Information we collect</p>
-                  <p className="mt-1">To give you access we collect your name and mobile number (verified by a one-time SMS code), and the business details you provide — company name, type, size, role, work email and your note.</p>
+                  <p className="mt-1">To give you access we collect your name and contact (mobile or email, verified by a one-time code), and the business details you provide — company name, type, size, role, work email and your note.</p>
 
                   <p className="mt-3 font-bold text-[#1A1033]">3. How we use it</p>
                   <p className="mt-1">We use these details to give you access to the tools and to contact you about JenVeda — including sending a detailed finance audit and relevant product information. We don&apos;t sell your data.</p>
