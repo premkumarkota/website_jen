@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   FINANCE_TOOLS,
   whatsappToolUrl,
@@ -134,49 +134,37 @@ function BarChart({ bars, unit }: { bars: { name: string; value: number; highlig
   );
 }
 
-/** Indian-grouped number for the editable field (50,00,000 / 12.5 / 1.2). */
-const fmtNum = (n: number) => n.toLocaleString("en-IN", { maximumFractionDigits: 3 });
-
 function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; onChange: (v: number) => void }) {
-  // Local text so the user can clear & type freely; re-synced whenever the value changes (e.g. via the slider).
-  const [text, setText] = useState(() => fmtNum(value));
-  useEffect(() => setText(fmtNum(value)), [value]);
+  // The field shows the label as its placeholder (not the count). Typing a number
+  // sets the value; the live value is shown bold below the slider. Field clears back
+  // to the label placeholder after commit so the count never lives inside the box.
+  const [text, setText] = useState("");
 
   const commit = (raw: string) => {
     const cleaned = raw.replace(/,/g, "").trim();
-    if (cleaned === "") {
-      onChange(def.min);
-      setText(fmtNum(def.min));
-      return;
-    }
+    setText(""); // always fall back to the label placeholder
+    if (cleaned === "") return;
     const n = Number(cleaned);
-    if (!Number.isFinite(n)) {
-      setText(fmtNum(value)); // reject junk → revert
-      return;
-    }
-    const clamped = Math.min(def.max, Math.max(def.min, n));
-    onChange(clamped);
-    setText(fmtNum(clamped));
+    if (!Number.isFinite(n)) return;
+    onChange(Math.min(def.max, Math.max(def.min, n)));
   };
 
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <span className="text-[12.5px] font-medium text-[#1A1033]">{def.label}</span>
-        <input
-          type="text"
-          inputMode="decimal"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          onFocus={(e) => e.currentTarget.select()}
-          onBlur={(e) => commit(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") e.currentTarget.blur();
-          }}
-          className="w-[108px] rounded-full border border-[#ECD9F7] bg-[#FBF5FF] px-3 py-1 text-right text-[12.5px] font-bold text-[#6D28D9] outline-none transition focus:border-[#E92F8E] focus:bg-white focus:ring-2 focus:ring-[#E92F8E]/20"
-          aria-label={`${def.label} value`}
-        />
-      </div>
+      <input
+        type="text"
+        inputMode="decimal"
+        value={text}
+        placeholder={def.label}
+        onChange={(e) => setText(e.target.value)}
+        onFocus={(e) => e.currentTarget.select()}
+        onBlur={(e) => commit(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") e.currentTarget.blur();
+        }}
+        className="mb-2.5 w-full rounded-[12px] border border-[#ECD9F7] bg-[#FBF5FF] px-4 py-2.5 text-[13px] font-semibold text-[#6D28D9] outline-none transition placeholder:font-medium placeholder:text-[#8B76B8] focus:border-[#E92F8E] focus:bg-white focus:ring-2 focus:ring-[#E92F8E]/20"
+        aria-label={def.label}
+      />
       <input
         type="range"
         min={def.min}
@@ -187,9 +175,9 @@ function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; 
         className="w-full accent-[#E92F8E]"
         aria-label={def.label}
       />
-      <div className="mt-1 flex justify-between text-[10px] font-medium text-[#B9B2CE]">
+      <div className="mt-1.5 flex items-center justify-between text-[10px] font-medium text-[#B9B2CE]">
         <span>{def.fmt(def.min)}</span>
-        <span className="font-bold text-[#6D28D9]">{def.fmt(value)}</span>
+        <span className="text-[12px] font-bold text-[#6D28D9]">{def.fmt(value)}</span>
         <span>{def.fmt(def.max)}</span>
       </div>
     </div>
