@@ -134,19 +134,37 @@ function BarChart({ bars, unit }: { bars: { name: string; value: number; highlig
   );
 }
 
+/** Indian-grouped number for the field after commit (50,00,000 / 12.5 / 1.2). */
+const fmtNum = (n: number) => n.toLocaleString("en-IN", { maximumFractionDigits: 3 });
+
 function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; onChange: (v: number) => void }) {
-  // The field shows the label as its placeholder (not the count). Typing a number
-  // sets the value; the live value is shown bold below the slider. Field clears back
-  // to the label placeholder after commit so the count never lives inside the box.
+  // Empty field shows the "Enter <label>" placeholder (no pre-filled count).
+  // Typing drives the slider live; on blur the box normalises to the committed number.
   const [text, setText] = useState("");
 
-  const commit = (raw: string) => {
+  const parse = (raw: string): number | null => {
     const cleaned = raw.replace(/,/g, "").trim();
-    setText(""); // always fall back to the label placeholder
-    if (cleaned === "") return;
+    if (cleaned === "") return null;
     const n = Number(cleaned);
-    if (!Number.isFinite(n)) return;
-    onChange(Math.min(def.max, Math.max(def.min, n)));
+    return Number.isFinite(n) ? n : null;
+  };
+  const clamp = (n: number) => Math.min(def.max, Math.max(def.min, n));
+
+  const onType = (raw: string) => {
+    setText(raw);
+    const n = parse(raw);
+    if (n !== null) onChange(clamp(n)); // live: moving the drag with every keystroke
+  };
+
+  const commit = (raw: string) => {
+    const n = parse(raw);
+    if (n === null) {
+      setText(""); // invalid/empty → fall back to the label placeholder
+      return;
+    }
+    const c = clamp(n);
+    onChange(c);
+    setText(fmtNum(c)); // keep the box in sync with the slider
   };
 
   return (
@@ -155,8 +173,8 @@ function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; 
         type="text"
         inputMode="decimal"
         value={text}
-        placeholder={def.label}
-        onChange={(e) => setText(e.target.value)}
+        placeholder={`Enter ${def.label}`}
+        onChange={(e) => onType(e.target.value)}
         onFocus={(e) => e.currentTarget.select()}
         onBlur={(e) => commit(e.target.value)}
         onKeyDown={(e) => {
