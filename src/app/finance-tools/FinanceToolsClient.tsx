@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FINANCE_TOOLS,
   whatsappToolUrl,
@@ -14,6 +14,50 @@ import { WHATSAPP_DISPLAY, formatInrCompact } from "@/lib/dso";
 const BRAND = "linear-gradient(90deg,#4A1E91 0%, #E92F8E 100%)";
 const GOOD = "linear-gradient(90deg,#4A1E91,#8B5CF6)";
 const BAD = "linear-gradient(90deg,#DC2626,#E92F8E)";
+
+/* ─── per-tool accent colors for the 5 selector cards ─────
+   All 5 carry a soft colored fill; the active one lifts into a stronger
+   tint + colored ring + top bar so it's clearly highlighted. Kept light
+   on purpose (no heavy dark cards). */
+type Accent = {
+  bar: string; // solid/gradient used for the icon badge + top strip
+  solid: string; // ring + active subtitle
+  softBg: string; // resting fill
+  softBorder: string; // resting border
+  activeBg: string; // active fill
+  shadow: string; // active shadow color
+  title: string; // active title
+  badgeBg: string;
+  badgeText: string;
+};
+const TOOL_ACCENTS: Record<string, Accent> = {
+  "cash-stuck": {
+    bar: "linear-gradient(135deg,#7C3AED,#6D28D9)", solid: "#6D28D9",
+    softBg: "#FAF7FF", softBorder: "#ECE3FB", activeBg: "linear-gradient(135deg,#F1E9FF,#FBF8FF)",
+    shadow: "rgba(109,40,217,0.22)", title: "#4A1E91", badgeBg: "#F0E7FF", badgeText: "#6D28D9",
+  },
+  "profit-leakage": {
+    bar: "linear-gradient(135deg,#F2529F,#DB2777)", solid: "#DB2777",
+    softBg: "#FFF6FB", softBorder: "#FBD9EC", activeBg: "linear-gradient(135deg,#FFE6F2,#FFF6FB)",
+    shadow: "rgba(233,47,142,0.22)", title: "#BE185D", badgeBg: "#FDE7F2", badgeText: "#DB2777",
+  },
+  "discount-audit": {
+    bar: "linear-gradient(135deg,#FB923C,#EA580C)", solid: "#EA580C",
+    softBg: "#FFF9F3", softBorder: "#FBE2CC", activeBg: "linear-gradient(135deg,#FFEEDD,#FFF9F3)",
+    shadow: "rgba(234,88,12,0.22)", title: "#C2410C", badgeBg: "#FDEBD8", badgeText: "#C2410C",
+  },
+  "tally-lag": {
+    bar: "linear-gradient(135deg,#22B8D9,#0891B2)", solid: "#0891B2",
+    softBg: "#F2FCFE", softBorder: "#CDEFF5", activeBg: "linear-gradient(135deg,#DBF5FB,#F2FCFE)",
+    shadow: "rgba(8,145,178,0.22)", title: "#0E7490", badgeBg: "#DBF4FA", badgeText: "#0E7490",
+  },
+  "working-capital": {
+    bar: "linear-gradient(135deg,#34D399,#059669)", solid: "#059669",
+    softBg: "#F2FDF8", softBorder: "#C8EEDC", activeBg: "linear-gradient(135deg,#D7F7E8,#F2FDF8)",
+    shadow: "rgba(5,150,105,0.22)", title: "#047857", badgeBg: "#D6F5E5", badgeText: "#047857",
+  },
+};
+const FALLBACK_ACCENT: Accent = TOOL_ACCENTS["cash-stuck"];
 
 const toneStyles: Record<ResultCard["tone"], { box: string; value: string; label: string }> = {
   neutral: { box: "bg-white border-[#F1ECFA]", value: "text-[#1A1033]", label: "text-[#9B8BC7]" },
@@ -90,14 +134,48 @@ function BarChart({ bars, unit }: { bars: { name: string; value: number; highlig
   );
 }
 
+/** Indian-grouped number for the editable field (50,00,000 / 12.5 / 1.2). */
+const fmtNum = (n: number) => n.toLocaleString("en-IN", { maximumFractionDigits: 3 });
+
 function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; onChange: (v: number) => void }) {
+  // Local text so the user can clear & type freely; re-synced whenever the value changes (e.g. via the slider).
+  const [text, setText] = useState(() => fmtNum(value));
+  useEffect(() => setText(fmtNum(value)), [value]);
+
+  const commit = (raw: string) => {
+    const cleaned = raw.replace(/,/g, "").trim();
+    if (cleaned === "") {
+      onChange(def.min);
+      setText(fmtNum(def.min));
+      return;
+    }
+    const n = Number(cleaned);
+    if (!Number.isFinite(n)) {
+      setText(fmtNum(value)); // reject junk → revert
+      return;
+    }
+    const clamped = Math.min(def.max, Math.max(def.min, n));
+    onChange(clamped);
+    setText(fmtNum(clamped));
+  };
+
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between gap-3">
         <span className="text-[12.5px] font-medium text-[#1A1033]">{def.label}</span>
-        <span className="rounded-full border border-[#ECD9F7] bg-[#FBF5FF] px-2.5 py-1 text-[12.5px] font-bold text-[#6D28D9]">
-          {def.fmt(value)}
-        </span>
+        <input
+          type="text"
+          inputMode="decimal"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onFocus={(e) => e.currentTarget.select()}
+          onBlur={(e) => commit(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") e.currentTarget.blur();
+          }}
+          className="w-[108px] rounded-full border border-[#ECD9F7] bg-[#FBF5FF] px-3 py-1 text-right text-[12.5px] font-bold text-[#6D28D9] outline-none transition focus:border-[#E92F8E] focus:bg-white focus:ring-2 focus:ring-[#E92F8E]/20"
+          aria-label={`${def.label} value`}
+        />
       </div>
       <input
         type="range"
@@ -109,6 +187,11 @@ function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; 
         className="w-full accent-[#E92F8E]"
         aria-label={def.label}
       />
+      <div className="mt-1 flex justify-between text-[10px] font-medium text-[#B9B2CE]">
+        <span>{def.fmt(def.min)}</span>
+        <span className="font-bold text-[#6D28D9]">{def.fmt(value)}</span>
+        <span>{def.fmt(def.max)}</span>
+      </div>
     </div>
   );
 }
@@ -260,32 +343,47 @@ export default function FinanceToolsClient() {
         <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {FINANCE_TOOLS.map((t) => {
             const on = t.id === active.id;
+            const a = TOOL_ACCENTS[t.id] ?? FALLBACK_ACCENT;
             return (
               <button
                 key={t.id}
                 onClick={() => setActiveId(t.id)}
-                className={`rounded-[16px] border p-3.5 text-left transition-all ${
-                  on
-                    ? "border-[#6D28D9] bg-[#F7F2FE] shadow-[0_10px_24px_rgba(109,40,217,0.14)]"
-                    : "border-[#F1ECFA] bg-white hover:border-[#E92F8E]/30 hover:shadow-sm"
-                }`}
+                className="group relative overflow-hidden rounded-[16px] border p-3.5 text-left transition-all duration-200 hover:-translate-y-[2px]"
+                style={{
+                  borderColor: on ? a.solid : a.softBorder,
+                  background: on ? a.activeBg : a.softBg,
+                  boxShadow: on ? `0 12px 26px ${a.shadow}` : "none",
+                  transform: on ? "translateY(-2px)" : undefined,
+                }}
               >
+                {/* top accent strip — only on the active card */}
+                <span
+                  className="absolute inset-x-0 top-0 h-[3px] transition-opacity"
+                  style={{ background: a.bar, opacity: on ? 1 : 0 }}
+                />
                 <div className="flex items-center justify-between">
                   <span
-                    className={`grid h-7 w-7 place-items-center rounded-full text-[13px] font-bold transition-colors ${
-                      on ? "bg-[#6D28D9] text-white" : "border border-[#F1ECFA] bg-[#FBF8FF] text-[#4A1E91]"
-                    }`}
+                    className="grid h-8 w-8 place-items-center rounded-full text-[14px] font-bold text-white shadow-sm"
+                    style={{ background: a.bar }}
                   >
                     {t.icon}
                   </span>
-                  <span className="rounded-full border border-[#FFD8B8] bg-[#FFF1E6] px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-[#9A4A00]">
+                  <span
+                    className="rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em]"
+                    style={{ background: a.badgeBg, color: a.badgeText }}
+                  >
                     {t.pain}
                   </span>
                 </div>
-                <div className="mt-3 text-[13px] font-bold leading-tight tracking-tight text-[#1A1033]">
+                <div
+                  className="mt-3 text-[13px] font-bold leading-tight tracking-tight"
+                  style={{ color: on ? a.title : "#1A1033" }}
+                >
                   {t.short}
                 </div>
-                <div className={`text-[11px] ${on ? "text-[#6D28D9]" : "text-[#8B8BA3]"}`}>{t.title}</div>
+                <div className="text-[11px]" style={{ color: on ? a.solid : "#8B8BA3" }}>
+                  {t.title}
+                </div>
               </button>
             );
           })}
