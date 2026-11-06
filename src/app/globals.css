@@ -248,3 +248,84 @@ h1, h2, h3, .font-heading {
   font-weight: revert-layer;
   letter-spacing: revert-layer;
 }
+
+/* ─── Finance Tools page (/finance-tools) ──────────── */
+.fin-tools { position: relative; }
+
+/* floating decorative glow blobs behind the hero + panel */
+.fin-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  animation: fin-float 16s ease-in-out infinite;
+}
+@keyframes fin-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(24px, -28px) scale(1.1); }
+}
+
+/* entrance rise */
+.fin-rise { animation: fin-rise 0.6s cubic-bezier(.16,1,.3,1) both; }
+@keyframes fin-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* live number update pop — replays whenever a keyed value changes */
+.fin-pop { animation: fin-pop 0.4s cubic-bezier(.16,1,.3,1); }
+@keyframes fin-pop { from { opacity: .35; transform: translateY(5px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* custom gradient-filled range slider */
+.fin-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+}
+.fin-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid #E92F8E;
+  box-shadow: 0 3px 10px rgba(233,47,142,.45), 0 0 0 6px rgba(233,47,142,.10);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.fin-range::-webkit-slider-thumb:hover { transform: scale(1.18); box-shadow: 0 4px 14px rgba(233,47,142,.55), 0 0 0 8px rgba(233,47,142,.14); }
+.fin-range::-moz-range-thumb {
+  height: 22px;
+  width: 22px;
+  border: 3px solid #E92F8E;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(233,47,142,.45);
+  cursor: pointer;
+}
+
+/* bar grow-in on mount / tool switch */
+.fin-bar-fill { animation: fin-grow 0.7s cubic-bezier(.16,1,.3,1) both; }
+@keyframes fin-grow { from { width: 0; } }
+
+/* CTA shine sweep */
+.fin-cta { position: relative; overflow: hidden; }
+.fin-cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-18deg);
+  animation: fin-shine 3.6s ease-in-out infinite;
+}
+@keyframes fin-shine { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .fin-blob, .fin-rise, .fin-pop, .fin-bar-fill { animation: none !important; }
+  .fin-cta::after { display: none; }
+}
