@@ -252,13 +252,13 @@ export default function PrivacyClient() {
                   >
                     <div className="grid gap-4 sm:grid-cols-2">
                       <a
-                        href="mailto:contact@jenveda.com"
+                        href="mailto:hr@jenveda.com"
                         className="flex items-center gap-3 text-[15px] font-semibold text-slate-700 transition-colors hover:text-violet-700"
                       >
                         <svg className="h-5 w-5 flex-shrink-0 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        contact@jenveda.com
+                        hr@jenveda.com
                       </a>
                       <a
                         href="tel:+919247977049"

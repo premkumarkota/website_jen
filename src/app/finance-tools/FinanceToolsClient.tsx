@@ -15,49 +15,11 @@ const BRAND = "linear-gradient(90deg,#4A1E91 0%, #E92F8E 100%)";
 const GOOD = "linear-gradient(90deg,#10B981,#34D399)";
 const BAD = "linear-gradient(90deg,#DC2626,#E92F8E)";
 
-/* ─── per-tool accent colors for the 5 selector cards ─────
-   All 5 carry a soft colored fill; the active one lifts into a stronger
-   tint + colored ring + top bar so it's clearly highlighted. Kept light
-   on purpose (no heavy dark cards). */
-type Accent = {
-  bar: string; // solid/gradient used for the icon badge + top strip
-  solid: string; // ring + active subtitle
-  softBg: string; // resting fill
-  softBorder: string; // resting border
-  activeBg: string; // active fill
-  shadow: string; // active shadow color
-  title: string; // active title
-  badgeBg: string;
-  badgeText: string;
-};
-const TOOL_ACCENTS: Record<string, Accent> = {
-  "cash-stuck": {
-    bar: "linear-gradient(135deg,#7C3AED,#6D28D9)", solid: "#6D28D9",
-    softBg: "#FAF7FF", softBorder: "#ECE3FB", activeBg: "linear-gradient(135deg,#F1E9FF,#FBF8FF)",
-    shadow: "rgba(109,40,217,0.22)", title: "#4A1E91", badgeBg: "#F0E7FF", badgeText: "#6D28D9",
-  },
-  "profit-leakage": {
-    bar: "linear-gradient(135deg,#F2529F,#DB2777)", solid: "#DB2777",
-    softBg: "#FFF6FB", softBorder: "#FBD9EC", activeBg: "linear-gradient(135deg,#FFE6F2,#FFF6FB)",
-    shadow: "rgba(233,47,142,0.22)", title: "#BE185D", badgeBg: "#FDE7F2", badgeText: "#DB2777",
-  },
-  "discount-audit": {
-    bar: "linear-gradient(135deg,#FB923C,#EA580C)", solid: "#EA580C",
-    softBg: "#FFF9F3", softBorder: "#FBE2CC", activeBg: "linear-gradient(135deg,#FFEEDD,#FFF9F3)",
-    shadow: "rgba(234,88,12,0.22)", title: "#C2410C", badgeBg: "#FDEBD8", badgeText: "#C2410C",
-  },
-  "tally-lag": {
-    bar: "linear-gradient(135deg,#22B8D9,#0891B2)", solid: "#0891B2",
-    softBg: "#F2FCFE", softBorder: "#CDEFF5", activeBg: "linear-gradient(135deg,#DBF5FB,#F2FCFE)",
-    shadow: "rgba(8,145,178,0.22)", title: "#0E7490", badgeBg: "#DBF4FA", badgeText: "#0E7490",
-  },
-  "working-capital": {
-    bar: "linear-gradient(135deg,#34D399,#059669)", solid: "#059669",
-    softBg: "#F2FDF8", softBorder: "#C8EEDC", activeBg: "linear-gradient(135deg,#D7F7E8,#F2FDF8)",
-    shadow: "rgba(5,150,105,0.22)", title: "#047857", badgeBg: "#D6F5E5", badgeText: "#047857",
-  },
-};
-const FALLBACK_ACCENT: Accent = TOOL_ACCENTS["cash-stuck"];
+/* ─── selector cards — ONE cohesive brand system ──────────
+   No per-tool rainbow. At rest every card is a clean neutral white
+   surface with a violet-tinted icon chip; the selected card lifts into
+   a single premium deep-violet gradient. Enterprise, restrained, on-brand. */
+const CARD_ACTIVE_BG = "linear-gradient(140deg,#3A1878 0%,#4A1E91 46%,#6D28D9 100%)";
 
 const toneStyles: Record<ResultCard["tone"], { box: string; value: string; label: string; dot: string }> = {
   neutral: { box: "bg-white border-[#ECE7F6]", value: "text-[#1A1033]", label: "text-[#9B8BC7]", dot: "#C4B5FD" },
@@ -185,15 +147,7 @@ function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; 
 
   return (
     <div>
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <label className="text-[12px] font-semibold text-[#5F5F76]">{def.label}</label>
-        <span
-          key={def.fmt(value)}
-          className="fin-pop rounded-full bg-[#F4ECFF] px-2.5 py-[3px] text-[12px] font-extrabold text-[#6D28D9]"
-        >
-          {def.fmt(value)}
-        </span>
-      </div>
+      <label className="mb-2 block text-[12px] font-semibold text-[#5F5F76]">{def.label}</label>
       <input
         type="text"
         inputMode="decimal"
@@ -219,8 +173,9 @@ function RangeSlider({ def, value, onChange }: { def: SliderDef; value: number; 
         style={{ background: trackFill }}
         aria-label={def.label}
       />
-      <div className="mt-1.5 flex items-center justify-between text-[10px] font-medium text-[#B9B2CE]">
+      <div className="mt-2 flex items-center justify-between text-[10px] font-medium text-[#B9B2CE]">
         <span>{def.fmt(def.min)}</span>
+        <span key={def.fmt(value)} className="fin-pop text-[12px] font-bold text-[#6D28D9]">{def.fmt(value)}</span>
         <span>{def.fmt(def.max)}</span>
       </div>
     </div>
@@ -238,10 +193,7 @@ function ToolPanel({ tool }: { tool: ToolDef }) {
       {/* LEFT — inputs + mapping */}
       <div className="space-y-5">
         <div className="rounded-[20px] border border-[#F1ECFA] bg-white p-5 shadow-[0_8px_30px_rgba(74,30,145,0.05)]">
-          <div className="mb-4 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#6D28D9]">
-            <span className="grid h-5 w-5 place-items-center rounded-md bg-[#F0E7FF]">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" /></svg>
-            </span>
+          <div className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-[#6D28D9]">
             Pain Inputs — Your Reality Today
           </div>
           <div className="space-y-5">
@@ -372,11 +324,7 @@ export default function FinanceToolsClient() {
   const activeIndex = FINANCE_TOOLS.findIndex((t) => t.id === active.id);
 
   return (
-    <div className="fin-tools overflow-hidden bg-white text-[#5F5F76] antialiased selection:bg-[#E92F8E]/20">
-      {/* floating hero glows */}
-      <div className="fin-blob" style={{ top: 40, left: -80, width: 360, height: 360, background: "rgba(139,92,246,0.22)" }} />
-      <div className="fin-blob" style={{ top: 120, right: -60, width: 320, height: 320, background: "rgba(233,47,142,0.16)", animationDelay: "-5s" }} />
-
+    <div className="fin-tools bg-white text-[#5F5F76] antialiased selection:bg-[#E92F8E]/20">
       <section className="relative z-10 mx-auto max-w-[1200px] px-5 pb-20 pt-[112px] lg:px-6 lg:pt-[128px]">
         {/* hero */}
         <div className="fin-rise inline-flex items-center gap-2 rounded-full border border-[#F3D6E6] bg-[#FFF0F7] px-3.5 py-[6px]">
@@ -392,49 +340,49 @@ export default function FinanceToolsClient() {
           Real-time, no sign-up.
         </p>
 
-        {/* tab selector */}
-        <div className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
-          {FINANCE_TOOLS.map((t) => {
+        {/* tab selector — one cohesive brand system, no rainbow */}
+        <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+          {FINANCE_TOOLS.map((t, i) => {
             const on = t.id === active.id;
-            const a = TOOL_ACCENTS[t.id] ?? FALLBACK_ACCENT;
             return (
               <button
                 key={t.id}
                 onClick={() => setActiveId(t.id)}
-                className="group relative overflow-hidden rounded-[16px] border p-3.5 text-left transition-all duration-200 hover:-translate-y-[2px]"
-                style={{
-                  borderColor: on ? a.solid : a.softBorder,
-                  background: on ? a.activeBg : a.softBg,
-                  boxShadow: on ? `0 12px 26px ${a.shadow}` : "none",
-                  transform: on ? "translateY(-2px)" : undefined,
-                }}
+                aria-pressed={on}
+                className={`group relative overflow-hidden rounded-[18px] border p-4 text-left transition-all duration-300 ${
+                  on
+                    ? "border-transparent text-white shadow-[0_18px_42px_-12px_rgba(74,30,145,0.55)]"
+                    : "border-[#ECE9F3] bg-white hover:-translate-y-[2px] hover:border-[#D9CFF0] hover:bg-[#FCFBFE] hover:shadow-[0_14px_32px_-16px_rgba(74,30,145,0.3)]"
+                }`}
+                style={on ? { background: CARD_ACTIVE_BG } : undefined}
               >
-                {/* top accent strip — only on the active card */}
-                <span
-                  className="absolute inset-x-0 top-0 h-[3px] transition-opacity"
-                  style={{ background: a.bar, opacity: on ? 1 : 0 }}
-                />
-                <div className="flex items-center justify-between">
+                {/* soft inner sheen on the selected card */}
+                {on && (
+                  <span aria-hidden className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/10 blur-2xl" />
+                )}
+                <div className="relative flex items-center justify-between">
                   <span
-                    className="grid h-8 w-8 place-items-center rounded-full text-[14px] font-bold text-white shadow-sm transition-transform duration-200 group-hover:scale-110"
-                    style={{ background: a.bar, transform: on ? "scale(1.08)" : undefined }}
+                    className={`grid h-9 w-9 place-items-center rounded-[11px] text-[15px] font-semibold transition-colors duration-300 ${
+                      on ? "bg-white/15 text-white" : "bg-[#F4F1FB] text-[#6D28D9] group-hover:bg-[#ECE5FB]"
+                    }`}
                   >
                     {t.icon}
                   </span>
                   <span
-                    className="rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em]"
-                    style={{ background: a.badgeBg, color: a.badgeText }}
+                    className={`rounded-full px-2 py-[3px] text-[9px] font-bold uppercase tracking-[0.1em] transition-colors duration-300 ${
+                      on ? "bg-white/15 text-white/90" : "bg-[#F5F3FA] text-[#9488B0]"
+                    }`}
                   >
                     {t.pain}
                   </span>
                 </div>
-                <div
-                  className="mt-3 text-[13px] font-bold leading-tight tracking-tight"
-                  style={{ color: on ? a.title : "#1A1033" }}
-                >
+                <div className={`relative mt-3.5 text-[13.5px] font-bold leading-tight tracking-tight ${on ? "text-white" : "text-[#1A1033]"}`}>
                   {t.short}
                 </div>
-                <div className="text-[11px]" style={{ color: on ? a.solid : "#8B8BA3" }}>
+                <div className={`relative mt-0.5 flex items-center gap-1.5 text-[11px] ${on ? "text-white/70" : "text-[#9A93AD]"}`}>
+                  <span className={`text-[10px] font-bold tabular-nums ${on ? "text-white/50" : "text-[#C3BAD8]"}`}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {t.title}
                 </div>
               </button>

@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -19,6 +20,9 @@ export default function Chatbot() {
   const [showBadge, setShowBadge] = useState(true);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname();
+  // Finance-tools page uses contact@jenveda.com; everywhere else hr@jenveda.com.
+  const contactEmail = pathname?.startsWith("/finance-tools") ? "contact@jenveda.com" : "hr@jenveda.com";
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -69,7 +73,7 @@ export default function Chatbot() {
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Sorry, something went wrong. Please email us at contact@jenveda.com" },
+        { role: "assistant", content: `Sorry, something went wrong. Please email us at ${contactEmail}` },
       ]);
     } finally {
       setLoading(false);

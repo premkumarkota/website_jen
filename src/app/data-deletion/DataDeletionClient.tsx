@@ -40,7 +40,7 @@ const steps = [
   {
     tag: "By email",
     title: "Email our support team",
-    body: "Send a request to contact@jenveda.com with your account / business identity and a request to delete your data.",
+    body: "Send a request to hr@jenveda.com with your account / business identity and a request to delete your data.",
   },
 ];
 
@@ -180,8 +180,8 @@ export default function DataDeletionClient() {
                     {s.tag === "By email" ? (
                       <>
                         Send a request to{" "}
-                        <a href="mailto:contact@jenveda.com" className="font-semibold text-violet-600 hover:text-violet-800">
-                          contact@jenveda.com
+                        <a href="mailto:hr@jenveda.com" className="font-semibold text-violet-600 hover:text-violet-800">
+                          hr@jenveda.com
                         </a>{" "}
                         with your account / business identity and a request to delete your data.
                       </>
@@ -233,13 +233,13 @@ export default function DataDeletionClient() {
           >
             <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Contact</p>
             <a
-              href="mailto:contact@jenveda.com"
+              href="mailto:hr@jenveda.com"
               className="flex items-center gap-3 text-[16px] font-semibold text-slate-700 transition-colors hover:text-violet-700"
             >
               <svg className="h-5 w-5 flex-shrink-0 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              contact@jenveda.com
+              hr@jenveda.com
             </a>
           </motion.div>
 
