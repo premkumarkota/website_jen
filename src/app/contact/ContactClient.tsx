@@ -142,9 +142,9 @@ export default function ContactClient() {
                   color: "#D1008F",
                   bg: "rgba(209,0,143,0.07)",
                   label: "Email",
-                  value: "hr@jenveda.com",
+                  value: "contact@jenveda.com",
                   sub: "We reply within 24 hours",
-                  href: "mailto:hr@jenveda.com",
+                  href: "mailto:contact@jenveda.com",
                   icon: (
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   ),

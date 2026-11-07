@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 const products = [
   { label: "HRMS", href: "/products/hrms" },
@@ -17,9 +16,7 @@ const legal = [
 ];
 
 export default function Footer() {
-  // Finance-tools page uses contact@jenveda.com; every other page uses hr@jenveda.com.
-  const pathname = usePathname();
-  const contactEmail = pathname?.startsWith("/finance-tools") ? "contact@jenveda.com" : "hr@jenveda.com";
+  const contactEmail = "contact@jenveda.com";
   return (
     <footer className="relative border-t overflow-hidden" style={{ background: "var(--bg-surface)", borderColor: "rgba(0,0,0,0.08)" }}>
       {/* Top glow line */}

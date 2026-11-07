@@ -337,7 +337,7 @@ export default function FinanceToolsClient() {
         <p className="fin-rise mt-4 max-w-[600px] text-[17px] leading-[1.6] text-[#5F5F76]">
           Five quick calculators expose a hidden cost — cash stuck in DSO, margin leakage, discount abuse, Tally lag and
           working-capital risk — then show how Jenveda&apos;s Tally API, WhatsApp, Role-based controls &amp; Cloud fix it.
-          Real-time, no sign-up.
+          Real-time results — free, after a quick mobile verification.
         </p>
 
         {/* tab selector — one cohesive brand system, no rainbow */}

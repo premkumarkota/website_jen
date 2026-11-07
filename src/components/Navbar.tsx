@@ -370,7 +370,7 @@ export default function Navbar() {
             </li>
 
             {/* 3 · Tools · 4 · Resources · 5 · Company */}
-            <NavDropdown label="Tools" items={toolLinks} width={368} cta={{ label: "Explore all free tools", sub: "5 live calculators · no sign-up", href: "/finance-tools" }} />
+            <NavDropdown label="Tools" items={toolLinks} width={368} cta={{ label: "Explore all free tools", sub: "5 live calculators · free, quick verify", href: "/finance-tools" }} />
             <NavDropdown label="Resources" items={resourceLinks} width={352} cta={{ label: "Watch JenVeda in action", sub: "Short product walkthroughs", href: "/videos" }} />
             <NavDropdown label="Company" items={companyLinks} align="right" width={312} />
           </ul>

@@ -6,7 +6,7 @@ import Mailgun from "mailgun.js";
    Phase 1: email the lead to sales via Mailgun (no DB store). */
 
 const mailgun = new Mailgun(FormData);
-const SALES_RECIPIENTS = ["hr@jenveda.com", "subbareddy@Jenveda.com", "madhug8.mg@gmail.com"];
+const SALES_RECIPIENTS = ["contact@jenveda.com", "subbareddy@Jenveda.com", "madhug8.mg@gmail.com"];
 
 type Lead = {
   name?: string;

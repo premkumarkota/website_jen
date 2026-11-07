@@ -29,7 +29,7 @@ ${message || "—"}
 
   await mg.messages.create(process.env.MAILGUN_DOMAIN!, {
     from: `JenVeda Website <noreply@${process.env.MAILGUN_DOMAIN}>`,
-    to: ["hr@jenveda.com", "subbareddy@Jenveda.com", "madhug8.mg@gmail.com"],
+    to: ["contact@jenveda.com", "subbareddy@Jenveda.com", "madhug8.mg@gmail.com"],
     subject: `New Enquiry from ${name}`,
     text: emailBody,
     html: `
